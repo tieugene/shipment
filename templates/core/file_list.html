@@ -1,0 +1,23 @@
+{% extends "core/file_base.html" %}
+{% block body_main %}
+{% include "paginator.html" %}
+<table width="auto" border="1">
+<thead>
+ <tr>
+  <th> # </th>
+  <th> Name </th>
+  <th> Ctime </th>
+  <th> Size </th>
+ </tr>
+</thead>
+<tbody>
+{% for object in object_list %}
+ <tr>
+  <td> {{ object.pk }} </td>
+  <td> <a href="{% url 'file_view' object.pk %}"> {{ object.name }} </a> </td>
+  <td> {{ object.ctime|date:"y.m.d H:i:d" }} </td>
+  <td> {{ object.size }} </td>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

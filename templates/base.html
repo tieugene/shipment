@@ -1,0 +1,33 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	{% block meta %} {% endblock %}
+	<title> Das Ist {% block title %} ... {% endblock %} </title>
+	<!-- 1. me -->
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/base.css">
+	<!--link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/colors.css"/-->
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/fieldset.css"/>
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/thumbnails.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/svgbutton.css" />
+	<!-- 2. admin (symlink) -->
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}admin/css/forms.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}admin/css/widgets.css" />
+	{% block js %}
+	{% endblock %}
+	<style>
+	{% block css %}
+	{% endblock %}
+	</style>
+</head>
+<body>
+<div id="topmenu">
+	<div id="tm_index" class=""> <a href="{% url 'index' %}"> {% include "svgbutton/home.html" %} </a> </div>
+	<div style="width: 100%"> <b> <a href="{% url 'index' %}"> DasIst: </a> {% block menu_title %} ... {% endblock %} </b> </div>
+</div>
+	<div>
+	{% block body_main %}
+		<p> Заглушка </p>
+	{% endblock %}
+	</div>
+</body>
+</html>

@@ -3,13 +3,17 @@
 ## Tools:
 - Django
 - [WebDAV](https://github.com/MnogoByte/djangodav)
+- pylint with [pylint-django](https://github.com/PyCQA/pylint-django)
 
 ## Classes
-- File:
-- DirTree
-- Document
-- Org
-- Partner
+- core:
+  - File
+  - Mime
+- shipment:
+  - DirTree
+  - Document
+  - Org
+  - Partner
 
 ## Actions
 - CRUD
