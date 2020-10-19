@@ -1,7 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from . import models
 
@@ -12,13 +14,25 @@ def index(request):
 
 class FileList(ListView):
     model = models.File
-    template_name = 'core/file_list.html'
+    #template_name = 'core/file_list.html'
     paginate_by = PAGE_SIZE
 
 
+class FileAdd(CreateView):
+    model = models.File
+    #fields = ['name', 'fullname']
+
 class FileDetail(DetailView):
     model = models.File
-    template_name = 'core/file_view.html'
+
+class FileUpdate(UpdateView):
+    model = models.File
+    fields = ['name', 'date']
+
+
+class FileDelete(DeleteView):
+    model = models.File
+    success_url = reverse_lazy('file_list')
 
 @login_required
 def file_preview(request, id):

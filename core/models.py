@@ -5,10 +5,6 @@ import uuid
 from django.db import models
 
 
-class Mime(models.Model):
-	sig = models.CharField(db_index=True, blank=False, max_length=255, verbose_name='Signature')
-	name = models.CharField(db_index=True, blank=False, max_length=255, verbose_name='Name')
-
 def my_upload_to(instance, filename):
     '''
     Generates upload path for FileField
@@ -39,7 +35,7 @@ class File(models.Model):
     '''
     file = models.FileField(upload_to=my_upload_to, verbose_name='File')
     name = models.CharField(db_index=True, blank=False, max_length=255, verbose_name='File name')    # max=130
-    mime = models.ForeignKey(Mime, on_delete=models.CASCADE, db_index=True, verbose_name='MIME type')    # max=10
+    mime = models.CharField(db_index=True, blank=False, max_length=255, verbose_name='MIME type')    # max=10
     ctime = models.DateTimeField(db_index=True, auto_now_add=True, verbose_name='Created')
     size = models.PositiveIntegerField(db_index=True, verbose_name='Size')
     crc = models.UUIDField(db_index=True, verbose_name='CRC')

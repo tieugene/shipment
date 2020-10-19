@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -6,9 +7,11 @@
 	<!-- 1. me -->
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/base.css">
 	<!--link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/colors.css"/-->
+	<!--
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/fieldset.css"/>
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/thumbnails.css" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/svgbutton.css" />
+	-->
 	<!-- 2. admin (symlink) -->
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}admin/css/forms.css" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}admin/css/widgets.css" />
@@ -20,14 +23,16 @@
 	</style>
 </head>
 <body>
-<div id="topmenu">
-	<div id="tm_index" class=""> <a href="{% url 'index' %}"> {% include "svgbutton/home.html" %} </a> </div>
-	<div style="width: 100%"> <b> <a href="{% url 'index' %}"> DasIst: </a> {% block menu_title %} ... {% endblock %} </b> </div>
-</div>
+	<header> <h1> Das ist shipment </h1> </header>
+	<nav> id="topmenu">
+		<a href="{% url 'index' %}"> {% include "svgbutton/home.html" %} </a>
+		<div style="width: 100%"> <b> <a href="{% url 'index' %}"> DasIst: </a> {% block menu_title %} ... {% endblock %} </b> </div>
+	</nav>
 	<div>
 	{% block body_main %}
 		<p> Заглушка </p>
 	{% endblock %}
 	</div>
+<footer> &copy; /me </footer>	
 </body>
 </html>

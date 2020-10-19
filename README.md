@@ -8,12 +8,12 @@
 ## Classes
 - core:
   - File
-  - Mime
+  - [Mime]
 - shipment:
   - DirTree
-  - Document
   - Org
   - Partner
+  - Document
 
 ## Actions
 - CRUD
