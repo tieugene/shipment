@@ -1,4 +1,5 @@
 {% extends "shipment/org_base.html" %}
+{% load i18n %}
 {% block css %}
  tr.list td {
   cursor:pointer;
@@ -12,9 +13,10 @@
 <table width="auto" border="1">
 <thead>
  <tr>
-  <th> <a href="{% url 'org_add' %}"> {% include "svgbutton/new.html" %} </a> </th>
+  <th> &numero; </th>
   <th> Кратко </th>
   <th> Полностью </th>
+     <th> <a href="{% url 'org_add' %}"> {% include "svgbutton/new.html" %} </a> </th>
  </tr>
 </thead>
 <tbody>
@@ -23,7 +25,11 @@
   <td align="right"> {{ object.pk }} </td>
   <td> {{ object.name }} </td>
   <td> {{ object.fullname }} </td>
- </tr>
+     <td>
+        <a href="{% url 'org_update' object.pk %}"> {% include "svgbutton/edit.html" %} </a>
+        <a href="{% url 'org_delete' object.pk %}"> {% include "svgbutton/delete.html" %} </a>
+    </td>
+</tr>
 {% endfor %}
 </tbody>
 </table>

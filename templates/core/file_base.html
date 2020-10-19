@@ -1,3 +1,4 @@
 {% extends "core/base.html" %}
-{% block title %} {% translate "Files" %} {% endblock %}
-{% block menu_title %} <a href="{% url 'file_list' %}"> {% translate "Files" %} </a> {% endblock %}
+{% load i18n %}
+{% block title %} {% trans "Files" %} {% endblock %}
+{% block menu_title %} <a href="{% url 'file_list' %}"> {% trans "Files" %} </a> {% endblock %}

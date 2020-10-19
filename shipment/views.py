@@ -1,12 +1,13 @@
-#from django.shortcuts import render
+# from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic.base import View, TemplateView, RedirectView # !
+from django.views.generic.base import View, TemplateView, RedirectView  # !
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from . import models
 
 PAGE_SIZE = 25
+
 
 class OrgList(ListView):
     model = models.Org

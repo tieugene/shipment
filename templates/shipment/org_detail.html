@@ -1,4 +1,5 @@
 {% extends "shipment/org_base.html" %}
+{% load i18n %}
 {% block body_main %}
 <table width="auto" border="1">
  <tbody>
@@ -7,7 +8,7 @@
  </tbody>
 </table>
 {# if user.is_staff #}
-<a href="{% url 'org_edit' object.pk %}"> {% include "svgbutton/edit.html" %} </a>
+<a href="{% url 'org_update' object.pk %}"> {% include "svgbutton/edit.html" %} </a>
 <a href="{% url 'org_delete' object.pk %}"> {% include "svgbutton/delete.html" %} </a>
 {# endif #}
 {% endblock %}

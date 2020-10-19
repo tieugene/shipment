@@ -7,21 +7,21 @@ from django.utils.translation import gettext as _
 
 
 def my_upload_to(instance, filename):
-    '''
+    """
     Generates upload path for FileField
-    '''
+    """
     instance.name = filename
     # return u'temp/%s' % filename
     return 'temp/%s' % uuid.uuid4().hex.upper()
 
 
 def file_md5(file, block_size=1024 * 14):
-    '''
+    """
     file_md5(file, use_system = False) -> md5sum of "file" as hexdigest string.
     "file" may be a file name or file object, opened for read.
     If "use_system" is True, if possible use system specific program. This ignore, if file object given.
     "block_size" -- size in bytes buffer for calc md5. Used with "use_system=False".
-    '''
+    """
     if isinstance(file, basestring):
         file = open(file, 'rb')
     h = hashlib.md5()
@@ -31,9 +31,10 @@ def file_md5(file, block_size=1024 * 14):
         block = file.read(block_size)
     return h.hexdigest()
 
+
 class File(models.Model):
-    '''
-    '''
+    """
+    """
     file = models.FileField(upload_to=my_upload_to, verbose_name=_('File'))
     name = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('File name'))
     mime = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('MIME type'))

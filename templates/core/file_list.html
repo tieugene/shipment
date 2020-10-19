@@ -1,13 +1,16 @@
 {% extends "core/file_base.html" %}
+{% load i18n %}
 {% block body_main %}
 {% include "paginator.html" %}
 <table width="auto" border="1">
 <thead>
  <tr>
   <th> &numero; </th>
-  <th> {% translate "Name" %} </th>
-  <th> Ctime </th>
-  <th> {% translate "Size" %} </th>
+  <th> {% trans "Name" %} </th>
+  <th> MIME </th>
+  <th> CTime </th>
+  <th> {% trans "Size" %} </th>
+     <th> <a href="{% url 'file_add' %}"> {% include "svgbutton/new.html" %} </a> </th>
  </tr>
 </thead>
 <tbody>
@@ -15,8 +18,13 @@
  <tr>
   <td> {{ object.pk }} </td>
   <td> <a href="{% url 'file_view' object.pk %}"> {{ object.name }} </a> </td>
+  <td> {{ object.mime }} </td>
   <td> {{ object.ctime|date:"y.m.d H:i:d" }} </td>
   <td> {{ object.size }} </td>
+    <td>
+        <a href="{% url 'file_update' %}"> {% include "svgbutton/edit.html" %} </a>
+        <a href="{% url 'file_delete' %}"> {% include "svgbutton/delete.html" %} </a>
+    </td>
 {% endfor %}
 </tbody>
 </table>
