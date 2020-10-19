@@ -23,9 +23,16 @@
 </head>
 <body>
 	<header> <h1> Das ist shipment </h1> </header>
-	<nav> id="topmenu">
+	<nav id="topmenu">
 		<a href="{% url 'index' %}"> {% include "svgbutton/home.html" %} </a>
-		<div style="width: 100%"> <b> <a href="{% url 'index' %}"> DasIst: </a> {% block menu_title %} ... {% endblock %} </b> </div>
+ 		<a href="{% url 'file_list' %}"> {% include "svgbutton/file.html" %} </a>
+ 		<a href="{% url 'org_list' %}"> {% include "svgbutton/org.html" %} </a>
+ 		<a href="{% url 'doc_list' %}"> {% include "svgbutton/book.html" %} </a>
+		<span style="width: 100%">
+			<b> <a href="{% url 'index' %}"> DasIst: </a>
+			{% block menu_title %} ... {% endblock %} </b>
+		</span>
+		<a href="{% url 'admin:index' %}"> {% include "svgbutton/admin.html" %} </a>
 	</nav>
 	<div>
 	{% block body_main %}

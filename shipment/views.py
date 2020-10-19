@@ -6,6 +6,8 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from . import models
 
+PAGE_SIZE = 25
+
 class OrgList(ListView):
     model = models.Org
     paginate_by = PAGE_SIZE
@@ -35,29 +37,29 @@ class OrgDelete(DeleteView):
     # template_name = 'shipment/org_confirm_delete.html'
 
 
-class DocumetList(ListView):
+class DocList(ListView):
     model = models.Document
     paginate_by = PAGE_SIZE
 
 
-class DocumentAdd(CreateView):
+class DocAdd(CreateView):
     model = models.Document
     fields = ['name', 'fullname']
     # template_name = 'shipment/org_form.html'
 
 
-class DocumentDetail(DetailView):
+class DocDetail(DetailView):
     model = models.Document
     # template_name = 'shipment/org_detail.html'
 
 
-class DocumentUpdate(UpdateView):
+class DocUpdate(UpdateView):
     model = models.Document
     fields = ['shipper', 'org', 'doctype', 'date']
     # template_name = 'shipment/org_form.html'
 
 
-class DocumentDelete(DeleteView):
+class DocDelete(DeleteView):
     model = models.Document
     success_url = reverse_lazy('doc_list')
     # template_name = 'shipment/org_confirm_delete.html'

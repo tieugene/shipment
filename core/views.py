@@ -9,9 +9,6 @@ from . import models
 
 PAGE_SIZE = 25
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the core index.")
-
 class FileList(ListView):
     model = models.File
     #template_name = 'core/file_list.html'

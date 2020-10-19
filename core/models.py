@@ -3,6 +3,7 @@ import os
 import uuid
 
 from django.db import models
+from django.utils.translation import gettext as _
 
 
 def my_upload_to(instance, filename):
@@ -33,13 +34,13 @@ def file_md5(file, block_size=1024 * 14):
 class File(models.Model):
     '''
     '''
-    file = models.FileField(upload_to=my_upload_to, verbose_name='File')
-    name = models.CharField(db_index=True, blank=False, max_length=255, verbose_name='File name')    # max=130
-    mime = models.CharField(db_index=True, blank=False, max_length=255, verbose_name='MIME type')    # max=10
-    ctime = models.DateTimeField(db_index=True, auto_now_add=True, verbose_name='Created')
-    size = models.PositiveIntegerField(db_index=True, verbose_name='Size')
+    file = models.FileField(upload_to=my_upload_to, verbose_name=_('File'))
+    name = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('File name'))
+    mime = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('MIME type'))
+    ctime = models.DateTimeField(db_index=True, auto_now_add=True, verbose_name=_('Created'))
+    size = models.PositiveIntegerField(db_index=True, verbose_name=_('Size'))
     crc = models.UUIDField(db_index=True, verbose_name='CRC')
 
     class Meta:
-        verbose_name = 'File'
-        verbose_name_plural = 'Files'
+        verbose_name = _('File')
+        verbose_name_plural = _('Files')
