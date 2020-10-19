@@ -1,0 +1,30 @@
+{% extends "shipment/org_base.html" %}
+{% block css %}
+ tr.list td {
+  cursor:pointer;
+  padding-top: 0;
+  padding-bottom: 0;
+  white-space: nowrap;
+ }
+{% endblock %}
+{% block body_main %}
+{% include "paginator.html" %}
+<table width="auto" border="1">
+<thead>
+ <tr>
+  <th> <a href="{% url 'org_add' %}"> {% include "svgbutton/new.html" %} </a> </th>
+  <th> Кратко </th>
+  <th> Полностью </th>
+ </tr>
+</thead>
+<tbody>
+{% for object in object_list %}
+ <tr class="list" onclick="window.document.location='{% url 'org_view' object.pk %}'">
+  <td align="right"> {{ object.pk }} </td>
+  <td> {{ object.name }} </td>
+  <td> {{ object.fullname }} </td>
+ </tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

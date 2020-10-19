@@ -1,0 +1,63 @@
+{% extends "shipment/base.html" %}
+{% block meta %} <meta http-equiv="refresh" content="300"> {% endblock %}
+{% block js %}
+{% endblock %}
+{% block css %}
+ tr.shipment td {
+  cursor:pointer;
+  padding-top: 0;
+  padding-bottom: 0;
+  white-space: nowrap;
+ }
+{% endblock %}
+{% block body_main %}
+ <table border="0">
+  <tr>
+   <td>
+    <a href="{% url 'shipment_add' %}"> {% include "svgbutton/new.html" %} </a>
+   </td>
+   <td nowrap>
+{% include "paginator.html" %}
+   </td>
+   <td nowrap>
+    <label for="lpp">Строк:</label>
+    <select onchange="document.location=this.options[this.selectedIndex].value">
+     <option value="{% url 'shipment_set_lpp' 10 %}" {% ifequal lpp 10 %}selected{% endifequal %}>10</option>
+     <option value="{% url 'shipment_set_lpp' 15 %}" {% ifequal lpp 15 %}selected{% endifequal %}>15</option>
+     <option value="{% url 'shipment_set_lpp' 20 %}" {% ifequal lpp 20 %}selected{% endifequal %}>20</option>
+     <option value="{% url 'shipment_set_lpp' 25 %}" {% ifequal lpp 25 %}selected{% endifequal %}>25</option>
+     <option value="{% url 'shipment_set_lpp' 50 %}" {% ifequal lpp 50 %}selected{% endifequal %}>50</option>
+    </select>
+   </td>
+  </tr>
+</table>
+
+<form action="{% url 'shipment_filter' %}" method="POST">
+{% csrf_token %}
+<table border="1">
+ <thead>
+  <tr>
+   <th> # </th>
+   <th> Поставщик </th>
+   <th> Потребитель </th>
+   <th> Дата </th>
+  </tr>
+  <tr>
+   <th> <button type="submit" class="plain_mid"> {% include "svgbutton/filter.html" %} </button> </th>
+   <th> {{ fsform.shipper }} </th>
+   <th> {{ fsform.payer }} </th>
+   <th> {{ fsform.year }} </th>
+  </tr>
+ </thead>
+ <tbody>
+{% for object in object_list %}
+ <tr class="contract" onclick="window.document.location='{% url 'shipment_view' object.pk %}'">
+  <td> {{ object.pk }} </td>
+  <td> {{ object.shipper }} </td>
+  <td> {{ object.payer }} </td>
+  <td> {{ object.date|date:"d.m.y" }} </td>
+ </tr>
+{% endfor %}
+</table>
+</form>
+{% endblock %}
