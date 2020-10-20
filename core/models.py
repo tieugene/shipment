@@ -1,8 +1,10 @@
 import hashlib
 import os
-import uuid
+import uuid, mimetypes
 
 from django.db import models
+from django.db.models.signals import pre_save, post_save
+from django.dispatch import receiver
 from django.utils.translation import gettext as _
 
 
@@ -42,6 +44,27 @@ class File(models.Model):
     size = models.PositiveIntegerField(db_index=True, verbose_name=_('Size'))
     crc = models.UUIDField(db_index=True, verbose_name='CRC')
 
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('file_view', kwargs={'pk': self.pk})
+
     class Meta:
         verbose_name = _('File')
         verbose_name_plural = _('Files')
+
+
+@receiver(pre_save, sender=File)
+def _file_pre_save(sender, instance, **kwargs):
+    """
+    Define mime, size, crc
+    Mime for django: https://medium.com/@ajrbyers/file-mime-types-in-django-ee9531f3035b
+    """
+    print("File pre-save start")
+    f = instance.file
+    instance.size = f.size
+    # mimetypes.guess_type(f.name)
+    instance.mime = "application/pdf"
+    instance.crc = file_md5(f.file)
+    print("File pre-save end")

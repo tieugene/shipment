@@ -2,8 +2,8 @@
 ## todo
 
 ### Hot:
-- &#9745;  Org CHRUDL
-- &hellip; File CRUDL
+- &#9745;  Org CRUDL~~a~~
+- &hellip; File CRUDLa
 - &#9744; Shipper - admin only
 - &#9744; DocType - admin only
 - &#9744; Doc - CRUDL

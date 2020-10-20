@@ -8,7 +8,8 @@
 	<table border="1">
 		{{ form.as_table }}
 	</table>
-	<button type="submit" title="Записать" class="plain"> {% include "svgbutton/save.html" %} </button>
-	<a href="{% if object %} {% url 'file_view' object.pk %} {% else %} {% url 'file_list' %} {% endif %}"> <button type="button" title="Отказаться" class="plain"> {% include "svgbutton/cancel.html" %} </button> </a>
+	<button type="submit" title="Записать" class="plain"> &check; </button>
+	<a href="{% if object %} {% url 'file_view' object.pk %} {% else %} {% url 'file_list' %} {% endif %}">
+        <button type="button" title="Отказаться" class="plain"> &cross; </button> </a>
    </form>
 {% endblock %}
