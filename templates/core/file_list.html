@@ -10,7 +10,7 @@
   <th> MIME </th>
   <th> CTime </th>
   <th> {% trans "Size" %} </th>
-     <th> <a href="{% url 'file_add' %}"> {% include "svgbutton/new.html" %} </a> </th>
+     <th> <a href="{% url 'file_add' %}"> <button type="button"> &plus; </button></a> </th>
  </tr>
 </thead>
 <tbody>
@@ -22,8 +22,8 @@
   <td> {{ object.ctime|date:"y.m.d H:i:d" }} </td>
   <td> {{ object.size }} </td>
     <td>
-        <a href="{% url 'file_update' %}"> {% include "svgbutton/edit.html" %} </a>
-        <a href="{% url 'file_delete' %}"> {% include "svgbutton/delete.html" %} </a>
+        <a href="{% url 'file_update' object.pk %}"> <button type="button"> &#9998; </button> </a>
+        <a href="{% url 'file_delete' object.pk %}"> <button type="button"> &#9249; </button> </a>
     </td>
 {% endfor %}
 </tbody>

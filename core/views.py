@@ -27,7 +27,7 @@ class FileDetail(DetailView):
 
 class FileUpdate(UpdateView):
     model = models.File
-    fields = ['name', 'date']
+    fields = ('name',)
 
 
 class FileDelete(DeleteView):

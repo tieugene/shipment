@@ -1,5 +1,9 @@
 # Shipment
 
+## Requires:
+- django
+- python-magic
+
 ## Tools:
 - Django
 - [WebDAV](https://github.com/MnogoByte/djangodav)

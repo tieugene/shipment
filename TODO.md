@@ -1,15 +1,21 @@
 # Shipment
 ## todo
 
+### Done:
+- &#9745; Org CRUDLa
+- &#9745; Shipper - admin only
+- &#9745; DocType - admin only
+
 ### Hot:
-- &#9745;  Org CRUDL~~a~~
 - &hellip; File CRUDLa
-- &#9744; Shipper - admin only
-- &#9744; DocType - admin only
 - &#9744; Doc - CRUDL
+- File:
+  - mime from head and filename (on upload only)
 
 ### file add:
-- File: fill on Create (.save()?):
+- Add: admin.File, admin.Doc, file_add.
+  ? non-model form to add?
+- File: fill on Create (.pre_save()?):
   - name
   - mime (and check it)
   - ctime (autonow?)
@@ -24,6 +30,7 @@
   - [fore](https://progi.pro/django-audio-proverka-faylov-9997753)
 
 ## Future:
+- admin.File - disable edit on add
 - Buttons - text + html [entities](https://www.amp-what.com/unicode/search/home)
   (as [template tag](https://docs.djangoproject.com/en/3.0/howto/custom-template-tags/)
   for [&lt;button&gt;](http://htmlbook.ru/html/button)):

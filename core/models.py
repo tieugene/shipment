@@ -1,10 +1,12 @@
 import hashlib
 import os
 import uuid, mimetypes
+import magic
 
 from django.db import models
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
+from django.urls import reverse
 from django.utils.translation import gettext as _
 
 
@@ -23,15 +25,36 @@ def file_md5(file, block_size=1024 * 14):
     "file" may be a file name or file object, opened for read.
     If "use_system" is True, if possible use system specific program. This ignore, if file object given.
     "block_size" -- size in bytes buffer for calc md5. Used with "use_system=False".
+    @param file: in admin
+    - new/replace - django.core.files.uploadedfile.InMemoryUploadedFile (for newly created)
+    - edit (w/o changing file itself) - django.core.files.base.File
     """
-    if isinstance(file, basestring):
-        file = open(file, 'rb')
     h = hashlib.md5()
+    # if isinstance(file, basestring):
+    #    file = open(file, 'rb')
     block = file.read(block_size)
     while block:
         h.update(block)
         block = file.read(block_size)
+    # TODO: iterate over file.chunks() if (file.multiple_chunks())
+    # h.update(file.read())  # for InMemoryUploadedFile
     return h.hexdigest()
+
+
+def file_mime(file):
+    """
+    @param file:
+    - new/replace - django.core.files.uploadedfile.InMemoryUploadedFile (for newly created)
+    - edit (w/o changing file itself) - django.core.files.base.File
+    From https://stackoverflow.com/questions/4853581/django-get-uploaded-file-type-mimetype
+    initial_pos = file.tell()
+    file.seek(0)
+    mime_type = magic.from_buffer(file.read(1024), mime=True)
+    file.seek(initial_pos)
+    return mime_type
+    """
+    mime = magic.from_buffer(file.read(), mime=True)
+    return mime
 
 
 class File(models.Model):
@@ -41,7 +64,7 @@ class File(models.Model):
     name = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('File name'))
     mime = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('MIME type'))
     ctime = models.DateTimeField(db_index=True, auto_now_add=True, verbose_name=_('Created'))
-    size = models.PositiveIntegerField(db_index=True, verbose_name=_('Size'))
+    size = models.PositiveIntegerField(db_index=True, verbose_name=_('Size'))  # Option?
     crc = models.UUIDField(db_index=True, verbose_name='CRC')
 
     def __str__(self):
@@ -62,9 +85,11 @@ def _file_pre_save(sender, instance, **kwargs):
     Mime for django: https://medium.com/@ajrbyers/file-mime-types-in-django-ee9531f3035b
     """
     print("File pre-save start")
-    f = instance.file
+    f = instance.file  # FieldFile
+    print("File type: {}".format(type(f.file)))
+    # TODO: if isinstanse(f.file, django.core.files.uploadedfile.InMemoryUploadedFile)
     instance.size = f.size
     # mimetypes.guess_type(f.name)
-    instance.mime = "application/pdf"
+    instance.mime = file_mime(f.file)
     instance.crc = file_md5(f.file)
     print("File pre-save end")
