@@ -9,18 +9,21 @@ from . import models
 
 PAGE_SIZE = 25
 
+
 class FileList(ListView):
     model = models.File
-    #template_name = 'core/file_list.html'
+    # template_name = 'core/file_list.html'
     paginate_by = PAGE_SIZE
 
 
 class FileAdd(CreateView):
     model = models.File
-    #fields = ['name', 'fullname']
+    fields = ('file',)
+
 
 class FileDetail(DetailView):
     model = models.File
+
 
 class FileUpdate(UpdateView):
     model = models.File
@@ -31,6 +34,7 @@ class FileDelete(DeleteView):
     model = models.File
     success_url = reverse_lazy('file_list')
 
+
 @login_required
 def file_preview(request, id):
     return render(request, 'core/file_img.html', {'file': models.File.objects.get(pk=int(id))})
@@ -38,9 +42,9 @@ def file_preview(request, id):
 
 @login_required
 def file_get(request, id):
-    '''
+    """
     Download file
-    '''
+    """
     file = models.File.objects.get(pk=int(id))
     response = HttpResponse(content_type=file.mime)
     response['Content-Transfer-Encoding'] = 'binary'
@@ -51,7 +55,7 @@ def file_get(request, id):
 
 @login_required
 def file_del(request, id):
-    '''
-    '''
+    """
+    """
     models.File.objects.get(pk=int(id)).delete()
     return redirect('file_list')
