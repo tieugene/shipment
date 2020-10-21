@@ -9,7 +9,7 @@ from core.models import get_file_mime
 
 
 class DocAddForm(forms.Form):
-    file = forms.FileField(label=_('File'))  # , required=False
+    file = forms.FileField(label=_('File'))
     shipper = forms.ModelChoiceField(queryset=models.Shipper.objects.all(), label=_("Shipper"))
     org = forms.ModelChoiceField(queryset=models.Org.objects.all(), label=_("Customer"))
     date = forms.DateField(initial=datetime.date.today, widget=forms.SelectDateWidget, label=_("Date"),
@@ -25,3 +25,7 @@ class DocAddForm(forms.Form):
         if "application/pdf" not in mime:
             raise ValidationError(_("File is not PDF."))
         return file
+
+
+class MultiDocAddForm(forms.Form):
+    file = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}), label=_('File'))

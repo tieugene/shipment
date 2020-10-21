@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.base import View, TemplateView, RedirectView  # !
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 
 from . import models, forms
 from core.models import File
@@ -44,20 +44,17 @@ class DocList(ListView):
     paginate_by = PAGE_SIZE
 
 
-'''class DocAdd(CreateView):
-    model = models.Document
-    fields = ['file', 'shipper', 'org', 'date', 'doctype', 'comments']
-    # template_name = 'shipment/doc_form.html'
-'''
+class DocAdd(FormView):
+    form_class = forms.DocAddForm
+    template_name = 'shipment/document_form.html'
+    success_url = reverse_lazy('doc_list')
 
-
-def doc_add(request):
-    """
-    """
-    if request.method == 'POST':
-        form = forms.DocAddForm(request.POST, request.FILES)
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
         if form.is_valid():
-            file = File(file=request.FILES['file'])
+            f = request.FILES.get('file')
+            file = File(file=f)
             file.save()
             doc = models.Document(
                 file=file,
@@ -68,10 +65,9 @@ def doc_add(request):
                 comments=form.cleaned_data['comments']
             )
             doc.save()
-            return redirect(doc)
-    else:
-        form = forms.DocAddForm()
-    return render(request, 'shipment/document_form.html', {'form': form})
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 
 class DocDetail(DetailView):
@@ -89,3 +85,10 @@ class DocDelete(DeleteView):
     model = models.Document
     success_url = reverse_lazy('doc_list')
     # template_name = 'shipment/doc_confirm_delete.html'
+
+
+'''class DocAdd(CreateView):
+    model = models.Document
+    fields = ['file', 'shipper', 'org', 'date', 'doctype', 'comments']
+    # template_name = 'shipment/doc_form.html'
+'''

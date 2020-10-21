@@ -29,8 +29,8 @@ class FileAdd(FormView):
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-        files = request.FILES.getlist('file')
         if form.is_valid():
+            files = request.FILES.getlist('file')
             for f in files:
                 file = models.File(file=f)
                 file.save()

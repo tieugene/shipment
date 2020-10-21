@@ -2,23 +2,23 @@
 
 ## ToDo:
 - FIXME: file size for big files
-- FormView
 - Doc multiupload (set defaults: shipper, org, date[, doctype][, comments]):
   - [builtin](https://docs.djangoproject.com/en/3.0/topics/http/file-uploads/#uploading-multiple-files)
   - [3rd-party](https://github.com/Chive/django-multiupload) or builtin
 - Doc: bulk upload via ClI (curl)
 
 ### Done:
-- &#9745; Org CRUDLa
-- &#9745; Shipper: admin only
-- &#9745; DocType: admin only
-- &check; File: CRUDLa
-- &check; File: id-based name
-- &#9744; Doc: CRUDL
-- &#9744; Doc: pdf only
-- &#9744; File/Doc: download/preview ok
-- &check; File: list - show doc
-- &check; Doc.del: del File (and vice versa)
+- Org CRUDLa
+- Shipper: admin only
+- DocType: admin only
+- File: CRUDLa
+- File: id-based name
+- Doc: CRUDL
+- Doc: pdf only
+- File/Doc: download/preview ok
+- File: list - show doc
+- Doc.del: del File (and vice versa)
+- FormView instead of *_add
 
 ## FixMe:
 - File.admin: disable edit on add
@@ -26,6 +26,7 @@
 
 ## Features:
 - Fixtures
+- "2 del?" - in-place/popup
 - File.crc - 64bit ([Positive]BigIntegerField; SipHash; python: builtin hash(), python3-siphash; cli - )
 - Chk file size on upload
 - DocList date-based views [lists](https://docs.djangoproject.com/en/3.0/ref/class-based-views/generic-date-based/)
