@@ -64,13 +64,13 @@ class Document(models.Model):
     doctype = models.ForeignKey(DocType, on_delete=models.CASCADE, null=True, related_name='doctype_document',
                                 db_index=True, verbose_name=_('DocType'))
     date = models.DateField(db_index=True, verbose_name=_('Date'))
-    comments = models.CharField(null=True, blank=False, db_index=True, max_length=255, verbose_name=_('Comments'))
+    comments = models.CharField(null=True, blank=True, db_index=True, max_length=255, verbose_name=_('Comments'))
 
-    # def __str__(self):
-    #    return str(self.pk) # shipper -> org date doctype (file.name, comment)
+    def __str__(self):
+        return "{} => {} {} {} ({})".format(self.shipper, self.org, self.date, self.doctype, self.comments)
 
     def get_absolute_url(self):
-        return reverse('document_view', kwargs={'pk': self.pk})
+        return reverse('doc_view', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ('date', 'shipper', 'org')

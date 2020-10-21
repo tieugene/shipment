@@ -45,22 +45,22 @@ class DocList(ListView):
 
 class DocAdd(CreateView):
     model = models.Document
-    fields = ['name', 'fullname']
-    # template_name = 'shipment/org_form.html'
+    fields = ['file', 'shipper', 'org', 'date', 'doctype', 'comments']
+    # template_name = 'shipment/doc_form.html'
 
 
 class DocDetail(DetailView):
     model = models.Document
-    # template_name = 'shipment/org_detail.html'
+    # template_name = 'shipment/doc_detail.html'
 
 
 class DocUpdate(UpdateView):
     model = models.Document
-    fields = ['shipper', 'org', 'doctype', 'date']
-    # template_name = 'shipment/org_form.html'
+    fields = ['shipper', 'org', 'date', 'doctype', 'comments']
+    # template_name = 'shipment/doc_form.html'
 
 
 class DocDelete(DeleteView):
     model = models.Document
     success_url = reverse_lazy('doc_list')
-    # template_name = 'shipment/org_confirm_delete.html'
+    # template_name = 'shipment/doc_confirm_delete.html'

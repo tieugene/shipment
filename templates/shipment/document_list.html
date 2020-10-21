@@ -1,4 +1,4 @@
-{% extends "shipment/base.html" %}
+{% extends "shipment/document_base.html" %}
 {% block meta %} <meta http-equiv="refresh" content="300"> {% endblock %}
 {% block js %}
 {% endblock %}
@@ -11,53 +11,34 @@
  }
 {% endblock %}
 {% block body_main %}
- <table border="0">
-  <tr>
-   <td>
-    <a href="{% url 'shipment_add' %}"> {% include "svgbutton/new.html" %} </a>
-   </td>
-   <td nowrap>
 {% include "paginator.html" %}
-   </td>
-   <td nowrap>
-    <label for="lpp">Строк:</label>
-    <select onchange="document.location=this.options[this.selectedIndex].value">
-     <option value="{% url 'shipment_set_lpp' 10 %}" {% ifequal lpp 10 %}selected{% endifequal %}>10</option>
-     <option value="{% url 'shipment_set_lpp' 15 %}" {% ifequal lpp 15 %}selected{% endifequal %}>15</option>
-     <option value="{% url 'shipment_set_lpp' 20 %}" {% ifequal lpp 20 %}selected{% endifequal %}>20</option>
-     <option value="{% url 'shipment_set_lpp' 25 %}" {% ifequal lpp 25 %}selected{% endifequal %}>25</option>
-     <option value="{% url 'shipment_set_lpp' 50 %}" {% ifequal lpp 50 %}selected{% endifequal %}>50</option>
-    </select>
-   </td>
-  </tr>
-</table>
-
-<form action="{% url 'shipment_filter' %}" method="POST">
-{% csrf_token %}
-<table border="1">
- <thead>
-  <tr>
-   <th> # </th>
-   <th> Поставщик </th>
-   <th> Потребитель </th>
-   <th> Дата </th>
-  </tr>
-  <tr>
-   <th> <button type="submit" class="plain_mid"> {% include "svgbutton/filter.html" %} </button> </th>
-   <th> {{ fsform.shipper }} </th>
-   <th> {{ fsform.payer }} </th>
-   <th> {{ fsform.year }} </th>
-  </tr>
- </thead>
- <tbody>
+<table width="auto" border="1">
+    <thead>
+    <tr>
+        <th> &numero; </th>
+        <th> Shipper </th>
+        <th> Org </th>
+        <th> Date </th>
+        <th> Type </th>
+        <th> Comments </th>
+        <th> <a href="{% url 'doc_add' %}"> {% include "svgbutton/new.html" %} </a> </th>
+    </tr>
+    </thead>
+<tbody>
 {% for object in object_list %}
- <tr class="contract" onclick="window.document.location='{% url 'shipment_view' object.pk %}'">
-  <td> {{ object.pk }} </td>
-  <td> {{ object.shipper }} </td>
-  <td> {{ object.payer }} </td>
-  <td> {{ object.date|date:"d.m.y" }} </td>
- </tr>
+    <tr class="list" onclick="window.document.location='{% url 'doc_view' object.pk %}'">
+        <td align="right"> {{ object.pk }} </td>
+        <td> {{ object.shipper.name }} </td>
+        <td> {{ object.org.name }} </td>
+        <td> {{ object.date }} </td>
+        <td> {{ object.doctype.name }} </td>
+        <td> {{ object.comments }} </td>
+         <td>
+            <a href="{% url 'doc_update' object.pk %}"> {% include "svgbutton/edit.html" %} </a>
+            <a href="{% url 'doc_delete' object.pk %}"> {% include "svgbutton/delete.html" %} </a>
+        </td>
+    </tr>
 {% endfor %}
+</tbody>
 </table>
-</form>
 {% endblock %}

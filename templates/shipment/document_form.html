@@ -1,4 +1,4 @@
-{% extends "shipment/base.html" %}
+{% extends "shipment/document_base.html" %}
 {% block js %}
 {{ form.media }}
 {% endblock %}
@@ -8,21 +8,8 @@
 	<table border="1">
 		<caption> {% if object %} Редактировать {% else %} Новая {% endif %} отгрузка </caption>
 		{{ form.as_table }}
-		{% if object %}
-		 <tr>
-		  <td> Оригинал: </td>
-		  <td> <table border="0">
-		   {% for img in object.fileseq.list_items.all %}
-		    <tr> <td>
-		     {{ img.order }}
-		     <a href="{% url 'file_get' img.pk %}"> {% include "svgbutton/download.html" %} </a>
-		    </td> </tr>
-		   {% endfor %}
-		  </table> </td>
-		 </tr>
-		{% endif %}
 	</table>
 	<button type="submit" title="Записать" class="plain"> {% include "svgbutton/save.html" %} </button>
-	<a href="{% if object %} {% url 'shipment_view' object.pk %} {% else %} {% url 'shipment_list' %} {% endif %}"> <button type="button" title="Отказаться" class="plain"> {% include "svgbutton/cancel.html" %} </button> </a>
+	<a href="{% if object %} {% url 'doc_view' object.pk %} {% else %} {% url 'doc_list' %} {% endif %}"> <button type="button" title="Отказаться" class="plain"> {% include "svgbutton/cancel.html" %} </button> </a>
    </form>
 {% endblock %}

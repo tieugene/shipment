@@ -1,4 +1,4 @@
-{% extends "shipment/base.html" %}
+{% extends "shipment/document_base.html" %}
 {% block css %}
 	fieldset {
 		background-color: gainsboro;
@@ -22,43 +22,16 @@
  <tbody>
   <tr> <th> # </th> <td> {{ object.pk }} </td> </tr>
   <tr> <th> Поставщик </th> <td nowrap> {{ object.shipper.name }} </td> </tr>
-  <tr> <th> Контрагент </th> <td nowrap> {{ object.payer.name }} <br/> ({{ object.payer.fullname }}) </td> </tr>
+  <tr> <th> Контрагент </th> <td nowrap> {{ object.org.name }} <br/> ({{ object.org.fullname }}) </td> </tr>
   <tr> <th> Дата </th> <td nowrap> {{ object.date|date:"d.m.y" }} </td> </tr>
-  <tr> <td> Оригиналы: </td>
-   <td>
-    <table border="0">
-     {% for img in object.fileseq.list_items.all %}
-      <tr>
-       <td>
-        {{ img.order }}
-        <a href="{% url 'file_get' img.pk %}" class="nou"> {{ img.file.name }} </a>
-        <a href="{% url 'shipment_img_del' img.pk %}" class="nou"> {% include "svgbutton/delete.html" %} </a>
-       </td>
-       <td>
-	    {% if not img.is_first %} <a href="{% url 'shipment_img_up' img.file.pk %}"> {% include "svgbutton/move-up.html" %} </a> <br/> {% endif %}
-	    {% if not img.is_last  %} <a href="{% url 'shipment_img_dn' img.file.pk %}"> {% include "svgbutton/move-down.html" %} </a> {% endif %}
-       </td>
-      </tr>
-     {% endfor %}
-    </table>
-   </td>
-  </tr>
+  <tr> <th> Тип </th> <td nowrap> {{ object.doctype }} </td> </tr>
+  <tr> <th> Comments </th> <td> {{ object.comments }} </td> </tr>
  </tbody>
 </table>
 </fieldset>
-<p> <a href="{% url 'shipment_test' object.pk %}"> Test: </a> </p>
-<form enctype="multipart/form-data" action="{% url 'shipment_img_add' object.pk %}" method="POST">
- {% csrf_token %}
- <table border="1">
-  <tr>
-   <td> {{ upload_form.as_p }} </td>
-   <td> <button type="submit" class="plain"> {% include "svgbutton/upload.html" %} </button> </td>
-  </tr>
- </table>
-</form>
 
 <p style="margin: 0">
- <a href="{% url 'shipment_edit' object.pk %}" class="nou"> {% include "svgbutton/edit.html" %} </a>
- <a href="{% url 'shipment_delete' object.pk %}" class="nou"> {% include "svgbutton/delete.html" %} </a>
+ <a href="{% url 'doc_update' object.pk %}" class="nou"> {% include "svgbutton/edit.html" %} </a>
+ <a href="{% url 'doc_delete' object.pk %}" class="nou"> {% include "svgbutton/delete.html" %} </a>
 </p>
 {% endblock %}
