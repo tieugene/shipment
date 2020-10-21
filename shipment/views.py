@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic.base import View, TemplateView, RedirectView  # !
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
+from django.views.decorators.csrf import csrf_exempt
 
 from . import models, forms
 from core.models import File
@@ -86,9 +88,50 @@ class DocDelete(DeleteView):
     success_url = reverse_lazy('doc_list')
     # template_name = 'shipment/doc_confirm_delete.html'
 
+@csrf_exempt
+def doc_bulk(request):
+    """
+    Bulk uploading documents.
+    RTFM: https://pythoncircle.com/post/713/sending-post-request-with-different-body-formats-in-django/
+    Test:
+    curl -X POST -F 'shipper=...' -F 'org=...' -F 'date=...' -F 'file=@filename.ext' http://localhost:8000/shipment/d/bulk/
+    [-H "Content-Type: multipart/form-data"]
+    File: or 'file=@filename.pdf;type=application/pdf'
+    (mimetype: `file -b --mime-type <filename>`
+    Note: name/org can be ru and w/ spaces
+    Requires: shipper, org, date, file[s]
+    request.POST: <QueryDict: {'shipper': ['PR'], 'org': ['MyOrg']}>
+    request.FILES: {'file': [<InMemoryUploadedFile: settings.py (application/pdf)>]}>
+    RTFM: https://www.kite.com/python/docs/django.http.QueryDict
+    ----
+    Errors:
+    - no/wrong shipper/org/date/files
+    """
+    if request.method != 'POST':
+        print("Not POST")
+        return
+    print("On POST:")
+    shipper = request.POST.get('shipper', None)     # str
+    org = request.POST.get('org', None)
+    date_s = request.POST.get('date', None)
+    print("Shipper: {}, Org: {}, Date: {}".format(shipper, org, date_s))
+    # print(request.POST)
+    print(request.FILES)
+    return HttpResponse(status=200)
 
-'''class DocAdd(CreateView):
+
+'''
+class DocAdd(CreateView):
     model = models.Document
     fields = ['file', 'shipper', 'org', 'date', 'doctype', 'comments']
     # template_name = 'shipment/doc_form.html'
+'''
+
+'''
+= Curl tests =
+Send:
+curl -X POST -F 'shipper=ПроРЕсурс+' -F 'org=Чужая контора' -F 'date=01.02.15' -F 'file=@settings.py;type=application/pdf' -F 'file=@run.sh;type=text/plain' http://localhost:8000/shipment/d/bulk/
+Received:
+Shipper: ПроРЕсурс+, Org: Чужая контора, Date: 01.02.15
+<MultiValueDict: {'file': [<InMemoryUploadedFile: settings.py (application/pdf)>, <InMemoryUploadedFile: run.sh (text/plain)>]}>
 '''

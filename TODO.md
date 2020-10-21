@@ -1,7 +1,8 @@
 # Shipment
 
 ## ToDo:
-- Doc: bulk upload via ClI (curl)
+- Doc: bulk upload via CLI (curl)
+  option: multiple files at once
 
 ## FixMe:
 - mime on 1st block (1KB?) or chunk

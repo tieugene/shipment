@@ -14,4 +14,5 @@ urlpatterns = [
     path('d/<int:pk>/r/',	views.DocDetail.as_view(), name='doc_view'),
     path('d/<int:pk>/u/',	views.DocUpdate.as_view(), name='doc_update'),
     path('d/<int:pk>/d/',	views.DocDelete.as_view(), name='doc_delete'),
+    path('d/bulk/',         views.doc_bulk, name='doc_bulk'),   # name is option
 ]
