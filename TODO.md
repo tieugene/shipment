@@ -12,7 +12,7 @@
 - &#9744; File/Doc: download/preview ok
 
 ### Hot:
-- Doc.del: del File
+- Doc.del: del File (and vice versa)
 - File: list - show doc
 - Doc: bulk upload via ClI (curl)
 

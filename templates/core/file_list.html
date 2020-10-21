@@ -10,6 +10,7 @@
   <th> MIME </th>
   <th> CTime </th>
   <th> {% trans "Size" %} </th>
+     <th> Doc </th>
      <th> <a href="{% url 'file_add' %}"> <button type="button"> &plus; </button></a> </th>
  </tr>
 </thead>
@@ -21,6 +22,7 @@
   <td> {{ object.mime }} </td>
   <td> {{ object.ctime|date:"y.m.d H:i:d" }} </td>
   <td> {{ object.size }} </td>
+    <td> {%  if object.document %} <a href="{% url 'doc_view' object.pk %}"> &#128206; </a> {% endif %} </td>
     <td>
         <a href="{% url 'file_show' object.pk %}"> <button type="button"> &plus; </button> </a>
         <a href="{% url 'file_get' object.pk %}"> <button type="button"> &darr; </button> </a>
