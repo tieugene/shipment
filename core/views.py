@@ -5,7 +5,7 @@ from django.http import HttpResponse, FileResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 
 from . import models, forms
 
@@ -39,6 +39,27 @@ def file_add(request):
     return render(request, 'core/file_form.html', {'form': form})
 
 
+class MultiFileAddView(FormView):
+    """
+    Exactly due doc: https://docs.djangoproject.com/en/3.0/topics/http/file-uploads/#uploading-multiple-files
+    """
+    form_class = forms.MultiFileAddForm
+    template_name = 'core/file_form.html'
+    success_url = reverse_lazy('file_list')
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        files = request.FILES.getlist('file')
+        if form.is_valid():
+            for f in files:
+                file = models.File(file=f)
+                file.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+
 class FileDetail(DetailView):
     model = models.File
 
@@ -52,9 +73,6 @@ class FileDelete(DeleteView):
     model = models.File
     success_url = reverse_lazy('file_list')
 
-
-# def file_preview(request, pk):
-#    return render(request, 'core/file_img.html', {'file': models.File.objects.get(pk=int(pk))})
 
 def __file_download(pk, as_attach):
     file = models.File.objects.get(pk=int(pk))

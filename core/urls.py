@@ -7,6 +7,7 @@ urlpatterns = [
     path('f/',				views.FileList.as_view(), name='file_list'),
     # path('f/a/',			views.FileAdd.as_view(), name='file_add'),
     path('f/a/',			views.file_add, name='file_add'),
+    path('f/ma/',			views.MultiFileAddView.as_view(), name='file_multi_add'),
     path('f/<int:pk>/r/',	views.FileDetail.as_view(), name='file_view'),
     path('f/<int:pk>/u/',	views.FileUpdate.as_view(), name='file_update'),
     path('f/<int:pk>/d/',	views.FileDelete.as_view(), name='file_delete'),

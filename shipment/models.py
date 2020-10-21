@@ -63,9 +63,9 @@ class Document(models.Model):
                                 verbose_name=_('Shipper'))
     org = models.ForeignKey(Org, on_delete=models.CASCADE, related_name='org_document', db_index=True,
                             verbose_name=_('Customer'))
+    date = models.DateField(db_index=True, verbose_name=_('Date'))
     doctype = models.ForeignKey(DocType, on_delete=models.CASCADE, null=True, related_name='doctype_document',
                                 db_index=True, verbose_name=_('DocType'))
-    date = models.DateField(db_index=True, verbose_name=_('Date'))
     comments = models.CharField(null=True, blank=True, db_index=True, max_length=255, verbose_name=_('Comments'))
 
     def __str__(self):

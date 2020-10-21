@@ -11,7 +11,10 @@
   <th> CTime </th>
   <th> {% trans "Size" %} </th>
      <th> Doc </th>
-     <th> <a href="{% url 'file_add' %}"> <button type="button"> &plus; </button></a> </th>
+     <th>
+         <a href="{% url 'file_add' %}"> <button type="button"> &plus; </button></a>
+         <a href="{% url 'file_multi_add' %}"> <button type="button"> &plus;&plus; </button></a>
+     </th>
  </tr>
 </thead>
 <tbody>
