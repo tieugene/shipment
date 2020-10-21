@@ -5,13 +5,11 @@
 - &#9745; Org CRUDLa
 - &#9745; Shipper - admin only
 - &#9745; DocType - admin only
+- &check; File CRUDLa (solution: admin - disable add/edit, list: ad in free form only)
 
 ### Hot:
-- &hellip; File CRUDLa
-  solution: admin - disable add/edit, list: ad in free form only
-- &#9744; Doc - CRUDL
-- File:
-  - mime from head and filename (on upload only)
+- File: id-based name
+- &#9744; Doc - CRUDLa
 
 ### file add:
 - Add: admin.File, admin.Doc, file_add.

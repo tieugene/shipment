@@ -3,8 +3,9 @@ import os
 import uuid, mimetypes
 import magic
 
+from django.conf import settings
 from django.db import models
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import pre_save, post_save, pre_delete
 from django.dispatch import receiver
 from django.urls import reverse
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -63,8 +64,8 @@ class File(models.Model):
     """
     file = models.FileField(upload_to=my_upload_to, verbose_name=_('File'))
     name = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('File name'))
-    mime = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('MIME type'))    # option?
-    ctime = models.DateTimeField(db_index=True, auto_now_add=True, verbose_name=_('Created'))   # option?
+    mime = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('MIME type'))  # option?
+    ctime = models.DateTimeField(db_index=True, auto_now_add=True, verbose_name=_('Created'))  # option?
     size = models.PositiveIntegerField(db_index=True, verbose_name=_('Size'))  # option?
     crc = models.UUIDField(db_index=True, verbose_name='CRC')
 
@@ -96,3 +97,11 @@ def _file_pre_save(sender, instance, **kwargs):
         instance.mime = __get_file_mime(f.file)
         instance.crc = __get_file_md5(f.file)
     # print("File pre-save end")
+
+
+@receiver(pre_delete, sender=File)
+def _file_delete(sender, instance, **kwargs):
+    # p = instance.get_path()
+    p = os.path.join(settings.MEDIA_ROOT, instance.file.name)
+    if os.path.exists(p):
+        os.unlink(p)
