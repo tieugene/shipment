@@ -8,6 +8,7 @@
 
 ### Hot:
 - &hellip; File CRUDLa
+  solution: admin - disable add/edit, list: ad in free form only
 - &#9744; Doc - CRUDL
 - File:
   - mime from head and filename (on upload only)
@@ -30,6 +31,7 @@
   - [fore](https://progi.pro/django-audio-proverka-faylov-9997753)
 
 ## Future:
+- tests
 - admin.File - disable edit on add
 - Buttons - text + html [entities](https://www.amp-what.com/unicode/search/home)
   (as [template tag](https://docs.djangoproject.com/en/3.0/howto/custom-template-tags/)

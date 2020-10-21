@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from . import models
+from . import models, forms
 
 PAGE_SIZE = 25
 
@@ -16,9 +16,25 @@ class FileList(ListView):
     paginate_by = PAGE_SIZE
 
 
+'''
 class FileAdd(CreateView):
     model = models.File
     fields = ('file',)
+'''
+
+
+def file_add(request):
+    """
+    """
+    if request.method == 'POST':
+        form = forms.FileAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = models.File(file=request.FILES['file'])
+            file.save()
+            return redirect(file)
+    else:
+        form = forms.FileAddForm()
+    return render(request, 'core/file_form.html', {'form': form})
 
 
 class FileDetail(DetailView):
