@@ -71,7 +71,7 @@ def __get_file_md5(file, block_size=1024 * 14):
     return h.hexdigest()
 
 
-def __get_file_mime(file):
+def get_file_mime(file):
     """
     @param file:
     - new/replace - django.core.files.uploadedfile.InMemoryUploadedFile (for newly created)
@@ -101,7 +101,7 @@ def _file_pre_save(sender, instance, **kwargs):
         instance.name = f.name
         instance.size = f.size
         # mimetypes.guess_type(f.name)
-        instance.mime = __get_file_mime(f.file)
+        instance.mime = get_file_mime(f.file)
         instance.crc = __get_file_md5(f.file)
     # print("File pre-save end")
 

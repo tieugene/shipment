@@ -1,5 +1,7 @@
+from urllib.parse import quote
+
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
@@ -51,27 +53,24 @@ class FileDelete(DeleteView):
     success_url = reverse_lazy('file_list')
 
 
-@login_required
-def file_preview(request, id):
-    return render(request, 'core/file_img.html', {'file': models.File.objects.get(pk=int(id))})
+# def file_preview(request, pk):
+#    return render(request, 'core/file_img.html', {'file': models.File.objects.get(pk=int(pk))})
+
+def __file_download(pk, as_attach):
+    file = models.File.objects.get(pk=int(pk))
+    return FileResponse(open(file.get_path(), "rb"), as_attachment=as_attach, content_type=file.mime,
+                        filename=file.name)
 
 
-@login_required
-def file_get(request, id):
+def file_get(request, pk):
     """
     Download file
     """
-    file = models.File.objects.get(pk=int(id))
-    response = HttpResponse(content_type=file.mime)
-    response['Content-Transfer-Encoding'] = 'binary'
-    response['Content-Disposition'] = '; filename=\"%s\"' % file.name.encode('utf-8')
-    response.write(open(file.get_path()).read())
-    return response
+    return __file_download(pk, True)
 
 
-@login_required
-def file_del(request, id):
+def file_show(request, pk):
     """
+    Download file
     """
-    models.File.objects.get(pk=int(id)).delete()
-    return redirect('file_list')
+    return __file_download(pk, False)

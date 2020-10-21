@@ -34,6 +34,8 @@
         <td> {{ object.doctype.name }} </td>
         <td> {{ object.comments }} </td>
          <td>
+        <a href="{% url 'file_show' object.pk %}"> <button type="button"> &plus; </button> </a>
+        <a href="{% url 'file_get' object.pk %}"> <button type="button"> &darr; </button> </a>
             <a href="{% url 'doc_update' object.pk %}"> {% include "svgbutton/edit.html" %} </a>
             <a href="{% url 'doc_delete' object.pk %}"> {% include "svgbutton/delete.html" %} </a>
         </td>

@@ -22,6 +22,8 @@
   <td> {{ object.ctime|date:"y.m.d H:i:d" }} </td>
   <td> {{ object.size }} </td>
     <td>
+        <a href="{% url 'file_show' object.pk %}"> <button type="button"> &plus; </button> </a>
+        <a href="{% url 'file_get' object.pk %}"> <button type="button"> &darr; </button> </a>
         <a href="{% url 'file_update' object.pk %}"> <button type="button"> &#9998; </button> </a>
         <a href="{% url 'file_delete' object.pk %}"> <button type="button"> &#9249; </button> </a>
     </td>
