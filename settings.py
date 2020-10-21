@@ -129,6 +129,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'temp')
 
 try:
     from local_settings import *

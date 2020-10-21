@@ -1,6 +1,5 @@
 import hashlib
 import os
-import uuid, mimetypes
 import magic
 
 from django.conf import settings
@@ -16,9 +15,38 @@ def my_upload_to(instance, filename):
     """
     Generates upload path for FileField
     """
+    import uuid
     instance.name = filename
-    # return u'temp/%s' % filename
+    # return 'temp/%s' % filename
     return 'temp/%s' % uuid.uuid4().hex.upper()
+
+
+class File(models.Model):
+    """
+    """
+    file = models.FileField(upload_to=my_upload_to, verbose_name=_('File'))  # ...
+    name = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('File name'))
+    mime = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('MIME type'))  # option?
+    ctime = models.DateTimeField(db_index=True, auto_now_add=True, verbose_name=_('Created'))  # option?
+    size = models.PositiveIntegerField(db_index=True, verbose_name=_('Size'))  # option?
+    crc = models.UUIDField(db_index=True, verbose_name='CRC')
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('file_view', kwargs={'pk': self.pk})
+
+    def get_filename(self):
+        s = '%09d' % self.pk
+        return os.path.join(s[:3], s[3:6], s[6:])
+
+    def get_path(self):
+        return os.path.join(settings.MEDIA_ROOT, self.get_filename())
+
+    class Meta:
+        verbose_name = _('File')
+        verbose_name_plural = _('Files')
 
 
 def __get_file_md5(file, block_size=1024 * 14):
@@ -59,27 +87,6 @@ def __get_file_mime(file):
     return mime
 
 
-class File(models.Model):
-    """
-    """
-    file = models.FileField(upload_to=my_upload_to, verbose_name=_('File'))
-    name = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('File name'))
-    mime = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('MIME type'))  # option?
-    ctime = models.DateTimeField(db_index=True, auto_now_add=True, verbose_name=_('Created'))  # option?
-    size = models.PositiveIntegerField(db_index=True, verbose_name=_('Size'))  # option?
-    crc = models.UUIDField(db_index=True, verbose_name='CRC')
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse('file_view', kwargs={'pk': self.pk})
-
-    class Meta:
-        verbose_name = _('File')
-        verbose_name_plural = _('Files')
-
-
 @receiver(pre_save, sender=File)
 def _file_pre_save(sender, instance, **kwargs):
     """
@@ -91,12 +98,33 @@ def _file_pre_save(sender, instance, **kwargs):
     f = instance.file  # FieldFile; f.file = django.core.files.uploadedfile.TemporaryUploadedFile
     # print("File type: {}".format(type(f.file)))
     if isinstance(f.file, InMemoryUploadedFile):
-        # instance.name = f.name
+        instance.name = f.name
         instance.size = f.size
         # mimetypes.guess_type(f.name)
         instance.mime = __get_file_mime(f.file)
         instance.crc = __get_file_md5(f.file)
     # print("File pre-save end")
+
+
+@receiver(post_save, sender=File)
+def _file_post_save(sender, instance, created, **kwargs):
+    """
+    Powered by https://dev.retosteffen.ch/2017/09/django-uploading-image-post_save/
+    """
+    if created:
+        file = instance.file
+        old_name = file.name
+        if not old_name:    # ?
+            return
+        new_name = instance.get_filename()
+        new_path = instance.get_path()
+        new_dir = os.path.dirname(new_path)
+        if not os.path.exists(new_dir):
+            os.makedirs(new_dir)
+        os.rename(file.path, new_path)
+        print("File renamed from {} to {}".format(file.path, new_path))
+        instance.file.name = new_name
+        instance.save()
 
 
 @receiver(pre_delete, sender=File)
