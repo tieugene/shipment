@@ -1,5 +1,10 @@
 # Shipment
-## todo
+
+## ToDo:
+- Doc.del: del File (and vice versa)
+- Doc: bulk upload via ClI (curl)
+- File.crc - 64bit (SipHash; python: builtin hash(), python3-siphash; cli - )
+- [MultiUpload](https://github.com/Chive/django-multiupload) or builtin
 
 ### Done:
 - &#9745; Org CRUDLa
@@ -10,23 +15,20 @@
 - &#9744; Doc: CRUDL
 - &#9744; Doc: pdf only
 - &#9744; File/Doc: download/preview ok
+- &check; File: list - show doc
 
-### Hot:
-- Doc.del: del File (and vice versa)
-- File: list - show doc
-- Doc: bulk upload via ClI (curl)
+## FixMe:
+- File.admin: disable edit on add
+- Doc.admin: no add, edit w/o file
 
-## Future:
-- Doc: admin: no add, edit w/o file
-- File.crc - 64bit (SipHash; python: builtin hash(), python3-siphash; cli - )
-- admin.File - disable edit on add
+## Features:
+- Fixtures
+- Chk file size on upload
 - DocList date-based views [lists](https://docs.djangoproject.com/en/3.0/ref/class-based-views/generic-date-based/)
-- [MultiUpload](https://github.com/Chive/django-multiupload) or builtin
 - Delete checked
-- "Select folder" on upload
 - mime &rarr; - separate model (signature; ext, name) and/or inner dict()
 - preview cache (grey)
-- awesome font? fot icons
+- awesome font? for icons
 - idea: multicolumn = grid view
 - idea: email docs
 - tests

@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 from django.utils.translation import gettext as _
 
 from core.models import File
@@ -76,3 +78,8 @@ class Document(models.Model):
         ordering = ('date', 'shipper', 'org')
         verbose_name = _('Document')
         verbose_name_plural = _('Documents')
+
+
+@receiver(post_delete, sender=Document)
+def _doc_post_delete(sender, instance, **kwargs):
+    File.objects.get(pk=instance.pk).delete()
