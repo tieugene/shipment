@@ -18,28 +18,7 @@ class FileList(ListView):
     paginate_by = PAGE_SIZE
 
 
-'''
-class FileAdd(CreateView):
-    model = models.File
-    fields = ('file',)
-'''
-
-
-def file_add(request):
-    """
-    """
-    if request.method == 'POST':
-        form = forms.FileAddForm(request.POST, request.FILES)
-        if form.is_valid():
-            file = models.File(file=request.FILES['file'])
-            file.save()
-            return redirect(file)
-    else:
-        form = forms.FileAddForm()
-    return render(request, 'core/file_form.html', {'form': form})
-
-
-class MultiFileAddView(FormView):
+class FileAdd(FormView):
     """
     Exactly due doc: https://docs.djangoproject.com/en/3.0/topics/http/file-uploads/#uploading-multiple-files
     """
@@ -76,8 +55,11 @@ class FileDelete(DeleteView):
 
 def __file_download(pk, as_attach):
     file = models.File.objects.get(pk=int(pk))
-    return FileResponse(open(file.get_path(), "rb"), as_attachment=as_attach, content_type=file.mime,
-                        filename=file.name)
+    return FileResponse(
+        open(file.get_path(), "rb"),
+        as_attachment=as_attach,
+        content_type=file.mime,
+        filename=file.name)
 
 
 def file_get(request, pk):
@@ -92,3 +74,23 @@ def file_show(request, pk):
     Download file
     """
     return __file_download(pk, False)
+
+
+'''
+class FileAdd(CreateView):
+    model = models.File
+    fields = ('file',)
+
+def file_add(request):
+    """
+    """
+    if request.method == 'POST':
+        form = forms.FileAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = models.File(file=request.FILES['file'])
+            file.save()
+            return redirect(file)
+    else:
+        form = forms.FileAddForm()
+    return render(request, 'core/file_form.html', {'form': form})
+'''
