@@ -7,7 +7,7 @@ from django.db import models
 from django.db.models.signals import pre_save, post_save, pre_delete
 from django.dispatch import receiver
 from django.urls import reverse
-from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 from django.utils.translation import gettext as _
 
 
@@ -28,8 +28,8 @@ class File(models.Model):
     name = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('File name'))
     mime = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('MIME type'))  # option?
     ctime = models.DateTimeField(db_index=True, auto_now_add=True, verbose_name=_('Created'))  # option?
-    size = models.PositiveIntegerField(db_index=True, verbose_name=_('Size'))  # option?
-    crc = models.UUIDField(db_index=True, verbose_name='CRC')
+    size = models.PositiveIntegerField(db_index=True, editable=False, verbose_name=_('Size'))  # option?
+    crc = models.CharField(max_length=32, blank=False, db_index=True, editable=False, verbose_name='CRC')
 
     def __str__(self):
         return self.name
@@ -83,8 +83,7 @@ def get_file_mime(file):
     file.seek(initial_pos)
     return mime_type
     """
-    mime = magic.from_buffer(file.read(), mime=True)
-    return mime
+    return magic.from_buffer(file.read(), mime=True)
 
 
 @receiver(pre_save, sender=File)
@@ -92,12 +91,12 @@ def _file_pre_save(sender, instance, **kwargs):
     """
     Define mime, size, crc
     Mime for django: https://medium.com/@ajrbyers/file-mime-types-in-django-ee9531f3035b
-
+    Uploaded is django.core.files.uploadedfile.InMemoryUploadedFile (small)/ TemporaryUploadedFile (3MB+)
     """
     # print("File pre-save start")
     f = instance.file  # FieldFile; f.file = django.core.files.uploadedfile.TemporaryUploadedFile
-    # print("File type: {}".format(type(f.file)))
-    if isinstance(f.file, InMemoryUploadedFile):
+    print("File type: {}".format(type(f.file)))
+    if isinstance(f.file, InMemoryUploadedFile) or isinstance(f.file, TemporaryUploadedFile):
         instance.name = f.name
         instance.size = f.size
         # mimetypes.guess_type(f.name)
