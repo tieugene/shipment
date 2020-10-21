@@ -1,26 +1,13 @@
 # Shipment
 
 ## ToDo:
-- FIXME: file size for big files
-- Doc multiupload (set defaults: shipper, org, date[, doctype][, comments]):
-  - [builtin](https://docs.djangoproject.com/en/3.0/topics/http/file-uploads/#uploading-multiple-files)
-  - [3rd-party](https://github.com/Chive/django-multiupload) or builtin
+- Doc multiple upload (set defaults: shipper, org, date[, doctype][, comments]):
+  [builtin](https://docs.djangoproject.com/en/3.0/topics/http/file-uploads/#uploading-multiple-files)
 - Doc: bulk upload via ClI (curl)
 
-### Done:
-- Org CRUDLa
-- Shipper: admin only
-- DocType: admin only
-- File: CRUDLa
-- File: id-based name
-- Doc: CRUDL
-- Doc: pdf only
-- File/Doc: download/preview ok
-- File: list - show doc
-- Doc.del: del File (and vice versa)
-- FormView instead of *_add
-
 ## FixMe:
+- file size for big files
+- mime on 1st block (1KB?) or chunk
 - File.admin: disable edit on add
 - Doc.admin: no add, edit w/o file
 
@@ -51,3 +38,16 @@
   - &#9993; email
   - &#9940; stop
   - &#9888; warning
+
+### Done:
+- Org CRUDLa
+- Shipper: admin only
+- DocType: admin only
+- File: CRUDLa
+- File: id-based name
+- Doc: CRUDL
+- Doc: pdf only
+- File/Doc: download/preview ok
+- File: list - show doc
+- Doc.del: del File (and vice versa)
+- FormView instead of *_add

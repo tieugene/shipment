@@ -122,7 +122,7 @@ def _file_post_save(sender, instance, created, **kwargs):
         if not os.path.exists(new_dir):
             os.makedirs(new_dir)
         os.rename(file.path, new_path)
-        print("File renamed from {} to {}".format(file.path, new_path))
+        # print("File renamed from {} to {}".format(file.path, new_path))
         instance.file.name = new_name
         instance.save()
 

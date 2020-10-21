@@ -21,7 +21,9 @@
         <th> Date </th>
         <th> Type </th>
         <th> Comments </th>
-        <th> <a href="{% url 'doc_add' %}"> {% include "svgbutton/new.html" %} </a> </th>
+        <th>
+            <a href="{% url 'doc_add' %}"> <button type="button"> &plus; </button> </a>
+        </th>
     </tr>
     </thead>
 <tbody>

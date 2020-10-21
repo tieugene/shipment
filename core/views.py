@@ -27,13 +27,10 @@ class FileAdd(FormView):
     success_url = reverse_lazy('file_list')
 
     def post(self, request, *args, **kwargs):
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
+        form = self.get_form(self.get_form_class())
         if form.is_valid():
-            files = request.FILES.getlist('file')
-            for f in files:
-                file = models.File(file=f)
-                file.save()
+            for f in request.FILES.getlist('file'):
+                models.File.objects.create(file=f)
             return self.form_valid(form)
         else:
             return self.form_invalid(form)

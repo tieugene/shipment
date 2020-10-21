@@ -53,18 +53,18 @@ class DocAdd(FormView):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         if form.is_valid():
-            f = request.FILES.get('file')
-            file = File(file=f)
-            file.save()
-            doc = models.Document(
-                file=file,
-                shipper=form.cleaned_data['shipper'],
-                org=form.cleaned_data['org'],
-                date=form.cleaned_data['date'],
-                doctype=form.cleaned_data['doctype'],
-                comments=form.cleaned_data['comments']
-            )
-            doc.save()
+            files = request.FILES.getlist('file')   # get() for standalone
+            for f in files:
+                file = File(file=f)
+                file.save()
+                models.Document.objects.create(
+                    file=file,
+                    shipper=form.cleaned_data['shipper'],
+                    org=form.cleaned_data['org'],
+                    date=form.cleaned_data['date'],
+                    doctype=form.cleaned_data['doctype'],
+                    comments=form.cleaned_data['comments']
+                )
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
