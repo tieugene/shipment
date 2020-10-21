@@ -6,10 +6,11 @@
 - &#9745; Shipper - admin only
 - &#9745; DocType - admin only
 - &check; File CRUDLa
-- File: id-based name
+- &check; File: id-based name
+- &#9744; Doc - CRUDL
 
 ### Hot:
-- &#9744; Doc - CRUDLa
+- Doc.admin: no add, edit w/o file
 
 ### file add:
 - Document: chk mime on create:

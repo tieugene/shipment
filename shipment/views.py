@@ -1,10 +1,11 @@
-# from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.base import View, TemplateView, RedirectView  # !
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from . import models
+from . import models, forms
+from core.models import File
 
 PAGE_SIZE = 25
 
@@ -43,10 +44,34 @@ class DocList(ListView):
     paginate_by = PAGE_SIZE
 
 
-class DocAdd(CreateView):
+'''class DocAdd(CreateView):
     model = models.Document
     fields = ['file', 'shipper', 'org', 'date', 'doctype', 'comments']
     # template_name = 'shipment/doc_form.html'
+'''
+
+
+def doc_add(request):
+    """
+    """
+    if request.method == 'POST':
+        form = forms.DocAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = File(file=request.FILES['file'])
+            file.save()
+            doc = models.Document(
+                file=file,
+                shipper=form.cleaned_data['shipper'],
+                org=form.cleaned_data['org'],
+                date=form.cleaned_data['date'],
+                doctype=form.cleaned_data['doctype'],
+                comments=form.cleaned_data['comments']
+            )
+            doc.save()
+            return redirect(doc)
+    else:
+        form = forms.DocAddForm()
+    return render(request, 'shipment/document_form.html', {'form': form})
 
 
 class DocDetail(DetailView):

@@ -6,7 +6,7 @@
    <form enctype="multipart/form-data" action="" method="POST">
 	{% csrf_token %}
 	<table border="1">
-		<caption> {% if object %} Редактировать {% else %} Новая {% endif %} отгрузка </caption>
+		<caption> {% if object %} Редактировать {% else %} Новый {% endif %} документ </caption>
 		{{ form.as_table }}
 	</table>
 	<button type="submit" title="Записать" class="plain"> {% include "svgbutton/save.html" %} </button>
