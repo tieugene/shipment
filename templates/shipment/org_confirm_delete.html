@@ -5,7 +5,7 @@
 <form action="." method="post">
     {% csrf_token %}
     <p>Удолить "{{ object }}"?<br/>
-        (Docs: {{ object.document_set.size }})
+        (Docs: {{ object.org_document.count }})
     </p>
     {% include 'tags/submit.html' %}
     <a href="{% url 'org_view' object.pk %}"> {% button 'no' %} </a>

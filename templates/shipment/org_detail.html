@@ -12,4 +12,7 @@
 <a href="{% url 'org_update' object.pk %}"> {% button 'edit' %} </a>
 <a href="{% url 'org_delete' object.pk %}"> {% button 'del' %} </a>
 {# endif #}
+    {% for doc in object.org_document.all %}
+    <p> {{ doc }}</p>
+    {% endfor %}
 {% endblock %}

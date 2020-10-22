@@ -29,7 +29,7 @@ class File(models.Model):
     mime = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('MIME type'))  # option?
     ctime = models.DateTimeField(db_index=True, auto_now_add=True, verbose_name=_('Created'))  # option?
     size = models.PositiveIntegerField(db_index=True, editable=False, verbose_name=_('Size'))  # option?
-    crc = models.CharField(max_length=32, blank=False, db_index=True, editable=False, verbose_name='CRC')
+    crc = models.CharField(unique=True, max_length=32, blank=False, editable=False, verbose_name='CRC')
 
     def __str__(self):
         return self.name
@@ -49,7 +49,7 @@ class File(models.Model):
         verbose_name_plural = _('Files')
 
 
-def get_file_md5(file, block_size=1024 * 14):
+def get_file_crc(file, block_size=1024 * 14):
     """
     file_md5(file, use_system = False) -> md5sum of "file" as hexdigest string.
     "file" may be a file name or file object, opened for read.
@@ -62,10 +62,13 @@ def get_file_md5(file, block_size=1024 * 14):
     h = hashlib.md5()
     # if isinstance(file, basestring):
     #    file = open(file, 'rb')
+    pos = file.tell()
+    file.seek(0)
     block = file.read(block_size)
     while block:
         h.update(block)
         block = file.read(block_size)
+    file.seek(pos)
     # TODO: iterate over file.chunks() if (file.multiple_chunks())
     # h.update(file.read())  # for InMemoryUploadedFile
     return h.hexdigest()
@@ -101,7 +104,7 @@ def _file_pre_save(sender, instance, **kwargs):
         instance.size = f.size
         # mimetypes.guess_type(f.name)
         instance.mime = get_file_mime(f.file)
-        instance.crc = get_file_md5(f.file)
+        instance.crc = get_file_crc(f.file)
     # print("File pre-save end")
 
 

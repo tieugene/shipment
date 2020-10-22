@@ -1,11 +1,12 @@
 # Shipment
 
 ## ToDo:
-- MD5 is strange (and same)
 - Filters
+- CSS
 
 ## FixMe:
-- File: create with crc(md5) and/or mime
+- File: chk crc on creation
+- File: create() with crc(md5) and/or mime
 - mime on 1st block (1KB?) or chunk
 - Doc.add: validate all of files
 - File.admin: disable edit on add
@@ -43,3 +44,16 @@
 - big files upload ok (they are TemporaryUploadedFile)
 - buttons as template tags
 - Doc: bulk upload via CLI (curl)
+- MD5
+
+## Notes
+coreutils:
+- 512 b2sum
+- crc cksum
+- 128 md5sum
+- 160 sha1sum
+- sha224sum
+- sha256sum
+- sha384sum
+- sha512sum
+- checksum sum

@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 
 from . import models, forms
-from core.models import File, get_file_mime, get_file_md5
+from core.models import File, get_file_mime, get_file_crc
 
 # consts
 PAGE_SIZE = 25
@@ -141,29 +141,30 @@ def doc_bulk(request):
         return HttpResponse(status=412)
     org = doc = None
     # 3. add items
-    print("We have a job.")
+    # print("We have a job.")
     for f in files:  # add file=>doc if file is pdf and not exists; add org if required.
         # 3.1. chk file (pdf, not exists)
         mime = get_file_mime(f)
         if mime != MIME_PDF:
-            print("Invalid mime: ".format(mime))
+            # print("Invalid mime: ".format(mime))
             continue
-        md5 = get_file_md5(f)
+        md5 = get_file_crc(f)
         if File.objects.filter(crc=md5).exists():
-            print("File exists: {} (crc {})".format(f.name, md5))
-            # continue  FIXME: same for everything
+            # print("File exists: {} (crc {})".format(f.name, md5))
+            continue
         # 3.2. chk/create org
-        org, created = models.Org.objects.get_or_create(name=org_name)
-        if not (org or created):
-            print("Org oops.")
-            return HttpResponse(status=400)  # not found nor created
+        if not org:
+            org, created = models.Org.objects.get_or_create(name=org_name)
+            if not (org or created):
+                # print("Org oops.")
+                return HttpResponse(status=400)  # not found nor created
         file = File.objects.create(file=f)
-        if file:
-            print("File created.")
+        # if file:
+        #    print("File created.")
         # 3.3. create file
         doc = models.Document.objects.create(file=file, shipper=shipper, org=org, date=date)
-        if doc:
-            print("Doc created.")
+        # if doc:
+        #    print("Doc created.")
         # 3.4. create doc
     # x. the end
     # print("Shipper: {}, Org: {}, Date: {}".format(shipper, org_name, date_s))
