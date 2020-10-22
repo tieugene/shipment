@@ -4,7 +4,9 @@
 {% block body_main %}
 <form action="." method="post">
     {% csrf_token %}
-    <p>Удалить "{{ object }}"?</p>
+    <p>Удолить "{{ object }}"?<br/>
+        (Docs: {{ object.document_set.size }})
+    </p>
     {% include 'tags/submit.html' %}
     <a href="{% url 'org_view' object.pk %}"> {% button 'no' %} </a>
 </form>

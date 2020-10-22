@@ -1,12 +1,12 @@
 # Shipment
 
 ## ToDo:
-- Doc: bulk upload via CLI (curl)
+- MD5 is strange (and same)
 - Filters
 
 ## FixMe:
+- File: create with crc(md5) and/or mime
 - mime on 1st block (1KB?) or chunk
-- MD5 is strange
 - Doc.add: validate all of files
 - File.admin: disable edit on add
 - Doc.admin: no add, edit w/o file (!editable=False)
@@ -42,3 +42,4 @@
   [builtin](https://docs.djangoproject.com/en/3.0/topics/http/file-uploads/#uploading-multiple-files)
 - big files upload ok (they are TemporaryUploadedFile)
 - buttons as template tags
+- Doc: bulk upload via CLI (curl)
