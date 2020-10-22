@@ -1,5 +1,6 @@
 {% extends "core/file_base.html" %}
 {% load i18n %}
+{% load mytags %}
 {% block body_main %}
     <table width="auto" border="1">
      <tbody>
@@ -12,8 +13,8 @@
       <tr> <th> MD5 </th> <td> {{ object.crc }} </td> </tr>
      </tbody>
     </table>
-    <a href="{% url 'file_update' object.pk %}"> <button type="button"> &#9998; </button> </a>
+    <a href="{% url 'file_update' object.pk %}"> {% button 'edit' %} </a>
     <a href="{% url 'file_get' object.pk %}" class="image-link" title="{{ object.file.name }}" style="text-decoration: none;"> {% include "svgbutton/download.html" %} </a>
     <a href="{% url 'file_show' object.pk %}" class="image-link" title="{{ object.file.name }}" style="text-decoration: none;"> {% include "svgbutton/preview.html" %} </a>
-    <a href="{% url 'file_delete' object.pk %}" style="text-decoration: none;"> <button type="button"> &#9249; </button> </a>
+    <a href="{% url 'file_delete' object.pk %}" style="text-decoration: none;"> {% button 'del' %} </a>
 {% endblock %}

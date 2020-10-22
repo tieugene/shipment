@@ -1,5 +1,6 @@
 {% extends "core/file_base.html" %}
 {% load i18n %}
+{% load mytags %}
 {% block body_main %}
 {% include "paginator.html" %}
 <table width="auto" border="1">
@@ -12,7 +13,7 @@
   <th> {% trans "Size" %} </th>
      <th> Doc </th>
      <th>
-         <a href="{% url 'file_add' %}"> <button type="button"> &plus; </button></a>
+         <a href="{% url 'file_add' %}"> {% button 'add' %} </a>
      </th>
  </tr>
 </thead>
@@ -28,8 +29,8 @@
     <td>
         <a href="{% url 'file_show' object.pk %}"> <button type="button"> &plus; </button> </a>
         <a href="{% url 'file_get' object.pk %}"> <button type="button"> &darr; </button> </a>
-        <a href="{% url 'file_update' object.pk %}"> <button type="button"> &#9998; </button> </a>
-        <a href="{% url 'file_delete' object.pk %}"> <button type="button"> &#9249; </button> </a>
+        <a href="{% url 'file_update' object.pk %}"> {% button 'edit' %} </a>
+        <a href="{% url 'file_delete' object.pk %}"> {% button 'del' %} </a>
     </td>
 {% endfor %}
 </tbody>

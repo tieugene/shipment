@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotAllowed
 from django.urls import reverse_lazy
 from django.views.generic.base import View, TemplateView, RedirectView  # !
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import get_object_or_404
 
 from . import models, forms
 from core.models import File
@@ -91,12 +92,13 @@ class DocDelete(DeleteView):
 @csrf_exempt
 def doc_bulk(request):
     """
+    FIXME: View class
     Bulk uploading documents.
     RTFM: https://pythoncircle.com/post/713/sending-post-request-with-different-body-formats-in-django/
     Test:
     curl -X POST -F 'shipper=...' -F 'org=...' -F 'date=...' -F 'file=@filename.ext' http://localhost:8000/shipment/d/bulk/
     [-H "Content-Type: multipart/form-data"]
-    File: or 'file=@filename.pdf;type=application/pdf'
+    File: 'file=@filename.pdf[;type=application/pdf][;filename=...]'
     (mimetype: `file -b --mime-type <filename>`
     Note: name/org can be ru and w/ spaces
     Requires: shipper, org, date, file[s]
@@ -105,15 +107,24 @@ def doc_bulk(request):
     RTFM: https://www.kite.com/python/docs/django.http.QueryDict
     ----
     Errors:
-    - no/wrong shipper/org/date/files
+    - 400 (extra fields, no fields, no files)
+    - 404 (?)
+    - 405 (not POST)
+    - 406 (bad shipper)
+    - 412 (no shipper/org/date/files)
+    - 415 (not pdf)
+    - file[s] already exist[s]
     """
     if request.method != 'POST':
-        print("Not POST")
-        return
+        return HttpResponseNotAllowed()
     print("On POST:")
-    shipper = request.POST.get('shipper', None)     # str
-    org = request.POST.get('org', None)
+    shipper_name = request.POST.get('shipper', None)     # str
+    org_name = request.POST.get('org', None)
     date_s = request.POST.get('date', None)
+    files = request.FILES.getlist('file')
+    if shipper_name is None or org_name is None or date_s is None or not files:
+        return HttpResponse(status=406)
+    shipper = get_object_or_404(models.Shipper, name=shipper_name)
     print("Shipper: {}, Org: {}, Date: {}".format(shipper, org, date_s))
     # print(request.POST)
     print(request.FILES)

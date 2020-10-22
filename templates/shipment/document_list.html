@@ -1,4 +1,6 @@
 {% extends "shipment/document_base.html" %}
+{% load i18n %}
+{% load mytags %}
 {% block meta %} <meta http-equiv="refresh" content="300"> {% endblock %}
 {% block js %}
 {% endblock %}
@@ -22,7 +24,7 @@
         <th> Type </th>
         <th> Comments </th>
         <th>
-            <a href="{% url 'doc_add' %}"> <button type="button"> &plus; </button> </a>
+            <a href="{% url 'doc_add' %}"> {% button 'add' %} </a>
         </th>
     </tr>
     </thead>
@@ -38,8 +40,8 @@
          <td>
         <a href="{% url 'file_show' object.pk %}"> <button type="button"> &plus; </button> </a>
         <a href="{% url 'file_get' object.pk %}"> <button type="button"> &darr; </button> </a>
-            <a href="{% url 'doc_update' object.pk %}"> {% include "svgbutton/edit.html" %} </a>
-            <a href="{% url 'doc_delete' object.pk %}"> {% include "svgbutton/delete.html" %} </a>
+            <a href="{% url 'doc_update' object.pk %}"> {% button 'edit' %} </a>
+            <a href="{% url 'doc_delete' object.pk %}"> {% button 'del' %} </a>
         </td>
     </tr>
 {% endfor %}

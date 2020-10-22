@@ -1,4 +1,6 @@
 {% extends "shipment/document_base.html" %}
+{% load i18n %}
+{% load mytags %}
 {% block js %}
 {{ form.media }}
 {% endblock %}
@@ -9,7 +11,7 @@
 		<caption> {% if object %} Редактировать {% else %} Новый {% endif %} документ </caption>
 		{{ form.as_table }}
 	</table>
-	<button type="submit" title="Записать" class="plain"> {% include "svgbutton/save.html" %} </button>
-	<a href="{% if object %} {% url 'doc_view' object.pk %} {% else %} {% url 'doc_list' %} {% endif %}"> <button type="button" title="Отказаться" class="plain"> {% include "svgbutton/cancel.html" %} </button> </a>
+	{% include 'tags/submit.html' %}
+	<a href="{% if object %} {% url 'doc_view' object.pk %} {% else %} {% url 'doc_list' %} {% endif %}"> {% button 'no' %} </a>
    </form>
 {% endblock %}

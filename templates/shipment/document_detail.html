@@ -1,4 +1,6 @@
 {% extends "shipment/document_base.html" %}
+{% load i18n %}
+{% load mytags %}
 {% block css %}
 	fieldset {
 		background-color: gainsboro;
@@ -33,7 +35,7 @@
 <p style="margin: 0">
     <a href="{% url 'file_show' object.pk %}"> <button type="button"> &plus; </button> </a>
     <a href="{% url 'file_get' object.pk %}"> <button type="button"> &darr; </button> </a>
-    <a href="{% url 'doc_update' object.pk %}" class="nou"> {% include "svgbutton/edit.html" %} </a>
-    <a href="{% url 'doc_delete' object.pk %}" class="nou"> {% include "svgbutton/delete.html" %} </a>
+    <a href="{% url 'doc_update' object.pk %}" class="nou"> {% button 'edit' %} </a>
+    <a href="{% url 'doc_delete' object.pk %}" class="nou"> {% button 'del' %} </a>
 </p>
 {% endblock %}

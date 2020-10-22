@@ -3,7 +3,7 @@
 <form action="." method="post">
     {% csrf_token %}
     <p>Удалить "{{ object }}"?</p>
-    <button type="submit" title="Удалить"/> {% include "svgbutton/agreed.html" %} </button>
-    <a href="{% url 'file_view' object.pk %}"> <button type="button" title="Отказаться" class="plain"> {% include "svgbutton/cancel.html" %} </button> </a>
+    {% include 'tags/submit.html' %}
+    <a href="{% url 'file_view' object.pk %}"> {% button 'no' %} </a>
 </form>
 {% endblock %}

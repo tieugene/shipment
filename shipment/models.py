@@ -27,7 +27,7 @@ class Org(models.Model):
     Partner
     """
     name = models.CharField(unique=True, max_length=32, verbose_name=_('Short name'))
-    fullname = models.CharField(blank=False, db_index=True, max_length=64, verbose_name=_('Full name'))
+    fullname = models.CharField(null=True, blank=False, db_index=True, max_length=64, verbose_name=_('Full name'))
 
     def __str__(self):
         return "{} ({})".format(self.name, self.fullname)

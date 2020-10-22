@@ -8,6 +8,8 @@
   white-space: nowrap;
  }
 {% endblock %}
+{% load i18n %}
+{% load mytags %}
 {% block body_main %}
 {% include "paginator.html" %}
 <table width="auto" border="1">
@@ -16,7 +18,7 @@
   <th> &numero; </th>
   <th> Кратко </th>
   <th> Полностью </th>
-     <th> <a href="{% url 'org_add' %}"> {% include "svgbutton/new.html" %} </a> </th>
+     <th> <a href="{% url 'org_add' %}"> {% button 'add' %} </a> </th>
  </tr>
 </thead>
 <tbody>
@@ -26,8 +28,8 @@
   <td> {{ object.name }} </td>
   <td> {{ object.fullname }} </td>
      <td>
-        <a href="{% url 'org_update' object.pk %}"> {% include "svgbutton/edit.html" %} </a>
-        <a href="{% url 'org_delete' object.pk %}"> {% include "svgbutton/delete.html" %} </a>
+        <a href="{% url 'org_update' object.pk %}"> {% button 'edit' %} </a>
+        <a href="{% url 'org_delete' object.pk %}"> {% button 'del' %} </a>
     </td>
 </tr>
 {% endfor %}

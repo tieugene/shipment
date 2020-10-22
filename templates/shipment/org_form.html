@@ -1,4 +1,6 @@
 {% extends "shipment/org_base.html" %}
+{% load i18n %}
+{% load mytags %}
 {% block js %}
 {{ form.media }}
 {% endblock %}
@@ -8,7 +10,7 @@
 	<table border="1">
 		{{ form.as_table }}
 	</table>
-	<button type="submit" title="Записать" class="plain"> {% include "svgbutton/save.html" %} </button>
-	<a href="{% if object %} {% url 'org_view' object.pk %} {% else %} {% url 'org_list' %} {% endif %}"> <button type="button" title="Отказаться" class="plain"> {% include "svgbutton/cancel.html" %} </button> </a>
+	{% include 'tags/submit.html' %}
+	<a href="{% if object %} {% url 'org_view' object.pk %} {% else %} {% url 'org_list' %} {% endif %}"> {% button 'no' %} </a>
    </form>
 {% endblock %}

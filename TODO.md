@@ -2,7 +2,7 @@
 
 ## ToDo:
 - Doc: bulk upload via CLI (curl)
-  option: multiple files at once
+- Filters
 
 ## FixMe:
 - mime on 1st block (1KB?) or chunk
@@ -20,25 +20,11 @@
 - Chk file size on upload
 - DocList date-based views [lists](https://docs.djangoproject.com/en/3.0/ref/class-based-views/generic-date-based/)
 - mime &rarr; - separate model (signature; ext, name) and/or inner dict()
-- preview cache (grey)
-- awesome font? for icons
+- preview: img cache (grey)
+- icons: awesome font?
 - idea: multicolumn = grid view
 - idea: email docs
 - tests
-- Buttons - text + html [entities](https://www.amp-what.com/unicode/search/home)
-  (as [template tag](https://docs.djangoproject.com/en/3.0/howto/custom-template-tags/)
-  for [&lt;button&gt;](http://htmlbook.ru/html/button)):
-  - &#8962; Home
-  - &check; OK
-  - &cross; Cancel
-  - &plus; Add
-  - &#9249; Delete
-  - &#9998; Edit
-  - &#9198; Prev / &#9197; Next
-  - &#9194; Left / &#9193; Right
-  - &#9993; email
-  - &#9940; stop
-  - &#9888; warning
 
 ### Done:
 - Org CRUDLa
@@ -55,3 +41,4 @@
 - Doc multiple upload (set defaults: shipper, org, date[, doctype][, comments]):
   [builtin](https://docs.djangoproject.com/en/3.0/topics/http/file-uploads/#uploading-multiple-files)
 - big files upload ok (they are TemporaryUploadedFile)
+- buttons as template tags

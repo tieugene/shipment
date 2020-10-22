@@ -1,4 +1,6 @@
 {% extends "core/file_base.html" %}
+{% load i18n %}
+{% load mytags %}
 {% block js %}
 {{ form.media }}
 {% endblock %}
@@ -8,8 +10,7 @@
 	<table border="1">
 		{{ form.as_table }}
 	</table>
-	<button type="submit" title="Записать" class="plain"> &check; </button>
-	<a href="{% if object %} {% url 'file_view' object.pk %} {% else %} {% url 'file_list' %} {% endif %}">
-        <button type="button" title="Отказаться" class="plain"> &cross; </button> </a>
+	{% include 'tags/submit.html' %}
+	<a href="{% if object %} {% url 'file_view' object.pk %} {% else %} {% url 'file_list' %} {% endif %}"> {% button 'no' %} </a>
    </form>
 {% endblock %}
