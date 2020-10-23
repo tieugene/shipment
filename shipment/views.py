@@ -7,7 +7,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 
 from . import models, forms
 from core.models import File, get_file_mime, get_file_crc
@@ -108,17 +108,16 @@ class DocUpdateMulti(FormView):
     success_url = reverse_lazy('doc_list')
 
     def post(self, request, *args, **kwargs):
+        print("POST detected")
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         if form.is_valid():
-            models.Document.objects.update(
-                shipper=form.cleaned_data['shipper'],
-                org=form.cleaned_data['org'],
-                date=form.cleaned_data['date'],
-                doctype=form.cleaned_data['doctype'],
-            )
+            print("Valid form:")
+            print(form.cleaned_data.get('checked'))  # queryset
             return self.form_valid(form)
         else:
+            if not form.cleaned_data.get('checked'):    # empty doc list == fake call
+                return redirect(reverse('doc_list'))
             return self.form_invalid(form)
 
 

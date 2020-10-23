@@ -26,7 +26,7 @@
         <th> File </th>
         <th> Notes </th>
         <th colspan="2"> <a href="{% url 'doc_add' %}"> {% button 'add' %} </a> </th>
-        <th> <a href="{% url 'doc_update_multi' %}"> {% button 'edit' %} </a> </th>
+        <th> <button type="submit" title="{% trans "Edit selected" %}" formaction="{% url 'doc_update_multi' %}"> E </button> </th>
         <th> <button type="submit" title="{% trans "Delete selected" %}" formaction="{% url 'doc_delete_multi' %}"> &cross; </button> </th>
         <th> <input type="checkbox"> </th>
     </tr>

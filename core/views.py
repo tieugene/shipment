@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, FileResponse, HttpResponseNotAllowed
 from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.base import View
 from django.views.generic.edit import DeleteView, UpdateView, FormView
@@ -61,7 +61,7 @@ def _delete_multi(request, m, fw: str):
 
 
 def file_delete_multi(request):
-    return _delete_multi(request, models.File, reverse_lazy('file_list'))
+    return _delete_multi(request, models.File, reverse('file_list'))
 
 
 def __file_download(pk, as_attach):
