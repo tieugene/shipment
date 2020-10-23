@@ -18,6 +18,7 @@
         <th> &numero; </th>
         <th> {% trans "Short" %} </th>
         <th> {% trans "Full" %} </th>
+        <th> {% trans "Dox" %} </th>
         <th> <a href="{% url 'org_add' %}"> {% button 'add' %} </a> </th>
         <th> {% button 'del' %} </th>
         <th> <input type="checkbox"> </th>
@@ -29,6 +30,7 @@
         <td align="right"> {{ object.pk }} </td>
         <td> <a href="{% url 'org_view' object.pk %}"> {{ object.name }} </a> </td>
         <td> {{ object.fullname|default_if_none:"-" }} </td>
+        <td align="right"> {{ object.org_document.count }} </td>
         <td> <a href="{% url 'org_update' object.pk %}"> {% button 'edit' %} </a> </td>
         <td> <a href="{% url 'org_delete' object.pk %}"> {% button 'del' %} </a> </td>
         <td> <input type="checkbox"> </td>

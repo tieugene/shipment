@@ -13,6 +13,8 @@
   - i18n
 
 ## FixMe:
+- Org: full name -> Notes
+- Doc: Comments -> Notes
 - mime: application/x-empty
 - File: chk crc on creation
 - File: create() with crc(md5) and/or mime
@@ -22,6 +24,8 @@
 - Doc.admin: no add, edit w/o file (!editable=False)
 
 ## Features:
+- Multicolumn lists
+- Inplace edits
 - "2 del?" - in-place/popup
 - File: chk crc on file upload
 - File: chk size on upload
