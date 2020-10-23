@@ -11,10 +11,10 @@ buttons_items = {
     'add': ('&oplus;', 'Add'),           # &plus
     'del': ('&otimes;', 'Delete'),       # &#9249;
     'edit': ('&#9998;', 'Edit'),
-    'beg': ('&#9194;', 'Start'),        # &larrb;
-    'prev': ('&#9198;', 'Previous'),    # &larr;
-    'next': ('&#9197;', 'Next'),        # &rarr;
-    'end': ('&#9193;', 'End'),          # &rarrb;
+    'beg': ('&larrb;', 'Start'),        # &#9194;
+    'prev': ('&larr;', 'Previous'),    # &#9198;
+    'next': ('&rarr;', 'Next'),        # &#9197;
+    'end': ('&rarrb;', 'End'),          # &#9193;
     'dl': ('&DownArrowBar;', 'Download'),
     'show': ('&gtdot;', 'View'),
     '': ('', ''),
