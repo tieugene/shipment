@@ -27,8 +27,8 @@
   <td> {{ object.size }} </td>
     <td> {%  if object.document %} <a href="{% url 'doc_view' object.pk %}"> &#128206; </a> {% endif %} </td>
     <td>
-        <a href="{% url 'file_show' object.pk %}"> <button type="button"> &plus; </button> </a>
-        <a href="{% url 'file_get' object.pk %}"> <button type="button"> &darr; </button> </a>
+        <a href="{% url 'file_show' object.pk %}"> {% button 'show' %} </a>
+        <a href="{% url 'file_get' object.pk %}"> {% button 'dl' %} </a>
         <a href="{% url 'file_update' object.pk %}"> {% button 'edit' %} </a>
         <a href="{% url 'file_delete' object.pk %}"> {% button 'del' %} </a>
     </td>

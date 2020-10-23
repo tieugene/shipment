@@ -1,11 +1,6 @@
 """
 Custom template tags.
 [Rtfm](https://docs.djangoproject.com/en/3.0/howto/custom-template-tags/)
-[entities](https://www.amp-what.com/unicode/search/home):
-- &  # 8962; Home
-- &  # 9993; email
-- &  # 9940; stop
-- &  # 9888; warning
 """
 from django import template
 from django.utils.safestring import mark_safe
@@ -13,15 +8,15 @@ from django.utils.safestring import mark_safe
 buttons_items = {
     'ok': ('&check;', 'OK'),
     'no': ('&cross;', 'Cancel'),
-    'add': ('&plus;', 'Add'),
-    'del': ('&#9249;', 'Delete'),
+    'add': ('&oplus;', 'Add'),           # &plus
+    'del': ('&otimes;', 'Delete'),       # &#9249;
     'edit': ('&#9998;', 'Edit'),
-    'beg': ('&#9194;', 'Start'),
-    'prev': ('&#9198;', 'Previous'),
-    'next': ('&#9197;', 'Next'),
-    'end': ('&#9193;', 'End'),
-    'dl': ('', ''),
-    'show': ('', ''),
+    'beg': ('&#9194;', 'Start'),        # &larrb;
+    'prev': ('&#9198;', 'Previous'),    # &larr;
+    'next': ('&#9197;', 'Next'),        # &rarr;
+    'end': ('&#9193;', 'End'),          # &rarrb;
+    'dl': ('&DownArrowBar;', 'Download'),
+    'show': ('&gtdot;', 'View'),
     '': ('', ''),
 }
 

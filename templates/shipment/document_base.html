@@ -1,3 +1,4 @@
 {% extends "shipment/base.html" %}
-{% block title %} Отгрузки {% endblock %}
-{% block menu_title %} <a href="{% url 'doc_list' %}"> Отгрузки </a> {% endblock %}
+{% load i18n %}
+{% block title %} {% trans "Shipments" %} {% endblock %}
+{% block menu_title %} <a href="{% url 'doc_list' %}"> {% trans "Shipments" %} </a> {% endblock %}

@@ -1,34 +1,18 @@
 # Shipment
 
-## Requires:
-- django
-- python-magic
+General purpose file storage with addition functionality for shipping documents archiving.
 
-## Tools:
-- Django
-- [WebDAV](https://github.com/MnogoByte/djangodav)
-- pylint with [pylint-django](https://github.com/PyCQA/pylint-django)
-
-## Classes
-- core:
-  - File
-  - [Mime]
-- shipment:
-  - DirTree
-  - Org
+## Features
+- Shipping documents have attributes to filter and sort:
+  - Own organization
   - Partner
-  - Document
+  - Document (shipping) date
+  - Document type (orders, bills, invoices etc)
+- Bulk uploading documents
+- Uploading document type restriction (PDF only)
 
-## Actions
-- CRUD
-- Search
-- Filter (year[-mon[-date]], Partner, Owner)
-- merge Partners
-- change history
-
-## Utility
-- sync/import with local files:
-  - Year &rarr; Month &rarr; dd.mm.yyyy &rarr; partner
-  - show not imported
-  - show new
-  - chk crc64
+## Requires
+- Python 3.x
+- Django
+- Python-magic
+- Django-compatible RDB backend (SQLite, MariaDB, PostgreSQL etc)

@@ -26,7 +26,7 @@
  <tr class="list" onclick="window.document.location='{% url 'org_view' object.pk %}'">
   <td align="right"> {{ object.pk }} </td>
   <td> {{ object.name }} </td>
-  <td> {{ object.fullname }} </td>
+  <td> {{ object.fullname|default_if_none:"-" }} </td>
      <td>
         <a href="{% url 'org_update' object.pk %}"> {% button 'edit' %} </a>
         <a href="{% url 'org_delete' object.pk %}"> {% button 'del' %} </a>

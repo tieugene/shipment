@@ -19,23 +19,23 @@
 	}
 {% endblock %}
 {% block body_main %}
-<fieldset> <legend> Отгрузка </legend>
+<fieldset> <legend> {% trans "Document" %} </legend>
 <table border="1">
  <tbody>
   <tr> <th> # </th> <td> {{ object.pk }} </td> </tr>
   <tr> <th> Поставщик </th> <td nowrap> {{ object.shipper.name }} </td> </tr>
   <tr> <th> Контрагент </th> <td nowrap> {{ object.org.name }} <br/> ({{ object.org.fullname }}) </td> </tr>
   <tr> <th> Дата </th> <td nowrap> {{ object.date|date:"d.m.y" }} </td> </tr>
-  <tr> <th> Тип </th> <td nowrap> {{ object.doctype }} </td> </tr>
-  <tr> <th> Comments </th> <td> {{ object.comments }} </td> </tr>
+  <tr> <th> Тип </th> <td nowrap> {{ object.doctype|default_if_none:"-" }} </td> </tr>
+  <tr> <th> Comments </th> <td> {{ object.comments|default_if_none:"-" }} </td> </tr>
  </tbody>
 </table>
 </fieldset>
 
 <p style="margin: 0">
-    <a href="{% url 'file_show' object.pk %}"> <button type="button"> &plus; </button> </a>
-    <a href="{% url 'file_get' object.pk %}"> <button type="button"> &darr; </button> </a>
-    <a href="{% url 'doc_update' object.pk %}" class="nou"> {% button 'edit' %} </a>
-    <a href="{% url 'doc_delete' object.pk %}" class="nou"> {% button 'del' %} </a>
+    <a href="{% url 'file_show' object.pk %}"> {% button 'show' %} </a>
+    <a href="{% url 'file_get' object.pk %}"> {% button 'dl' %} </a>
+    <a href="{% url 'doc_update' object.pk %}"> {% button 'edit' %} </a>
+    <a href="{% url 'doc_delete' object.pk %}"> {% button 'del' %} </a>
 </p>
 {% endblock %}

@@ -1,10 +1,21 @@
 # Shipment
 
 ## ToDo:
-- Filters
-- CSS
+- Filters: date, shipper, org, doctype
+- Paginator
+- Bulk upload prepare (python walk() &rarr; curl)
+- Multiple del (&#9744; &#9745;)
+- Multiple edit
+- Merge orgs
+- [Fixtures](https://docs.djangoproject.com/en/3.1/howto/initial-data/)
+- view.*_* => forms.View
+- Interface:
+  - CSS
+  - icons: preview, download, doc exists
+  - i18n
 
 ## FixMe:
+- mime: application/x-empty
 - File: chk crc on creation
 - File: create() with crc(md5) and/or mime
 - mime on 1st block (1KB?) or chunk
@@ -13,12 +24,10 @@
 - Doc.admin: no add, edit w/o file (!editable=False)
 
 ## Features:
-- Fixtures
 - "2 del?" - in-place/popup
-- Delete multiple (checked)
-- CRC: chk on file upload
+- File: chk crc on file upload
+- File: chk size on upload
 - File.crc - 64bit ([Positive]BigIntegerField; SipHash; python: builtin hash(), python3-siphash; cli - )
-- Chk file size on upload
 - DocList date-based views [lists](https://docs.djangoproject.com/en/3.0/ref/class-based-views/generic-date-based/)
 - mime &rarr; - separate model (signature; ext, name) and/or inner dict()
 - preview: img cache (grey)
@@ -26,6 +35,8 @@
 - idea: multicolumn = grid view
 - idea: email docs
 - tests
+- [WebDAV](https://github.com/MnogoByte/djangodav)
+- pylint with [pylint-django](https://github.com/PyCQA/pylint-django)
 
 ### Done:
 - Org CRUDLa
@@ -46,14 +57,17 @@
 - Doc: bulk upload via CLI (curl)
 - MD5
 
-## Notes
-coreutils:
-- 512 b2sum
-- crc cksum
-- 128 md5sum
-- 160 sha1sum
-- sha224sum
-- sha256sum
-- sha384sum
-- sha512sum
-- checksum sum
+## icons
+[Search](https://www.amp-what.com/unicode/search/home) or
+[Explore](https://www.toptal.com/designers/htmlarrows/)
+[Test](https://mothereff.in/html-entities)
+- &#8962; Home
+- &#9993; Email
+- &#9940; Stop
+- &#9888; Warning
+- &#9786; Smile
+- &#9874;&#9881; Tools
+- &#9000; Keyboard
+- &#128269; ~~Magnify~~
+- &#128065; ~~Eye~~
+- &#128424; ~~Print~~

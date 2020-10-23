@@ -14,7 +14,7 @@
      </tbody>
     </table>
     <a href="{% url 'file_update' object.pk %}"> {% button 'edit' %} </a>
-    <a href="{% url 'file_get' object.pk %}" class="image-link" title="{{ object.file.name }}" style="text-decoration: none;"> {% include "svgbutton/download.html" %} </a>
-    <a href="{% url 'file_show' object.pk %}" class="image-link" title="{{ object.file.name }}" style="text-decoration: none;"> {% include "svgbutton/preview.html" %} </a>
-    <a href="{% url 'file_delete' object.pk %}" style="text-decoration: none;"> {% button 'del' %} </a>
+    <a href="{% url 'file_get' object.pk %}"> {% button 'dl' %} </a>
+    <a href="{% url 'file_show' object.pk %}"> {% button 'show' %} </a>
+    <a href="{% url 'file_delete' object.pk %}"> {% button 'del' %} </a>
 {% endblock %}
