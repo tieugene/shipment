@@ -1,11 +1,9 @@
 # Shipment
 
 ## ToDo:
-- Filters: date, shipper, org, doctype
-- Paginator
-- Bulk upload prepare (python walk() &rarr; curl)
 - Multiple del (&#9744; &#9745;)
 - Multiple edit
+- Filters: date, shipper, org, doctype
 - Merge orgs
 - [Fixtures](https://docs.djangoproject.com/en/3.1/howto/initial-data/)
 - view.*_* => forms.View
@@ -56,6 +54,7 @@
 - buttons as template tags
 - Doc: bulk upload via CLI (curl)
 - MD5
+- Bulk upload prepare (python walk() &rarr; curl)
 
 ## icons
 [Search](https://www.amp-what.com/unicode/search/home) or

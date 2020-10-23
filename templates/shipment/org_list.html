@@ -14,24 +14,25 @@
 {% include "paginator.html" %}
 <table width="auto" border="1">
 <thead>
- <tr>
-  <th> &numero; </th>
-  <th> Кратко </th>
-  <th> Полностью </th>
-     <th> <a href="{% url 'org_add' %}"> {% button 'add' %} </a> </th>
- </tr>
+    <tr>
+        <th> &numero; </th>
+        <th> {% trans "Short" %} </th>
+        <th> {% trans "Full" %} </th>
+        <th> <a href="{% url 'org_add' %}"> {% button 'add' %} </a> </th>
+        <th> {% button 'del' %} </th>
+        <th> <input type="checkbox"> </th>
+    </tr>
 </thead>
 <tbody>
 {% for object in object_list %}
- <tr class="list" onclick="window.document.location='{% url 'org_view' object.pk %}'">
-  <td align="right"> {{ object.pk }} </td>
-  <td> {{ object.name }} </td>
-  <td> {{ object.fullname|default_if_none:"-" }} </td>
-     <td>
-        <a href="{% url 'org_update' object.pk %}"> {% button 'edit' %} </a>
-        <a href="{% url 'org_delete' object.pk %}"> {% button 'del' %} </a>
-    </td>
-</tr>
+    <tr>
+        <td align="right"> {{ object.pk }} </td>
+        <td> <a href="{% url 'org_view' object.pk %}"> {{ object.name }} </a> </td>
+        <td> {{ object.fullname|default_if_none:"-" }} </td>
+        <td> <a href="{% url 'org_update' object.pk %}"> {% button 'edit' %} </a> </td>
+        <td> <a href="{% url 'org_delete' object.pk %}"> {% button 'del' %} </a> </td>
+        <td> <input type="checkbox"> </td>
+    </tr>
 {% endfor %}
 </tbody>
 </table>

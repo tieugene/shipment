@@ -23,26 +23,25 @@
         <th> Date </th>
         <th> Type </th>
         <th> Notes </th>
-        <th>
-            <a href="{% url 'doc_add' %}"> {% button 'add' %} </a>
-        </th>
+        <th colspan="3"> <a href="{% url 'doc_add' %}"> {% button 'add' %} </a> </th>
+        <th> {% button 'del' %} </th>
+        <th> <input type="checkbox"> </th>
     </tr>
     </thead>
 <tbody>
 {% for object in object_list %}
-    <tr class="list" onclick="window.document.location='{% url 'doc_view' object.pk %}'">
-        <td align="right"> {{ object.pk }} </td>
+    <tr>
+        <td align="right"> <a href="{% url 'doc_view' object.pk %}"> {{ object.pk }} </a> </td>
         <td> {{ object.shipper.name }} </td>
         <td> {{ object.org.name }} </td>
         <td> {{ object.date|date:"d.m.y" }} </td>
         <td> {{ object.doctype.name }} </td>
         <td> {{ object.comments|default_if_none:"-" }} </td>
-         <td>
-        <a href="{% url 'file_show' object.pk %}"> {% button 'show' %} </a>
-        <a href="{% url 'file_get' object.pk %}"> {% button 'dl' %} </a>
-            <a href="{% url 'doc_update' object.pk %}"> {% button 'edit' %} </a>
-            <a href="{% url 'doc_delete' object.pk %}"> {% button 'del' %} </a>
-        </td>
+        <td> <a href="{% url 'file_show' object.pk %}"> {% button 'show' %} </a> </td>
+        <td> <a href="{% url 'file_get' object.pk %}"> {% button 'dl' %} </a> </td>
+        <td> <a href="{% url 'doc_update' object.pk %}"> {% button 'edit' %} </a> </td>
+        <td> <a href="{% url 'doc_delete' object.pk %}"> {% button 'del' %} </a> </td>
+        <td> <input type="checkbox"> </td>
     </tr>
 {% endfor %}
 </tbody>
