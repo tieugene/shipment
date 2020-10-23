@@ -54,3 +54,10 @@ class DocEditMultiForm(forms.Form):
                 self.add_error('date', _("Set right date"))
         else:
             self.add_error(None, _("Choose to change something"))
+
+
+class DocFilterForm(forms.Form):
+    shipper = forms.ModelChoiceField(queryset=models.Shipper.objects.all(), required=False, label=_("Shipper"))
+    org = forms.ModelChoiceField(queryset=models.Org.objects.all(), required=False, label=_("Customer"))
+    date = forms.DateField(widget=forms.SelectDateWidget, required=False, label=_("Date"))
+    doctype = forms.ModelChoiceField(queryset=models.DocType.objects.all(), required=False, label=_("Type"))

@@ -14,10 +14,10 @@
 {% endblock %}
 {% block body_main %}
 {% include "paginator.html" %}
-<form method="POST"> {% csrf_token %}
+<form method="POST" action=""> {% csrf_token %}
 <table width="auto" border="1">
     <thead>
-    <tr>
+    <tr>    <!-- col titles -->
         <th> &numero; </th>
         <th> Shipper </th>
         <th> Org </th>
@@ -29,6 +29,14 @@
         <th> <button type="submit" title="{% trans "Edit selected" %}" formaction="{% url 'doc_update_multi' %}"> E </button> </th>
         <th> <button type="submit" title="{% trans "Delete selected" %}" formaction="{% url 'doc_delete_multi' %}"> &cross; </button> </th>
         <th> <input type="checkbox"> </th>
+    </tr>
+    <tr>    <!-- filter -->
+        <th> <button type="submit"> &check; </th>
+        <th> {{ form.shipper }} </th>
+        <th> {{ form.org }} </th>
+        <th> {{ form.date }} </th>
+        <th> {{ form.doctype }} </th>
+        <th colspan="7"> </th>
     </tr>
     </thead>
 <tbody>
@@ -50,5 +58,5 @@
 {% endfor %}
 </tbody>
 </table>
-
+</form>
 {% endblock %}

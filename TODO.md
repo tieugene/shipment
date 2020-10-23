@@ -3,7 +3,7 @@
 ## ToDo:
 - Filters: shipper, org, date, doctype
 - Merge Orgs
-- [Fixtures](https://docs.djangoproject.com/en/3.1/howto/initial-data/)
+- [Fixtures](https://docs.djangoproject.com/en/3.0/howto/initial-data/)
 - view.*_* => forms.View (file_get, file_show, doc_bulk)
 - Interface:
   - CSS
@@ -14,8 +14,8 @@
 - Org: full name -> Notes
 - Doc: Comments -> Notes
 - mime: application/x-empty
-- File: chk crc on creation
 - File: create() with crc(md5) and/or mime
+- File: chk crc on creation
 - mime on 1st block (1KB?) or chunk
 - Doc.add: validate all of files (form_valid())
 - File.admin: disable edit on add

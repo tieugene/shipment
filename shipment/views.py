@@ -1,11 +1,11 @@
 import datetime
 
 # from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseNotAllowed
+from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseForbidden
 from django.urls import reverse, reverse_lazy
 # from django.views.generic.base import View, TemplateView, RedirectView  # !
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView, FormMixin
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect, get_object_or_404
 
@@ -51,9 +51,38 @@ def org_delete_multi(request):
     return delete_multi(request, models.Org, reverse('org_list'))
 
 
-class DocList(ListView):
+class DocList(FormMixin, ListView):
+    """
+    [RTFM](https://docs.djangoproject.com/en/3.1/topics/class-based-views/mixins/#avoid-anything-more-complex)
+    [Discussion](https://stackoverflow.com/questions/6406553/django-class-based-view-listview-with-form)
+    """
     model = models.Document
+    form_class = forms.DocFilterForm
+    success_url = reverse_lazy('doc_list')
     paginate_by = PAGE_SIZE
+
+    def post(self, request, *args, **kwargs):   # 1st
+        # self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            print("Filter is valid")
+            print("Shipper was: {}".format(request.session.get('shipper_id')))
+            shipper = form.cleaned_data.get('shipper')
+            request.session['shipper_id'] = shipper.pk
+            print("Shipper stay: {}".format(request.session.get('shipper_id')))
+            # if shipper:
+            #    self.queryset = models.Document.objects.filter(shipper=shipper)
+            # request.session.get('has_commented', False):
+            # request.session['has_commented'] = True
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)      # 2nd
+
+    # def get_queryset(self):
+    #    print("Queryset call")
+    #    # print("Shipper: ()".format(request))
+    #    # self.publisher = get_object_or_404(Publisher, name=self.kwargs['publisher'])
+    #    return models.Document.objects.all()    # filter(publisher=self.publisher)
 
 
 class DocAdd(FormView):
@@ -124,10 +153,10 @@ class DocUpdateMulti(FormView):
                 to_change['date'] = form.cleaned_data.get('date')
             if form.cleaned_data.get('doctype_chg'):
                 to_change['doctype'] = form.cleaned_data.get('doctype')
-            form.cleaned_data.get('checked').update(**to_change)    # hack
+            form.cleaned_data.get('checked').update(**to_change)  # hack
             return self.form_valid(form)
         else:
-            if not form.cleaned_data.get('checked'):    # empty doc list == fake call
+            if not form.cleaned_data.get('checked'):  # empty doc list == fake call
                 return redirect(reverse('doc_list'))
             return self.form_invalid(form)
 
@@ -209,21 +238,3 @@ def doc_bulk(request):
     # print("Shipper: {}, Org: {}, Date: {}".format(shipper, org_name, date_s))
     status = 204 if doc is None else 201
     return HttpResponse(status=status)  # FIXME: 'created' (200 URL/201) or 'nothing changed (204)'
-
-
-'''
-class DocAdd(CreateView):
-    model = models.Document
-    fields = ['file', 'shipper', 'org', 'date', 'doctype', 'comments']
-    # template_name = 'shipment/doc_form.html'
-'''
-
-'''
-= Curl tests =
-Send:
-curl -X POST -F 'shipper=ПроРЕсурс+' -F 'org=Чужая контора' -F 'date=01.02.15' \
- -F 'file=@settings.py;type=application/pdf' -F 'file=@run.sh;type=text/plain' \
-  http://localhost:8000/shipment/d/bulk/
-Received:
-Shipper: ПроРЕсурс+, Org: Чужая контора, Date: 01.02.15
-'''
