@@ -46,7 +46,7 @@ class DocType(models.Model):
     Shipment document type
     """
     name = models.CharField(unique=True, max_length=16, db_index=True, verbose_name=_('Name'))
-    fullname = models.CharField(null=True, blank=False, db_index=True, max_length=64, verbose_name=_('Full name'))
+    fullname = models.CharField(null=True, db_index=True, max_length=64, verbose_name=_('Full name'))
 
     def __str__(self):
         return "{} ({})".format(self.name, self.fullname) if self.fullname else self.name

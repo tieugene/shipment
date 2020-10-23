@@ -29,7 +29,7 @@ class File(models.Model):
     mime = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('MIME type'))  # option?
     ctime = models.DateTimeField(db_index=True, auto_now_add=True, verbose_name=_('Created'))  # option?
     size = models.PositiveIntegerField(db_index=True, editable=False, verbose_name=_('Size'))  # option?
-    crc = models.CharField(unique=True, max_length=32, blank=False, editable=False, verbose_name='CRC')
+    crc = models.UUIDField(unique=True, max_length=32, blank=False, editable=False, verbose_name='CRC')
 
     def __str__(self):
         return self.name

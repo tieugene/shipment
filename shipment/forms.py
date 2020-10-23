@@ -52,7 +52,5 @@ class DocEditMultiForm(forms.Form):
                 self.add_error('org', _("Select one"))
             if date_chg and not cleaned_data.get('date'):
                 self.add_error('date', _("Set right date"))
-            if doctype_chg and not cleaned_data.get('doctype'):
-                self.add_error('doctype', _("Select one"))
         else:
             self.add_error(None, _("Choose to change something"))

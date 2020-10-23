@@ -49,7 +49,7 @@ class FileDelete(DeleteView):
     success_url = reverse_lazy('file_list')
 
 
-def _delete_multi(request, m, fw: str):
+def delete_multi(request, m, fw: str):
     """
     Delete checked items from listview
     """
@@ -61,7 +61,7 @@ def _delete_multi(request, m, fw: str):
 
 
 def file_delete_multi(request):
-    return _delete_multi(request, models.File, reverse('file_list'))
+    return delete_multi(request, models.File, reverse('file_list'))
 
 
 def __file_download(pk, as_attach):

@@ -34,12 +34,12 @@
 <tbody>
 {% for object in object_list %}
     <tr>
-        <td align="right"> <a href="{% url 'doc_view' object.pk %}"> {{ object.pk }} </a> </td>
+        <td align="right"> {{ object.pk }} </td>
         <td> {{ object.shipper.name }} </td>
         <td> {{ object.org.name }} </td>
         <td> {{ object.date|date:"d.m.y" }} </td>
         <td> {{ object.doctype.name }} </td>
-        <td> {{ object.file.name }} </td>
+        <td> <a href="{% url 'doc_view' object.pk %}"> {{ object.file.name }} </a> </td>
         <td> {{ object.comments|default_if_none:"-" }} </td>
         <td> <a href="{% url 'file_show' object.pk %}"> {% button 'show' %} </a> </td>
         <td> <a href="{% url 'file_get' object.pk %}"> {% button 'dl' %} </a> </td>

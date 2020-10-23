@@ -1,7 +1,6 @@
 # ToDo
 
 ## ToDo:
-- Doc: Multiple edit (shipper, org, date, doctype)
 - Filters: shipper, org, date, doctype
 - Merge Orgs
 - [Fixtures](https://docs.djangoproject.com/en/3.1/howto/initial-data/)
@@ -60,3 +59,4 @@
 - MD5
 - Bulk upload prepare (python walk() &rarr; curl)
 - Multiple del (&#9744; &#9745;)
+- Doc: Multiple edit (shipper, org, date, doctype)

@@ -11,7 +11,7 @@ from django.shortcuts import redirect, get_object_or_404
 
 from . import models, forms
 from core.models import File, get_file_mime, get_file_crc
-from core.views import _delete_multi
+from core.views import delete_multi
 
 # consts
 PAGE_SIZE = 25
@@ -48,7 +48,7 @@ class OrgDelete(DeleteView):
 
 
 def org_delete_multi(request):
-    return _delete_multi(request, models.Org, reverse('org_list'))
+    return delete_multi(request, models.Org, reverse('org_list'))
 
 
 class DocList(ListView):
@@ -99,7 +99,7 @@ class DocDelete(DeleteView):
 
 
 def doc_delete_multi(request):
-    return _delete_multi(request, models.Document, reverse('doc_list'))
+    return delete_multi(request, models.Document, reverse('doc_list'))
 
 
 class DocUpdateMulti(FormView):
@@ -108,12 +108,23 @@ class DocUpdateMulti(FormView):
     success_url = reverse_lazy('doc_list')
 
     def post(self, request, *args, **kwargs):
-        print("POST detected")
+        """
+        Bulk changing docs attributes.
+        Powered by [Internets](https://stackoverflow.com/questions/18051407/update-queryset-in-django-in-following-situation/18052834)
+        """
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         if form.is_valid():
-            print("Valid form:")
-            print(form.cleaned_data.get('checked'))  # queryset
+            to_change = dict()
+            if form.cleaned_data.get('shipper_chg'):
+                to_change['shipper'] = form.cleaned_data.get('shipper')
+            if form.cleaned_data.get('org_chg'):
+                to_change['org'] = form.cleaned_data.get('org')
+            if form.cleaned_data.get('date_chg'):
+                to_change['date'] = form.cleaned_data.get('date')
+            if form.cleaned_data.get('doctype_chg'):
+                to_change['doctype'] = form.cleaned_data.get('doctype')
+            form.cleaned_data.get('checked').update(**to_change)    # hack
             return self.form_valid(form)
         else:
             if not form.cleaned_data.get('checked'):    # empty doc list == fake call
