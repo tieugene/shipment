@@ -1,8 +1,8 @@
 # ToDo
 
 ## ToDo:
-- Doc: Multiple edit
-- Filters: date, shipper, org, doctype
+- Doc: Multiple edit (shipper, org, date, doctype)
+- Filters: shipper, org, date, doctype
 - Merge Orgs
 - [Fixtures](https://docs.djangoproject.com/en/3.1/howto/initial-data/)
 - view.*_* => forms.View (file_get, file_show, doc_bulk)

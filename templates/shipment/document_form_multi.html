@@ -1,0 +1,36 @@
+{% extends "shipment/document_base.html" %}
+{% load i18n %}
+{% load mytags %}
+{% block js %}
+{{ form.media }}
+{% endblock %}
+{% block body_main %}
+   <form action="" method="POST">
+	{% csrf_token %}
+	<table border="1">
+		<caption> {% trans "Edit documents" %}  </caption>
+        <tr>
+            <th> {{ form.shipper.label_tag }} </th>
+            <th> {{ form.shipper }} </th>
+            <th> {{ form.shipper_chg }} </th>
+        </tr>
+        <tr>
+            <th> {{ form.org.label_tag }} </th>
+            <th> {{ form.org }} </th>
+            <th> {{ form.org_chg }} </th>
+        </tr>
+        <tr>
+            <th> {{ form.date.label_tag }} </th>
+            <th> {{ form.date }} </th>
+            <th> {{ form.date_chg }} </th>
+        </tr>
+        <tr>
+            <th> {{ form.doctype.label_tag }} </th>
+            <th> {{ form.doctype }} </th>
+            <th> {{ form.doctype_chg }} </th>
+        </tr>
+	</table>
+	{% include 'tags/submit.html' %}
+	<a href="{% url 'doc_list' %}"> {% button 'no' %} </a>
+   </form>
+{% endblock %}

@@ -102,6 +102,26 @@ def doc_delete_multi(request):
     return _delete_multi(request, models.Document, reverse('doc_list'))
 
 
+class DocUpdateMulti(FormView):
+    form_class = forms.DocEditMultiForm
+    template_name = 'shipment/document_form_multi.html'
+    success_url = reverse_lazy('doc_list')
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        if form.is_valid():
+            models.Document.objects.update(
+                shipper=form.cleaned_data['shipper'],
+                org=form.cleaned_data['org'],
+                date=form.cleaned_data['date'],
+                doctype=form.cleaned_data['doctype'],
+            )
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+
 @csrf_exempt
 def doc_bulk(request):
     """
