@@ -1,12 +1,11 @@
-# Shipment
+# ToDo
 
 ## ToDo:
-- Multiple del (&#9744; &#9745;)
-- Multiple edit
+- Doc: Multiple edit
 - Filters: date, shipper, org, doctype
-- Merge orgs
+- Merge Orgs
 - [Fixtures](https://docs.djangoproject.com/en/3.1/howto/initial-data/)
-- view.*_* => forms.View
+- view.*_* => forms.View (file_get, file_show, doc_bulk)
 - Interface:
   - CSS
   - icons: preview, download, doc exists
@@ -19,11 +18,12 @@
 - File: chk crc on creation
 - File: create() with crc(md5) and/or mime
 - mime on 1st block (1KB?) or chunk
-- Doc.add: validate all of files
+- Doc.add: validate all of files (form_valid())
 - File.admin: disable edit on add
 - Doc.admin: no add, edit w/o file (!editable=False)
 
 ## Features:
+- Keyboard navigation (arrows, Ins, Del, Enter, Space)
 - Multicolumn lists
 - Inplace edits
 - "2 del?" - in-place/popup
@@ -59,18 +59,4 @@
 - Doc: bulk upload via CLI (curl)
 - MD5
 - Bulk upload prepare (python walk() &rarr; curl)
-
-## icons
-[Search](https://www.amp-what.com/unicode/search/home) or
-[Explore](https://www.toptal.com/designers/htmlarrows/)
-[Test](https://mothereff.in/html-entities)
-- &#8962; Home
-- &#9993; Email
-- &#9940; Stop
-- &#9888; Warning
-- &#9786; Smile
-- &#9874;&#9881; Tools
-- &#9000; Keyboard
-- &#128269; ~~Magnify~~
-- &#128065; ~~Eye~~
-- &#128424; ~~Print~~
+- Multiple del (&#9744; &#9745;)

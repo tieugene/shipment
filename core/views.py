@@ -1,11 +1,10 @@
-from urllib.parse import quote
-
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, FileResponse
+from django.http import HttpResponse, FileResponse, HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
+from django.views.generic.base import View
+from django.views.generic.edit import DeleteView, UpdateView, FormView
 
 from . import models, forms
 
@@ -48,6 +47,21 @@ class FileUpdate(UpdateView):
 class FileDelete(DeleteView):
     model = models.File
     success_url = reverse_lazy('file_list')
+
+
+def _delete_multi(request, m, fw: str):
+    """
+    Delete checked items from listview
+    """
+    if request.method == 'POST':
+        checks = request.POST.getlist('checked')
+        if checks:
+            m.objects.filter(pk__in=set(checks)).delete()
+    return redirect(fw)
+
+
+def file_delete_multi(request):
+    return _delete_multi(request, models.File, reverse_lazy('file_list'))
 
 
 def __file_download(pk, as_attach):

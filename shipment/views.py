@@ -2,7 +2,7 @@ import datetime
 
 # from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotAllowed
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 # from django.views.generic.base import View, TemplateView, RedirectView  # !
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404
 
 from . import models, forms
 from core.models import File, get_file_mime, get_file_crc
+from core.views import _delete_multi
 
 # consts
 PAGE_SIZE = 25
@@ -44,6 +45,10 @@ class OrgDelete(DeleteView):
     model = models.Org
     success_url = reverse_lazy('org_list')
     # template_name = 'shipment/org_confirm_delete.html'
+
+
+def org_delete_multi(request):
+    return _delete_multi(request, models.Org, reverse('org_list'))
 
 
 class DocList(ListView):
@@ -91,6 +96,10 @@ class DocDelete(DeleteView):
     model = models.Document
     success_url = reverse_lazy('doc_list')
     # template_name = 'shipment/doc_confirm_delete.html'
+
+
+def doc_delete_multi(request):
+    return _delete_multi(request, models.Document, reverse('doc_list'))
 
 
 @csrf_exempt
