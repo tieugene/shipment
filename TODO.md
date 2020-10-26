@@ -1,7 +1,6 @@
 # ToDo
 
 ## ToDo:
-- Filters: shipper, org, date, doctype
 - [Fixtures](https://docs.djangoproject.com/en/3.0/howto/initial-data/): doc_type[, mime]
 - Interface:
   - CSS (styles (positions+sizes+look)/colors)
@@ -11,6 +10,7 @@
 
 ## FixMe:
 - mime: application/x-empty
+- DocList.filter: date is in future only
 - view.*_* => forms.View (file_get, file_show, org_delete_multi, doc_delete_multi, doc_bulk)
 - Org: full name -> Notes
 - Doc: Comments -> Notes
@@ -62,3 +62,4 @@
 - Bulk upload prepare (python walk() &rarr; curl)
 - Multiple del (&#9744; &#9745;)
 - Doc: Multiple edit (shipper, org, date, doctype)
+- Filters: shipper, org, date, doctype

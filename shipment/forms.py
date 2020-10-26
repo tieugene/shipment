@@ -62,10 +62,11 @@ class DocFilterForm(forms.Form):
     date = forms.DateField(widget=forms.SelectDateWidget, required=False, label=_("Date"))
     doctype = forms.ModelChoiceField(queryset=models.DocType.objects.all(), required=False, label=_("Type"))
 
-
-'''
-    def __init__(self, *args, request_data=None, **kwargs):
+    def __init__(self, *args, init_data=None, **kwargs):
         super().__init__(*args, **kwargs)
-        for i in ('shipper', 'org', 'date', 'doctype'):
-            self.fields[i].initial = request_data.GET.get(i, '')
-'''
+        if init_data:
+            for i in ('shipper', 'org', 'doctype'):
+                if i in init_data:
+                    self.fields[i].initial = int(init_data[i])
+                if 'date' in init_data:
+                    self.fields['date'].initial = datetime.datetime.strptime(init_data['date'], "%y%m%d")

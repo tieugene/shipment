@@ -1,11 +1,11 @@
 import datetime
 
 # from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseNotAllowed
 from django.urls import reverse, reverse_lazy
 # from django.views.generic.base import View, TemplateView, RedirectView  # !
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView, FormMixin, ProcessFormView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView, FormMixin
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect, get_object_or_404
 
@@ -63,62 +63,29 @@ class DocList(FormMixin, ListView):
     paginate_by = PAGE_SIZE
 
     def get_queryset(self):
-        print("1. Queryset.")
         q = models.Document.objects.all()
         f = self.request.session.get('doc_list')
         if f:
-            val = f.get('shipper_id')
+            val = f.get('shipper')
             if val:
                 q = q.filter(shipper=models.Shipper.objects.get(pk=int(val)))
-            val = f.get('org_id')
+            val = f.get('org')
             if val:
                 q = q.filter(org=models.Org.objects.get(pk=int(val)))
-            val = f.get('doctype_id')
+            val = f.get('doctype')
             if val:
                 q = q.filter(doctype=models.DocType.objects.get(pk=int(val)))
             val = f.get('date')
             if val:
-                q = q.filter(date=datetime.datetime.strftime(val, "%y%m%d"))
+                q = q.filter(date=datetime.datetime.strptime(val, "%y%m%d"))
         return q
 
     def get_context_data(self, **kwargs):
-        print("2. Context.")
         context = super().get_context_data(**kwargs)
-        #shipper = self.request.session.get('doc_list_shipper_id')
-        #print("shipper {}".format(shipper))
+        f = self.request.session.get('doc_list')
+        if f:
+            context['form'] = self.get_form_class()(init_data=f)
         return context
-
-    # def get(self, request, *args, **kwargs):
-'''
-    def post(self, request, *args, **kwargs):  # 1st
-        form = self.get_form()
-        if form.is_valid():
-            print("Filter is valid")
-            print("Shipper was: {}".format(request.session.get('shipper_id')))
-            # if shipper:
-            #    self.queryset = models.Document.objects.filter(shipper=shipper)
-            # request.session.get('has_commented', False):
-            # request.session['has_commented'] = True
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)  # 2nd
-
-
-    # useless
-    def form_valid(self, form):
-        return super().form_valid(form)
-
-    def get_queryset(self):
-        print("Queryset call")
-        print("Shipper: ()".format(self.shipper))
-        # self.publisher = get_object_or_404(Publisher, name=self.kwargs['publisher'])
-        return models.Document.objects.all()    # filter(publisher=self.publisher)
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs.update(request_data=self.request)
-        return kwargs
-'''
 
 
 class DocAdd(FormView):
@@ -175,16 +142,16 @@ class DocListFilter(FormView):
             doc_list_filter = dict()
             val = form.cleaned_data.get('shipper')
             if val:
-                doc_list_filter['shipper_id'] = val.pk
+                doc_list_filter['shipper'] = val.pk
             val = form.cleaned_data.get('org')
             if val:
-                doc_list_filter['org_id'] = val.pk
+                doc_list_filter['org'] = val.pk
             val = form.cleaned_data.get('doctype')
             if val:
-                doc_list_filter['doctype_id'] = val.pk
+                doc_list_filter['doctype'] = val.pk
             val = form.cleaned_data.get('date')
             if val:
-                doc_list_filter['date'] = val.strptime("%y%m%d")
+                doc_list_filter['date'] = val.strftime("%y%m%d")
             if doc_list_filter:
                 request.session['doc_list'] = doc_list_filter
             else:
