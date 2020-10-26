@@ -1,36 +1,18 @@
 {% extends "shipment/document_base.html" %}
 {% load i18n %}
 {% load mytags %}
-{% block css %}
-	fieldset {
-		background-color: gainsboro;
-		border-color: gainsboro;
-		border-radius: 5px;
-		padding: 5px;
-		vertical-align: top;
-	}
-	legend {
-		background-color: white;
-		border-radius: 5px;
-		padding: 0px 10px;
-	}
-	fieldset table {
-		background-color: white;
-	}
-{% endblock %}
 {% block body_main %}
-<fieldset> <legend> {% trans "Document" %} </legend>
 <table border="1">
- <tbody>
-  <tr> <th> # </th> <td> {{ object.pk }} </td> </tr>
-  <tr> <th> Поставщик </th> <td nowrap> {{ object.shipper.name }} </td> </tr>
-  <tr> <th> Контрагент </th> <td nowrap> {{ object.org.name }} <br/> ({{ object.org.fullname }}) </td> </tr>
-  <tr> <th> Дата </th> <td nowrap> {{ object.date|date:"d.m.y" }} </td> </tr>
-  <tr> <th> Тип </th> <td nowrap> {{ object.doctype|default_if_none:"-" }} </td> </tr>
-  <tr> <th> Comments </th> <td> {{ object.comments|default_if_none:"-" }} </td> </tr>
- </tbody>
+    <caption> {% trans "Document" %} </caption>
+    <tbody>
+        <tr> <th> &numero; </th> <td> {{ object.pk }} </td> </tr>
+        <tr> <th> {% trans "Shipper" %} </th> <td nowrap> {{ object.shipper.name }} </td> </tr>
+        <tr> <th> {% trans "Customer" %} </th> <td nowrap> {{ object.org.name }} <br/> ({{ object.org.fullname }}) </td> </tr>
+        <tr> <th> {% trans "Date" %} </th> <td nowrap> {{ object.date|date:"d.m.y" }} </td> </tr>
+        <tr> <th> {% trans "Type" %} </th> <td nowrap> {{ object.doctype|default_if_none:"-" }} </td> </tr>
+        <tr> <th> {% trans "Notes" %} </th> <td> {{ object.comments|default_if_none:"-" }} </td> </tr>
+    </tbody>
 </table>
-</fieldset>
 
 <p style="margin: 0">
     <a href="{% url 'file_show' object.pk %}"> {% button 'show' %} </a>

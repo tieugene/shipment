@@ -35,7 +35,7 @@
 - Декларация соответствия
 - &hellip;
 
-## Filtering:
-- post: separate view; store filter into session and fw to doc_list
-- get: fill form from session
-- get_queryset: filter by ..?
+## Fixtures:
+[RTFM](https://docs.djangoproject.com/en/3.0/howto/initial-data/)
+- save: ```./manage.py dumpdata --indent 2 -o shipment_doctype.json shipment.DocType```
+- load: ```./manage.py loaddata shipment_doctype.json```

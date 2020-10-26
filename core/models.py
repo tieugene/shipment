@@ -25,7 +25,7 @@ class File(models.Model):
     """
     """
     file = models.FileField(upload_to=my_upload_to, verbose_name=_('File'))  # ...
-    name = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('File name'))
+    name = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('Name'))
     mime = models.CharField(db_index=True, blank=False, max_length=255, verbose_name=_('MIME type'))  # option?
     ctime = models.DateTimeField(db_index=True, auto_now_add=True, verbose_name=_('Created'))  # option?
     size = models.PositiveIntegerField(db_index=True, editable=False, verbose_name=_('Size'))  # option?

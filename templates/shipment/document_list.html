@@ -16,17 +16,18 @@
 {% include "paginator.html" %}
 <form method="POST" action=""> {% csrf_token %}
 <table width="auto" border="1">
+<caption> {% trans "Document list" %}</caption>
     <thead>
     <tr>    <!-- col titles -->
         <th> &numero; </th>
-        <th> Shipper </th>
-        <th> Org </th>
-        <th> Date </th>
-        <th> Type </th>
-        <th> File </th>
-        <th> Notes </th>
+        <th> {% trans "Shipper" %} </th>
+        <th> {% trans "Customer" %} </th>
+        <th> {% trans "Date" %} </th>
+        <th> {% trans "Type" %} </th>
+        <th> {% trans "File name" %} </th>
+        <th> {% trans "Note" %} </th>
         <th colspan="2"> <a href="{% url 'doc_add' %}"> {% button 'add' %} </a> </th>
-        <th> <button type="submit" title="{% trans "Edit selected" %}" formaction="{% url 'doc_update_multi' %}"> E </button> </th>
+        <th> <button type="submit" title="{% trans "Edit selected" %}" formaction="{% url 'doc_update_multi' %}"> &#9998; </button> </th>
         <th> <button type="submit" title="{% trans "Delete selected" %}" formaction="{% url 'doc_delete_multi' %}"> &cross; </button> </th>
         <th> <input type="checkbox"> </th>
     </tr>

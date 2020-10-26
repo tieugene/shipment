@@ -1,14 +1,15 @@
 # ToDo
 
 ## ToDo:
-- [Fixtures](https://docs.djangoproject.com/en/3.0/howto/initial-data/): doc_type[, mime]
+- doc_bulk: verbose x 2 (prepare, upload)
 - Interface:
   - CSS (styles (positions+sizes+look)/colors)
   - icons: preview, download, linked doc, filter, tools, orgs, docs, files
-  - i18n
   - buttons: submit tag, button_svg+submit_svg templates
 
 ## FixMe:
+- Doc.create: blank comments
+- Doc.edit: doctype required=True
 - DocList.filter: date year is in future only; must be from db
 - view.*_* => forms.View (file_get, file_show, org_delete_multi, doc_delete_multi, doc_bulk)
 - Org: full name -> Notes
@@ -22,6 +23,7 @@
 
 ## Features:
 - Preview pane
+- Sort
 - Keyboard navigation (arrows, Ins, Del, Enter, Space)
 - Multicolumn lists (grid view?)
 - Inplace edits
@@ -63,3 +65,5 @@
 - Doc: Multiple edit (shipper, org, date, doctype)
 - Filters: shipper, org, date, doctype
 - fixed: mime == application/x-empty
+- fixtures (NOTES.md)
+- i18n

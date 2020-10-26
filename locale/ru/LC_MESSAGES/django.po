@@ -1,0 +1,267 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-26 18:32+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: core/forms.py:6 core/models.py:27 core/models.py:49 shipment/forms.py:13
+#: shipment/models.py:61 templates/core/file_detail.html:9
+msgid "File"
+msgstr "Файл"
+
+#: core/models.py:28 shipment/models.py:14 shipment/models.py:48
+#: templates/core/file_detail.html:10 templates/core/file_list.html:12
+msgid "Name"
+msgstr "Наименование"
+
+#: core/models.py:29
+msgid "MIME type"
+msgstr "Тип MIME"
+
+#: core/models.py:30 templates/core/file_detail.html:12
+#: templates/core/file_list.html:14
+msgid "Created"
+msgstr "Создан"
+
+#: core/models.py:31 templates/core/file_detail.html:13
+#: templates/core/file_list.html:15
+msgid "Size"
+msgstr "Размер"
+
+#: core/models.py:50 templates/core/file_base.html:3
+#: templates/core/file_base.html:4
+msgid "Files"
+msgstr "Файлы"
+
+#: core/templatetags/mytags.py:11
+msgid "Cancel"
+msgstr "Отказаться"
+
+#: core/templatetags/mytags.py:12 templates/shipment/document_form.html:11
+msgid "New"
+msgstr "Новый"
+
+#: core/templatetags/mytags.py:13 templates/core/file_confirm_delete.html:7
+#: templates/shipment/document_confirm_delete.html:7
+#: templates/shipment/org_confirm_delete.html:7
+msgid "Delete"
+msgstr "Удалить"
+
+#: core/templatetags/mytags.py:14 templates/shipment/document_form.html:11
+msgid "Edit"
+msgstr "Редактировать"
+
+#: core/templatetags/mytags.py:15
+msgid "Start"
+msgstr "Начало"
+
+#: core/templatetags/mytags.py:16
+msgid "Previous"
+msgstr "Предыдущая"
+
+#: core/templatetags/mytags.py:17
+msgid "Next"
+msgstr "Седующая"
+
+#: core/templatetags/mytags.py:18
+msgid "End"
+msgstr "Конец"
+
+#: core/templatetags/mytags.py:19
+msgid "Download"
+msgstr "Скачать"
+
+#: core/templatetags/mytags.py:20
+msgid "View"
+msgstr "Просмотр"
+
+#: shipment/forms.py:14 shipment/forms.py:30 shipment/forms.py:59
+#: shipment/models.py:21 shipment/models.py:63
+#: templates/shipment/document_detail.html:9
+#: templates/shipment/document_list.html:23
+msgid "Shipper"
+msgstr "Поставщик"
+
+#: shipment/forms.py:15 shipment/forms.py:31 shipment/forms.py:60
+#: shipment/models.py:40 shipment/models.py:65
+#: templates/shipment/document_detail.html:10
+#: templates/shipment/document_list.html:24
+msgid "Customer"
+msgstr "Потребитель"
+
+#: shipment/forms.py:16 shipment/forms.py:32 shipment/forms.py:61
+#: shipment/models.py:66 templates/shipment/document_detail.html:11
+#: templates/shipment/document_list.html:25
+msgid "Date"
+msgstr "Дата"
+
+#: shipment/forms.py:17 shipment/forms.py:33 shipment/forms.py:62
+#: shipment/models.py:68 templates/shipment/document_detail.html:12
+#: templates/shipment/document_list.html:26
+msgid "Type"
+msgstr "Тип"
+
+#: shipment/forms.py:18 shipment/models.py:69
+#: templates/shipment/document_list.html:28
+msgid "Note"
+msgstr "Примечание"
+
+#: shipment/forms.py:24
+msgid "File is not PDF: "
+msgstr "Файл не PDF"
+
+#: shipment/forms.py:34
+msgid "Change shipper"
+msgstr "Заменить поставщика"
+
+#: shipment/forms.py:35
+msgid "Change partner"
+msgstr ""
+
+#: shipment/forms.py:36
+msgid "Изменить дату date"
+msgstr ""
+
+#: shipment/forms.py:37
+msgid "Change doctype"
+msgstr ""
+
+#: shipment/forms.py:48 shipment/forms.py:50
+msgid "Select one"
+msgstr "Выберите что-то"
+
+#: shipment/forms.py:52
+msgid "Set right date"
+msgstr "Укажите правильно дату"
+
+#: shipment/forms.py:55
+msgid "Choose to change something"
+msgstr "Укажите что изменить"
+
+#: shipment/models.py:22
+msgid "Shippers"
+msgstr "Поставщики"
+
+#: shipment/models.py:29 templates/shipment/org_detail.html:8
+msgid "Short name"
+msgstr "Короткое наименование"
+
+#: shipment/models.py:30 shipment/models.py:49
+#: templates/shipment/org_detail.html:9
+msgid "Full name"
+msgstr "Полное наименование"
+
+#: shipment/models.py:41
+msgid "Customers"
+msgstr "Потребитель"
+
+#: shipment/models.py:56
+msgid "Document type"
+msgstr "Тип документа"
+
+#: shipment/models.py:57
+msgid "Document types"
+msgstr "Типы документа"
+
+#: shipment/models.py:79 templates/shipment/document_detail.html:6
+msgid "Document"
+msgstr "Документ"
+
+#: shipment/models.py:80 templates/shipment/base.html:3
+#: templates/shipment/base.html:4 templates/shipment/document_base.html:3
+#: templates/shipment/document_base.html:4 templates/shipment/org_list.html:22
+msgid "Documents"
+msgstr "Документы"
+
+#: templates/404.html:4
+msgid "Page not found."
+msgstr "Страница не найдена."
+
+#: templates/500.html:3
+msgid "Internal server error (500)"
+msgstr "Внктренняя ошибка сервера (500)"
+
+#: templates/base.html:41
+msgid "Dummy"
+msgstr "Заглушка"
+
+#: templates/core/base.html:3
+msgid "Core"
+msgstr "Ядро"
+
+#: templates/core/file_detail.html:6
+msgid "File details:"
+msgstr ""
+
+#: templates/core/file_list.html:8
+msgid "File list"
+msgstr "Список файлов"
+
+#: templates/core/file_list.html:16
+msgid "Doc"
+msgstr ""
+
+#: templates/core/file_list.html:18 templates/shipment/document_list.html:31
+#: templates/shipment/org_list.html:24
+msgid "Delete selected"
+msgstr "Удалить выбранные"
+
+#: templates/shipment/document_detail.html:13
+msgid "Notes"
+msgstr ""
+
+#: templates/shipment/document_form.html:11
+msgid "document"
+msgstr "документ"
+
+#: templates/shipment/document_form_multi.html:12
+msgid "Edit documents"
+msgstr "Редактировать документ"
+
+#: templates/shipment/document_list.html:19
+msgid "Document list"
+msgstr "Список документов"
+
+#: templates/shipment/document_list.html:27
+msgid "File name"
+msgstr "Наименование файла"
+
+#: templates/shipment/document_list.html:30
+msgid "Edit selected"
+msgstr "Редактировать выбранные"
+
+#: templates/shipment/org_base.html:3
+msgid "Organisations"
+msgstr ""
+
+#: templates/shipment/org_base.html:4
+msgid "Organizations"
+msgstr ""
+
+#: templates/shipment/org_detail.html:6
+msgid "Organization detail"
+msgstr ""
+
+#: templates/shipment/org_list.html:20
+msgid "Short"
+msgstr "Кратко"
+
+#: templates/shipment/org_list.html:21
+msgid "Full"
+msgstr "Полностью"

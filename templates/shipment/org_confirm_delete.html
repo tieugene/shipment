@@ -4,7 +4,7 @@
 {% block body_main %}
 <form action="." method="post">
     {% csrf_token %}
-    <p>Удолить "{{ object }}"?<br/>
+    <p> {% trans 'Delete' %} "{{ object }}"?<br/>
         (Docs: {{ object.org_document.count }})
     </p>
     {% include 'tags/submit.html' %}

@@ -3,9 +3,10 @@
 {% load mytags %}
 {% block body_main %}
 <table width="auto" border="1">
+<caption> {% trans "Organization detail" %} </caption>
  <tbody>
-  <tr> <th> Кратко </th> <td> {{ object.name }} </td> </tr>
-  <tr> <th> Полностью </th> <td> {{ object.fullname|default_if_none:"-" }} </td> </tr>
+  <tr> <th> {% trans "Short name" %} </th> <td> {{ object.name }} </td> </tr>
+  <tr> <th> {% trans "Full name" %} </th> <td> {{ object.fullname|default_if_none:"-" }} </td> </tr>
  </tbody>
 </table>
 {# if user.is_staff #}

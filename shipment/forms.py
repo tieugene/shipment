@@ -13,10 +13,9 @@ class DocAddForm(forms.Form):
     file = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}), label=_('File'))
     shipper = forms.ModelChoiceField(queryset=models.Shipper.objects.all(), label=_("Shipper"))
     org = forms.ModelChoiceField(queryset=models.Org.objects.all(), label=_("Customer"))
-    date = forms.DateField(initial=datetime.date.today, label=_("Date"), help_text=_("Shipment date"))
-    doctype = forms.ModelChoiceField(queryset=models.DocType.objects.all(), required=False, label=_("Type"),
-                                     help_text=_("Document type"))
-    comments = forms.CharField(required=False, max_length=255, strip=True, label=_("Comments"))
+    date = forms.DateField(initial=datetime.date.today, label=_("Date"))
+    doctype = forms.ModelChoiceField(queryset=models.DocType.objects.all(), required=False, label=_("Type"))
+    comments = forms.CharField(required=False, max_length=255, strip=True, label=_("Note"))
 
     def clean_file(self):
         file = self.cleaned_data.get('file', False)
@@ -30,10 +29,9 @@ class DocEditMultiForm(forms.Form):
     # date: widget=forms.SelectDateWidget,
     shipper = forms.ModelChoiceField(queryset=models.Shipper.objects.all(), required=False, label=_("Shipper"))
     org = forms.ModelChoiceField(queryset=models.Org.objects.all(), required=False, label=_("Customer"))
-    date = forms.DateField(required=False, label=_("Date"), help_text=_("Shipment date"))
-    doctype = forms.ModelChoiceField(queryset=models.DocType.objects.all(), required=False, label=_("Type"),
-                                     help_text=_("Document type"))
-    shipper_chg = forms.BooleanField(required=False, label=_("Change shipper"))
+    date = forms.DateField(required=False, label=_("Date"))
+    doctype = forms.ModelChoiceField(queryset=models.DocType.objects.all(), required=False, label=_("Type"))
+    shipper_chg = forms.BooleanField(required=False, label=_("Change shipper"), help_text="Use it!")
     org_chg = forms.BooleanField(required=False, label=_("Change partner"))
     date_chg = forms.BooleanField(required=False, label=_("Change date"))
     doctype_chg = forms.BooleanField(required=False, label=_("Change doctype"))
@@ -52,6 +50,7 @@ class DocEditMultiForm(forms.Form):
                 self.add_error('org', _("Select one"))
             if date_chg and not cleaned_data.get('date'):
                 self.add_error('date', _("Set right date"))
+            # doctype can be cleared
         else:
             self.add_error(None, _("Choose to change something"))
 

@@ -4,19 +4,20 @@ Custom template tags.
 """
 from django import template
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext as _
 
-buttons_items = {
+buttons_items = {   # key: (symbol, tip)
     'ok': ('&check;', 'OK'),
-    'no': ('&cross;', 'Cancel'),
-    'add': ('&oplus;', 'Add'),           # &plus
-    'del': ('&otimes;', 'Delete'),       # &#9249;
-    'edit': ('&#9998;', 'Edit'),
-    'beg': ('&larrb;', 'Start'),        # &#9194;
-    'prev': ('&larr;', 'Previous'),    # &#9198;
-    'next': ('&rarr;', 'Next'),        # &#9197;
-    'end': ('&rarrb;', 'End'),          # &#9193;
-    'dl': ('&DownArrowBar;', 'Download'),
-    'show': ('&gtdot;', 'View'),
+    'no': ('&cross;', _('Cancel')),
+    'add': ('&plus;', _('New')),           # &plus
+    'del': ('&cross;', _('Delete')),       # &#9249;
+    'edit': ('&#9998;', _('Edit')),
+    'beg': ('&larrb;', _('Start')),        # &#9194;
+    'prev': ('&larr;', _('Previous')),    # &#9198;
+    'next': ('&rarr;', _('Next')),        # &#9197;
+    'end': ('&rarrb;', _('End')),          # &#9193;
+    'dl': ('&DownArrowBar;', _('Download')),
+    'show': ('&gtdot;', _('View')),
     '': ('', ''),
 }
 

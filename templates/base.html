@@ -10,8 +10,8 @@
 	<!-- 1. me -->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
 	<!--link rel="stylesheet" type="text/css" href="{# static 'css/colors.css' #}"/-->
-	<link rel="stylesheet" type="text/css" href="{% static 'css/fieldset.css' %}"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/thumbnails.css' %}" />
+	<!--link rel="stylesheet" type="text/css" href="{% static 'css/fieldset.css' %}"/-->
+	<!--link rel="stylesheet" type="text/css" href="{% static 'css/thumbnails.css' %}" /-->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/svgbutton.css' %}" />
 	<!-- 2. admin (symlink) -->
 	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}" />
@@ -24,7 +24,7 @@
 	</style>
 </head>
 <body>
-	<header> <h1> Das ist shipment </h1> </header>
+	<!-- header> <h1> Das ist Shipments </h1> </header-->
 	<nav id="topmenu">
 		<a href="{% url 'index' %}"> {% include "svgbutton/home.html" %} </a>
  		<a href="{% url 'file_list' %}"> {% include "svgbutton/file.html" %} </a>
@@ -38,7 +38,7 @@
 	</nav>
 	<div>
 	{% block body_main %}
-		<p> Заглушка </p>
+		<p> {% trans 'Dummy' %} </p>
 	{% endblock %}
 	</div>
 <footer> &copy; /me </footer>	
