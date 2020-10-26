@@ -9,8 +9,7 @@
   - buttons: submit tag, button_svg+submit_svg templates
 
 ## FixMe:
-- mime: application/x-empty
-- DocList.filter: date is in future only
+- DocList.filter: date year is in future only; must be from db
 - view.*_* => forms.View (file_get, file_show, org_delete_multi, doc_delete_multi, doc_bulk)
 - Org: full name -> Notes
 - Doc: Comments -> Notes
@@ -63,3 +62,4 @@
 - Multiple del (&#9744; &#9745;)
 - Doc: Multiple edit (shipper, org, date, doctype)
 - Filters: shipper, org, date, doctype
+- fixed: mime == application/x-empty

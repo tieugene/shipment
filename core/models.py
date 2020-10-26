@@ -45,6 +45,7 @@ class File(models.Model):
         return os.path.join(settings.MEDIA_ROOT, self.get_filename())
 
     class Meta:
+        ordering = ('-pk',)
         verbose_name = _('File')
         verbose_name_plural = _('Files')
 
@@ -86,7 +87,11 @@ def get_file_mime(file):
     file.seek(initial_pos)
     return mime_type
     """
-    return magic.from_buffer(file.read(), mime=True)
+    pos = file.tell()
+    file.seek(0)
+    mime = magic.from_buffer(file.read(), mime=True)
+    file.seek(pos)
+    return mime
 
 
 @receiver(pre_save, sender=File)
@@ -98,7 +103,7 @@ def _file_pre_save(sender, instance, **kwargs):
     """
     # print("File pre-save start")
     f = instance.file  # FieldFile; f.file = django.core.files.uploadedfile.TemporaryUploadedFile
-    print("File type: {}".format(type(f.file)))
+    # print("File type: {}".format(type(f.file)))
     if isinstance(f.file, InMemoryUploadedFile) or isinstance(f.file, TemporaryUploadedFile):
         instance.name = f.name
         instance.size = f.size

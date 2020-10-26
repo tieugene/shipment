@@ -9,11 +9,11 @@ from core.models import get_file_mime
 
 
 class DocAddForm(forms.Form):
+    # date: widget=forms.SelectDateWidget,
     file = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}), label=_('File'))
     shipper = forms.ModelChoiceField(queryset=models.Shipper.objects.all(), label=_("Shipper"))
     org = forms.ModelChoiceField(queryset=models.Org.objects.all(), label=_("Customer"))
-    date = forms.DateField(initial=datetime.date.today, widget=forms.SelectDateWidget, label=_("Date"),
-                           help_text=_("Shipment date"))
+    date = forms.DateField(initial=datetime.date.today, label=_("Date"), help_text=_("Shipment date"))
     doctype = forms.ModelChoiceField(queryset=models.DocType.objects.all(), required=False, label=_("Type"),
                                      help_text=_("Document type"))
     comments = forms.CharField(required=False, max_length=255, strip=True, label=_("Comments"))
@@ -27,10 +27,10 @@ class DocAddForm(forms.Form):
 
 
 class DocEditMultiForm(forms.Form):
+    # date: widget=forms.SelectDateWidget,
     shipper = forms.ModelChoiceField(queryset=models.Shipper.objects.all(), required=False, label=_("Shipper"))
     org = forms.ModelChoiceField(queryset=models.Org.objects.all(), required=False, label=_("Customer"))
-    date = forms.DateField(widget=forms.SelectDateWidget, required=False, label=_("Date"),
-                           help_text=_("Shipment date"))
+    date = forms.DateField(required=False, label=_("Date"), help_text=_("Shipment date"))
     doctype = forms.ModelChoiceField(queryset=models.DocType.objects.all(), required=False, label=_("Type"),
                                      help_text=_("Document type"))
     shipper_chg = forms.BooleanField(required=False, label=_("Change shipper"))

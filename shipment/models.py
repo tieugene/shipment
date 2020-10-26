@@ -75,7 +75,7 @@ class Document(models.Model):
         return reverse('doc_view', kwargs={'pk': self.pk})
 
     class Meta:
-        ordering = ('date', 'shipper', 'org')
+        ordering = ('-date', 'shipper', 'org')
         verbose_name = _('Document')
         verbose_name_plural = _('Documents')
 

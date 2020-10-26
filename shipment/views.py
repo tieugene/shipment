@@ -66,6 +66,7 @@ class DocList(FormMixin, ListView):
         q = models.Document.objects.all()
         f = self.request.session.get('doc_list')
         if f:
+            # FIXME: rework to field__pk=...
             val = f.get('shipper')
             if val:
                 q = q.filter(shipper=models.Shipper.objects.get(pk=int(val)))
