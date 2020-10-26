@@ -61,3 +61,11 @@ class DocFilterForm(forms.Form):
     org = forms.ModelChoiceField(queryset=models.Org.objects.all(), required=False, label=_("Customer"))
     date = forms.DateField(widget=forms.SelectDateWidget, required=False, label=_("Date"))
     doctype = forms.ModelChoiceField(queryset=models.DocType.objects.all(), required=False, label=_("Type"))
+
+
+'''
+    def __init__(self, *args, request_data=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        for i in ('shipper', 'org', 'date', 'doctype'):
+            self.fields[i].initial = request_data.GET.get(i, '')
+'''

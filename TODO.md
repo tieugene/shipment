@@ -2,18 +2,18 @@
 
 ## ToDo:
 - Filters: shipper, org, date, doctype
-- Merge Orgs
-- [Fixtures](https://docs.djangoproject.com/en/3.0/howto/initial-data/)
-- view.*_* => forms.View (file_get, file_show, doc_bulk)
+- [Fixtures](https://docs.djangoproject.com/en/3.0/howto/initial-data/): doc_type[, mime]
 - Interface:
-  - CSS
-  - icons: preview, download, doc exists
+  - CSS (styles (positions+sizes+look)/colors)
+  - icons: preview, download, linked doc, filter, tools, orgs, docs, files
   - i18n
+  - buttons: submit tag, button_svg+submit_svg templates
 
 ## FixMe:
+- mime: application/x-empty
+- view.*_* => forms.View (file_get, file_show, org_delete_multi, doc_delete_multi, doc_bulk)
 - Org: full name -> Notes
 - Doc: Comments -> Notes
-- mime: application/x-empty
 - File: create() with crc(md5) and/or mime
 - File: chk crc on creation
 - mime on 1st block (1KB?) or chunk
@@ -22,8 +22,9 @@
 - Doc.admin: no add, edit w/o file (!editable=False)
 
 ## Features:
+- Preview pane
 - Keyboard navigation (arrows, Ins, Del, Enter, Space)
-- Multicolumn lists
+- Multicolumn lists (grid view?)
 - Inplace edits
 - "2 del?" - in-place/popup
 - File: chk crc on file upload
@@ -31,11 +32,12 @@
 - File.crc - 64bit ([Positive]BigIntegerField; SipHash; python: builtin hash(), python3-siphash; cli - )
 - DocList date-based views [lists](https://docs.djangoproject.com/en/3.0/ref/class-based-views/generic-date-based/)
 - mime &rarr; - separate model (signature; ext, name) and/or inner dict()
+- mime: +icon
 - preview: img cache (grey)
 - icons: awesome font?
-- idea: multicolumn = grid view
 - idea: email docs
 - tests
+- Merge Orgs (option; can multiedit)
 - [WebDAV](https://github.com/MnogoByte/djangodav)
 - pylint with [pylint-django](https://github.com/PyCQA/pylint-django)
 
