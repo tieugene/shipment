@@ -5,7 +5,7 @@
 <form action="." method="post">
     {% csrf_token %}
     <p> {% trans 'Delete' %} "{{ object }}"?</p>
-    {% include 'tags/submit.html' %}
+    {% submit 'ok' %}
     <a href="{% url 'file_view' object.pk %}"> {% button 'no' %} </a>
 </form>
 {% endblock %}

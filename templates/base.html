@@ -8,6 +8,7 @@
 	{% block meta %} {% endblock %}
 	<title> {% trans "Shipments:" %} {% block title %} ... {% endblock %} </title>
 	<!-- 1. me -->
+    <link rel="shortcut icon" href="{% static 'img/TI_64.png' %}" type="image/png">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
 	<!--link rel="stylesheet" type="text/css" href="{# static 'css/colors.css' #}"/-->
 	<!--link rel="stylesheet" type="text/css" href="{% static 'css/fieldset.css' %}"/-->
@@ -31,8 +32,7 @@
  		<a href="{% url 'org_list' %}"> {% button "org" %} </a>
  		<a href="{% url 'doc_list' %}"> {% button "doc" %} </a>
 		<span style="width: 100%">
-			<b> <a href="{% url 'index' %}"> {% trans "Shipments" %}: </a>
-			{% block menu_title %} ... {% endblock %} </b>
+			<b> {% trans "Shipments" %}:{% block menu_title %} ... {% endblock %} </b>
 		</span>
 		<a href="{% url 'about' %}"> {% button 'info' %} </a>
 		<a href="{% url 'admin:index' %}"> {% button 'tool' %} </a>

@@ -13,7 +13,9 @@ buttons_items = {  # key: (symbol, tip)
     'no': ('&olarr;', _('Cancel')),
     'add': ('&plus;', _('New')),  # &plus
     'del': ('&cross;', _('Delete')),  # &#9249;
+    'del*': ('&cross;', _('Delete selected')),  # &#9249;
     'edit': ('&#9998;', _('Edit')),
+    'edit*': ('&#9998;', _('Edit selected')),
     'beg': ('&larrb;', _('Start')),  # &#9194;
     'prev': ('&larr;', _('Previous')),  # &#9198;
     'next': ('&rarr;', _('Next')),  # &#9197;
@@ -39,12 +41,12 @@ def button(key):
     img, title = buttons_items.get(key, ('?', '---'))
     return {
         'img': mark_safe(img),
-        'title': title
+        'title': title,
     }
 
 
 @register.inclusion_tag('tags/submit.html')
-def submit(key, action):
+def submit(key, action=''):
     img, title = buttons_items.get(key, ('?', '---'))
     return {
         'img': mark_safe(img),

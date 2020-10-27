@@ -1,1 +1,1 @@
-<button type="submit" title="{{ title }}" formaction="{% url action %}" style="font-size: 14pt"> {{ img }} </button>
+<button type="submit" title="{{ title }}" {% if action %} formaction="{% url action %}" {% endif %} style="font-size: 14pt"> {{ img }} </button>

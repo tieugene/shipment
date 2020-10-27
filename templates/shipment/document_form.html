@@ -11,7 +11,7 @@
 		<caption> {% if object %} {% trans "Edit" %}  {% else %} {% trans "New" %}  {% endif %} {% trans "document" %}  </caption>
 		{{ form.as_table }}
 	</table>
-	{% include 'tags/submit.html' %}
+	{% submit 'ok' %}
 	<a href="{% if object %} {% url 'doc_view' object.pk %} {% else %} {% url 'doc_list' %} {% endif %}"> {% button 'no' %} </a>
    </form>
 {% endblock %}

@@ -7,7 +7,7 @@
     <p> {% trans 'Delete' %} "{{ object }}"?<br/>
         (Docs: {{ object.org_document.count }})
     </p>
-    {% include 'tags/submit.html' %}
+    {% submit 'ok' %}
     <a href="{% url 'org_view' object.pk %}"> {% button 'no' %} </a>
 </form>
 {% endblock %}

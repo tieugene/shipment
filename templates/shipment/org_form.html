@@ -10,7 +10,7 @@
 	<table border="1">
 		{{ form.as_table }}
 	</table>
-	{% include 'tags/submit.html' %}
+	{% submit 'ok' %}
 	<a href="{% if object %} {% url 'org_view' object.pk %} {% else %} {% url 'org_list' %} {% endif %}"> {% button 'no' %} </a>
    </form>
 {% endblock %}

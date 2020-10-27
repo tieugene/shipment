@@ -32,7 +32,7 @@
             </tr>
         </table>
        {{ form.checked }}
-	    {% include 'tags/submit.html' %}
+	    {% submit 'ok' %}
 	    <a href="{% url 'doc_list' %}"> {% button 'no' %} </a>
     </form>
 {% endblock %}
