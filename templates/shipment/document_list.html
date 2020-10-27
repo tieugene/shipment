@@ -32,7 +32,10 @@
         <th> <input type="checkbox"> </th>
     </tr>
     <tr>    <!-- filter -->
-        <th> <button type="submit" formaction="{% url 'doc_list_filter' %}"> &check; </th>
+        <th>
+            <button type="submit" formaction="{% url 'doc_list_filter' %}"> &check;
+                {% submit 'filt' 'doc_list_filter' %}
+        </th>
         <th> {{ form.shipper }} </th>
         <th> {{ form.org }} </th>
         <th> {{ form.date }} </th>

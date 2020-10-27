@@ -2,8 +2,8 @@
 
 ## ToDo:
 - buttons:
-  - symbols: login, logout, filter,  org, doc, file
-  - submit tag
+  - button: w/ url (=> 'key' 'url')
+  - submit tag (key, url)
   - button_svg+submit_svg templates
 - CSS (styles (positions+sizes+look)/colors)
 - doc_bulk: verbose x 2 (prepare, upload)
@@ -68,3 +68,4 @@
 - fixed: mime == application/x-empty
 - fixtures (NOTES.md)
 - i18n
+- button.symbols: login, logout, filter, org, doc, file etc

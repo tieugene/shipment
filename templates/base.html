@@ -27,9 +27,9 @@
 	<!-- header> <h1> Das ist Shipments </h1> </header-->
 	<nav id="topmenu">
 		<a href="{% url 'index' %}"> {% button 'home' %} </a>
- 		<a href="{% url 'file_list' %}"> {% include "svgbutton/file.html" %} </a>
- 		<a href="{% url 'org_list' %}"> {% include "svgbutton/org.html" %} </a>
- 		<a href="{% url 'doc_list' %}"> {% include "svgbutton/book.html" %} </a>
+ 		<a href="{% url 'file_list' %}"> {% button "file" %} </a>
+ 		<a href="{% url 'org_list' %}"> {% button "org" %} </a>
+ 		<a href="{% url 'doc_list' %}"> {% button "doc" %} </a>
 		<span style="width: 100%">
 			<b> <a href="{% url 'index' %}"> {% trans "Shipments" %}: </a>
 			{% block menu_title %} ... {% endblock %} </b>
