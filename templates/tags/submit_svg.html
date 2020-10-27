@@ -1,0 +1,4 @@
+{% load static %}
+<button type="submit" title="{{ title }}" {% if action %} formaction="{% url action %}" {% endif %}>
+    <img src="{% static path %}" alt="{{ title }}" title="{{ title }}" class="svgimg"/>
+</button>

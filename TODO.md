@@ -1,7 +1,6 @@
 # ToDo
 
 ## ToDo:
-- buttons: button_svg+submit_svg templates
 - CSS (styles (positions+sizes+look)/colors)
 - doc_bulk: verbose x 2 (prepare, upload)
 
@@ -20,6 +19,7 @@
 - Doc.admin: no add, edit w/o file (!editable=False)
 
 ## Features:
+- auth
 - Preview pane
 - Sort
 - Keyboard navigation (arrows, Ins, Del, Enter, Space)
@@ -67,3 +67,4 @@
 - i18n
 - button.symbols: login, logout, filter, org, doc, file etc
 - submit button tag
+- buttons: button_svg+submit_svg templates
