@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	{% block meta %} {% endblock %}
-	<title> Das Ist {% block title %} ... {% endblock %} </title>
+	<title> {% trans "Shipments:" %} {% block title %} ... {% endblock %} </title>
 	<!-- 1. me -->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
 	<!--link rel="stylesheet" type="text/css" href="{# static 'css/colors.css' #}"/-->
@@ -26,15 +26,16 @@
 <body>
 	<!-- header> <h1> Das ist Shipments </h1> </header-->
 	<nav id="topmenu">
-		<a href="{% url 'index' %}"> {% include "svgbutton/home.html" %} </a>
+		<a href="{% url 'index' %}"> {% button 'home' %} </a>
  		<a href="{% url 'file_list' %}"> {% include "svgbutton/file.html" %} </a>
  		<a href="{% url 'org_list' %}"> {% include "svgbutton/org.html" %} </a>
  		<a href="{% url 'doc_list' %}"> {% include "svgbutton/book.html" %} </a>
 		<span style="width: 100%">
-			<b> <a href="{% url 'index' %}"> DasIst: </a>
+			<b> <a href="{% url 'index' %}"> {% trans "Shipments" %}: </a>
 			{% block menu_title %} ... {% endblock %} </b>
 		</span>
-		<a href="{% url 'admin:index' %}"> {% include "svgbutton/admin.html" %} </a>
+		<a href="{% url 'about' %}"> {% button 'info' %} </a>
+		<a href="{% url 'admin:index' %}"> {% button 'tool' %} </a>
 	</nav>
 	<div>
 	{% block body_main %}

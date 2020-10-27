@@ -1,11 +1,12 @@
 # ToDo
 
 ## ToDo:
+- buttons:
+  - symbols: login, logout, filter,  org, doc, file
+  - submit tag
+  - button_svg+submit_svg templates
+- CSS (styles (positions+sizes+look)/colors)
 - doc_bulk: verbose x 2 (prepare, upload)
-- Interface:
-  - CSS (styles (positions+sizes+look)/colors)
-  - icons: preview, download, linked doc, filter, tools, orgs, docs, files
-  - buttons: submit tag, button_svg+submit_svg templates
 
 ## FixMe:
 - Doc.create: blank comments

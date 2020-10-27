@@ -4,3 +4,4 @@ _misc
 temp/
 *.sqlite3
 *.sh
+*.mo

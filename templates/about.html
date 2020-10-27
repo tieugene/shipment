@@ -1,6 +1,28 @@
 {% extends "base.html" %}
+{% load mytags %}
 {% block jsready %}
 $("#tm_about").addClass("active");
 {% endblock %}
 {% block body_main %}
+    <h1> Buttons demo </h1>
+    {% button 'ok' %}
+    {% button 'no' %}
+    {% button 'add' %}
+    {% button 'del' %}
+    {% button 'edit' %}
+    {% button 'beg' %}
+    {% button 'prev' %}
+    {% button 'next' %}
+    {% button 'end' %}
+    {% button 'dl' %}
+    {% button 'show' %}
+    {% button 'home' %}
+    {% button 'tool' %}
+    {% button 'info' %}
+    {% button 'lin' %}
+    {% button 'lout' %}
+    {% button 'filt' %}
+    {% button 'file' %}
+    {% button 'doc' %}
+    {% button 'org' %}
 {% endblock %}
