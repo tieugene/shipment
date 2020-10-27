@@ -6,6 +6,7 @@
 
 ## FixMe:
 - Doc.create: blank comments
+- *.Edit: return ~~detail~~ back
 - Doc.edit: doctype required=True
 - DocList.filter: date year is in future only; must be from db
 - view.*_* => forms.View (file_get, file_show, org_delete_multi, doc_delete_multi, doc_bulk)
@@ -20,6 +21,7 @@
 
 ## Features:
 - auth
+- icons: fileS, orgS, docS, delS, editS
 - Preview pane
 - Sort
 - Keyboard navigation (arrows, Ins, Del, Enter, Space)
