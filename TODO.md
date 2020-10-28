@@ -1,9 +1,8 @@
 # ToDo
 
-tables: even/odd, text margins, hover, text-align
-
 ## ToDo:
-- CSS (position, size, decoration, color; button style by name="" attr; even/odd tr)
+- buttons: kwargs
+- date filter: yy/mm/dd
 - doc_bulk: verbose x 2 (prepare, upload)
 
 ## FixMe:
@@ -26,6 +25,7 @@ tables: even/odd, text margins, hover, text-align
 - icons: fileS, orgS, docS, delS, editS
 - Preview pane
 - Sort
+- button style by name="" attr
 - Keyboard navigation (arrows, Ins, Del, Enter, Space)
 - Multicolumn lists (grid view?)
 - Inplace edits
@@ -72,3 +72,4 @@ tables: even/odd, text margins, hover, text-align
 - button.symbols: login, logout, filter, org, doc, file etc
 - submit button tag
 - buttons: button_svg+submit_svg templates
+- CSS (position, size, decoration, color; even/odd tr)

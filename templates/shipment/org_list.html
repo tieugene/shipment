@@ -29,10 +29,10 @@
     <tbody>
     {% for object in object_list %}
         <tr>
-            <td align="right"> {{ object.pk }} </td>
-            <td> <a href="{% url 'org_view' object.pk %}"> {{ object.name }} </a> </td>
-            <td> {{ object.fullname|default_if_none:"-" }} </td>
-            <td align="right"> {{ object.org_document.count }} </td>
+            <td class="num"> {{ object.pk }} </td>
+            <td class="txt"> <a href="{% url 'org_view' object.pk %}"> {{ object.name }} </a> </td>
+            <td class="txt"> {{ object.fullname|default_if_none:"-" }} </td>
+            <td class="num"> {{ object.org_document.count }} </td>
             <td> <a href="{% url 'org_update' object.pk %}"> {% button 'edit' %} </a> </td>
             <td> <a href="{% url 'org_delete' object.pk %}"> {% button 'del' %} </a> </td>
             <td> <input name="checked" value="{{ object.pk }}" type="checkbox"> </td>

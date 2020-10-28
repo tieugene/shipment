@@ -1,5 +1,5 @@
 # Notes
-table: width=auto border=1
+
 ## CSS
 - type
 - .class
@@ -8,14 +8,8 @@ table: width=auto border=1
 - a,b: a | b
 - a b: b in a
 - a>b: b right in a
-- a~b: - b after a in same parent in same level
-- a+b: - 
-
-CSS online editor:
-- https://cssdeck.com/labs
-- http://www.cssdesk.com
-- https://www.w3schools.com/tryit/
-- https://codepen.io/
+- a~b: b after a in same parent in same level
+- a+b: ...
 
 ## Views:
 - View () - just get(), post()
@@ -32,16 +26,11 @@ CSS online editor:
 [Search](https://www.amp-what.com/unicode/search/home)
 [Explore](https://www.toptal.com/designers/htmlarrows/)
 [Test](https://mothereff.in/html-entities)
-- &#8962; Home
 - &#9993; Email
 - &#9940; Stop
 - &#9888; Warning
 - &#9786; Smile
-- &#9874;&#9881; Tools
 - &#9000; Keyboard
-- &#128269; ~~Magnify~~
-- &#128065; ~~Eye~~
-- &#128424; ~~Print~~
 
 ## Doc types:
 - Счет
@@ -56,3 +45,6 @@ CSS online editor:
 [RTFM](https://docs.djangoproject.com/en/3.0/howto/initial-data/)
 - save: ```./manage.py dumpdata --indent 2 -o shipment_doctype.json shipment.DocType```
 - load: ```./manage.py loaddata shipment_doctype.json```
+
+## Usual
+- [Sort table](https://www.kryogenix.org/code/browser/sorttable/)

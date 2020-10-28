@@ -21,11 +21,11 @@
     <tbody>
     {% for object in object_list %}
         <tr>
-            <td> {{ object.pk }} </td>
-            <td> <a href="{% url 'file_view' object.pk %}"> {{ object.name }} </a> </td>
-            <td> {{ object.mime }} </td>
-            <td title="{{ object.ctime|date:"y.m.d H:i:d" }}"> {{ object.ctime|date:"y.m.d" }} </td>
-            <td> {{ object.size }} </td>
+            <td class="num"> {{ object.pk }} </td>
+            <td class="txt"> <a href="{% url 'file_view' object.pk %}"> {{ object.name }} </a> </td>
+            <td class="txt"> {{ object.mime }} </td>
+            <td class="txt" title="{{ object.ctime|date:"y.m.d H:i:d" }}"> {{ object.ctime|date:"y.m.d" }} </td>
+            <td class="num"> {{ object.size }} </td>
             <td> {%  if object.document %} <a href="{% url 'doc_view' object.pk %}"> {% button 'doc' %} </a> {% endif %} </td>
             <td> <a href="{% url 'file_show' object.pk %}"> {% button 'show' %} </a> </td>
             <td> <a href="{% url 'file_get' object.pk %}"> {% button 'dl' %} </a> </td>

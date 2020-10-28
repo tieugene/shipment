@@ -23,7 +23,12 @@ img.svg {
 	width: 16px;
 }
 
-td {
-        // border: 1px solid black;
-        // padding: 0 2pt;
+table.list th {
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+}
+
+table.list td.txt,td.num {
+    padding-left: 0.2em;
+    padding-right: 0.2em;
 }
