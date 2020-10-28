@@ -5,7 +5,6 @@
 {% include "paginator.html" %}
 <form action="{% url 'file_delete_multi' %}" method="POST"> {% csrf_token %}
 <table width="auto" border="1">
-<caption> {% trans 'File list' %}</caption>
 <thead>
 <tr>
     <th> &numero; </th>

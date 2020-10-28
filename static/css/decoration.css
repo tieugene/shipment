@@ -1,27 +1,22 @@
-body {
-}
-
 nav {
-    //border-style: dotted;
-    //border-width: 1px;
+    // border-top: 5px solid #EBEFF9;
 }
 
-nav > h1 {
-    //border-style: dashed;
-    //border-width: 1px;
-}
-
-main {
-    //border-style: dotted;
-    //border-width: 1px;
-}
-
-footer {
-    //border-style: dotted;
-    //border-width: 1px;
+a {
+    text-decoration: none;
 }
 
 button {
 	border-style: solid;
 	cursor: pointer;
+    text-decoration: none;
+}
+
+table {
+        border-collapse: collapse;
+        border: none;
+}
+
+td {
+    border: none;
 }

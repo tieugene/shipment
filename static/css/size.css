@@ -7,14 +7,8 @@ html, body {
     height: 100%;
 }
 
-nav {
-}
-
 nav > h1 {
     font-size: 14pt;
-}
-
-footer {
 }
 
 button {
@@ -27,4 +21,9 @@ button {
 
 img.svg {
 	width: 16px;
+}
+
+td {
+        // border: 1px solid black;
+        // padding: 0 2pt;
 }

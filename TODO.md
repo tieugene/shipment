@@ -1,5 +1,7 @@
 # ToDo
 
+tables: even/odd
+
 ## ToDo:
 - CSS (position, size, decoration, color; button style by name="" attr; even/odd tr)
 - doc_bulk: verbose x 2 (prepare, upload)

@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	{% block meta %} {% endblock %}
 	<title> {% trans "Shipments:" %} {% block title %} ... {% endblock %} </title>
-	<!-- 1. me -->
+	<!-- 1. my -->
     <link rel="shortcut icon" href="{% static 'img/TI_64.png' %}" type="image/png"/>
 	<!--link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/-->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/position.css' %}"/>
@@ -17,29 +17,23 @@
 	<!-- 2. admin (symlink) -->
 	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}" />
 	<!--link rel="stylesheet" type="text/css" href="{# static 'admin/css/widgets.css' #} /-->
-	{% block js %}
-	{% endblock %}
-	<style>
-	{% block css %}
-	{% endblock %}
-	</style>
+	{% block js %} {% endblock %}
+	<style> {% block css %} {% endblock %} </style>
 </head>
 <body>
 	<!-- header> <h1> Das ist Shipments </h1> </header-->
 	<nav>
-		<a href="{% url 'index' %}"> {% button 'home' %} </a>
- 		<a href="{% url 'file_list' %}"> {% button "file" %} </a>
- 		<a href="{% url 'org_list' %}"> {% button "org" %} </a>
- 		<a href="{% url 'doc_list' %}"> {% button "doc" %} </a>
+		<a href="{% url 'index' %}" id="menu_home"> {% button 'home' %} </a>
+ 		<a href="{% url 'file_list' %}" id="menu_file"> {% button "file" %} </a>
+ 		<a href="{% url 'org_list' %}" id="menu_org"> {% button "org" %} </a>
+ 		<a href="{% url 'doc_list' %}" id="menu_doc"> {% button "doc" %} </a>
 		<h1> {% trans "Shipments" %}:{% block menu_title %} ... {% endblock %} </h1>
-		<a href="{% url 'about' %}"> {% button 'info' %} </a>
+		<a href="{% url 'about' %}" id="menu_info"> {% button 'info' %} </a>
 		<a href="{% url 'admin:index' %}"> {% button 'tool' %} </a>
 	</nav>
 	<main>
-	{% block body_main %}
-		<p> {% trans 'Dummy' %} </p>
-	{% endblock %}
+	    {% block body_main %} <p> {% trans 'Dummy' %} </p> {% endblock %}
 	</main>
-<footer> &copy; /me </footer>	
+    <footer> &copy; <a href="mailto:ti.eugene@gmail.com"> ti.eugene </a> </footer>
 </body>
 </html>
