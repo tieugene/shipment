@@ -1,6 +1,6 @@
 # ToDo
 
-tables: even/odd
+tables: even/odd, text margins, hover, text-align
 
 ## ToDo:
 - CSS (position, size, decoration, color; button style by name="" attr; even/odd tr)

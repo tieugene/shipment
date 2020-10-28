@@ -8,5 +8,20 @@ footer {
 
 button {
     border-color: silver;
-    background-color: #F0F0F0;
+    background-color: Transparent;  // #F8
+}
+
+button:hover {
+    background-color: greenyellow;
+}
+
+th {
+    background-color: #F8F8F8;
+}
+table.list > tbody > tr:nth-child(even) {
+    background-color: #F2F2F2;
+}
+
+table.list > tbody > tr > td:hover {
+    background-color: yellow;
 }

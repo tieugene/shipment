@@ -12,32 +12,33 @@
 {% load mytags %}
 {% block body_main %}
 {% include "paginator.html" %}
-<form action="{% url 'org_delete_multi' %}" method="POST"> {% csrf_token %}
-<table width="auto" border="1">
-<thead>
-    <tr>
-        <th> &numero; </th>
-        <th> {% trans "Short" %} </th>
-        <th> {% trans "Full" %} </th>
-        <th> {% trans "Documents" %} </th>
-        <th> <a href="{% url 'org_add' %}"> {% button 'add' %} </a> </th>
-        <th> {% submit 'del*' %} </th>
-        <th> <input type="checkbox"> </th>
-    </tr>
-</thead>
-<tbody>
-{% for object in object_list %}
-    <tr>
-        <td align="right"> {{ object.pk }} </td>
-        <td> <a href="{% url 'org_view' object.pk %}"> {{ object.name }} </a> </td>
-        <td> {{ object.fullname|default_if_none:"-" }} </td>
-        <td align="right"> {{ object.org_document.count }} </td>
-        <td> <a href="{% url 'org_update' object.pk %}"> {% button 'edit' %} </a> </td>
-        <td> <a href="{% url 'org_delete' object.pk %}"> {% button 'del' %} </a> </td>
-        <td> <input name="checked" value="{{ object.pk }}" type="checkbox"> </td>
-    </tr>
-{% endfor %}
-</tbody>
+<form action="{% url 'org_delete_multi' %}" method="POST">
+    {% csrf_token %}
+<table class="list">
+    <thead>
+        <tr>
+            <th> &numero; </th>
+            <th> {% trans "Short" %} </th>
+            <th> {% trans "Full" %} </th>
+            <th> {% trans "Documents" %} </th>
+            <th> <a href="{% url 'org_add' %}"> {% button 'add' %} </a> </th>
+            <th> {% submit 'del*' %} </th>
+            <th> <input type="checkbox"> </th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for object in object_list %}
+        <tr>
+            <td align="right"> {{ object.pk }} </td>
+            <td> <a href="{% url 'org_view' object.pk %}"> {{ object.name }} </a> </td>
+            <td> {{ object.fullname|default_if_none:"-" }} </td>
+            <td align="right"> {{ object.org_document.count }} </td>
+            <td> <a href="{% url 'org_update' object.pk %}"> {% button 'edit' %} </a> </td>
+            <td> <a href="{% url 'org_delete' object.pk %}"> {% button 'del' %} </a> </td>
+            <td> <input name="checked" value="{{ object.pk }}" type="checkbox"> </td>
+        </tr>
+    {% endfor %}
+    </tbody>
 </table>
 </form>
 {% endblock %}

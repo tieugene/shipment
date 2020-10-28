@@ -4,37 +4,37 @@
 {% block body_main %}
 {% include "paginator.html" %}
 <form action="{% url 'file_delete_multi' %}" method="POST"> {% csrf_token %}
-<table width="auto" border="1">
-<thead>
-<tr>
-    <th> &numero; </th>
-    <th> {% trans "Name" %} </th>
-    <th> MIME </th>
-    <th> {% trans "Created" %} </th>
-    <th> {% trans "Size" %} </th>
-    <th> {% trans "Doc" %} </th>
-    <th colspan="3"> <a href="{% url 'file_add' %}"> {% button 'add' %} </a>  </th>
-    <th> {% submit 'del*' %} </th>
-    <th> <input type="checkbox"> </th>
-    </tr>
-</thead>
-<tbody>
-{% for object in object_list %}
-    <tr>
-        <td> {{ object.pk }} </td>
-        <td> <a href="{% url 'file_view' object.pk %}"> {{ object.name }} </a> </td>
-        <td> {{ object.mime }} </td>
-        <td title="{{ object.ctime|date:"y.m.d H:i:d" }}"> {{ object.ctime|date:"y.m.d" }} </td>
-        <td> {{ object.size }} </td>
-        <td> {%  if object.document %} <a href="{% url 'doc_view' object.pk %}"> {% button 'doc' %} </a> {% endif %} </td>
-        <td> <a href="{% url 'file_show' object.pk %}"> {% button 'show' %} </a> </td>
-        <td> <a href="{% url 'file_get' object.pk %}"> {% button 'dl' %} </a> </td>
-        <td> <a href="{% url 'file_update' object.pk %}"> {% button 'edit' %} </a> </td>
-        <td> <a href="{% url 'file_delete' object.pk %}"> {% button 'del' %} </a> </td>
-        <td> <input name="checked" value="{{ object.pk }}" type="checkbox"> </td>
-    </tr>
-{% endfor %}
-</tbody>
+<table class="list">
+    <thead>
+        <tr>
+            <th> &numero; </th>
+            <th> {% trans "Name" %} </th>
+            <th> MIME </th>
+            <th> {% trans "Created" %} </th>
+            <th> {% trans "Size" %} </th>
+            <th> {% trans "Doc" %} </th>
+            <th colspan="3"> <a href="{% url 'file_add' %}"> {% button 'add' %} </a>  </th>
+            <th> {% submit 'del*' %} </th>
+            <th> <input type="checkbox"> </th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for object in object_list %}
+        <tr>
+            <td> {{ object.pk }} </td>
+            <td> <a href="{% url 'file_view' object.pk %}"> {{ object.name }} </a> </td>
+            <td> {{ object.mime }} </td>
+            <td title="{{ object.ctime|date:"y.m.d H:i:d" }}"> {{ object.ctime|date:"y.m.d" }} </td>
+            <td> {{ object.size }} </td>
+            <td> {%  if object.document %} <a href="{% url 'doc_view' object.pk %}"> {% button 'doc' %} </a> {% endif %} </td>
+            <td> <a href="{% url 'file_show' object.pk %}"> {% button 'show' %} </a> </td>
+            <td> <a href="{% url 'file_get' object.pk %}"> {% button 'dl' %} </a> </td>
+            <td> <a href="{% url 'file_update' object.pk %}"> {% button 'edit' %} </a> </td>
+            <td> <a href="{% url 'file_delete' object.pk %}"> {% button 'del' %} </a> </td>
+            <td> <input name="checked" value="{{ object.pk }}" type="checkbox"> </td>
+        </tr>
+    {% endfor %}
+    </tbody>
 </table>
 </form>
 {% endblock %}

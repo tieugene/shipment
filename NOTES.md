@@ -1,5 +1,5 @@
 # Notes
-
+table: width=auto border=1
 ## CSS
 - type
 - .class

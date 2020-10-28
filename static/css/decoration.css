@@ -12,11 +12,11 @@ button {
     text-decoration: none;
 }
 
-table {
+table.list {
         border-collapse: collapse;
         border: none;
 }
 
-td {
+table.list td {
     border: none;
 }

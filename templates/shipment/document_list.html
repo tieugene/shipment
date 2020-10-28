@@ -13,49 +13,50 @@
 {% endblock %}
 {% block body_main %}
 {% include "paginator.html" %}
-<form method="POST" action=""> {% csrf_token %}
-<table width="auto" border="1">
+<form method="POST" action="">
+    {% csrf_token %}
+<table class="list">
     <thead>
-    <tr>    <!-- col titles -->
-        <th> &numero; </th>
-        <th> {% trans "Shipper" %} </th>
-        <th> {% trans "Customer" %} </th>
-        <th> {% trans "Date" %} </th>
-        <th> {% trans "Type" %} </th>
-        <th> {% trans "File name" %} </th>
-        <th> {% trans "Note" %} </th>
-        <th colspan="2"> <a href="{% url 'doc_add' %}"> {% button 'add' %} </a> </th>
-        <th> {% submit 'edit*' 'doc_update_multi' %} </th>
-        <th> {% submit 'del*' 'doc_delete_multi' %} </th>
-        <th> <input type="checkbox"> </th>
-    </tr>
-    <tr>    <!-- filter -->
-        <th> {% submit 'filt' 'doc_list_filter' %} </th>
-        <th> {{ form.shipper }} </th>
-        <th> {{ form.org }} </th>
-        <th> {{ form.date }} </th>
-        <th> {{ form.doctype }} </th>
-        <th colspan="7"> </th>
-    </tr>
+        <tr>    <!-- col titles -->
+            <th> &numero; </th>
+            <th> {% trans "Shipper" %} </th>
+            <th> {% trans "Customer" %} </th>
+            <th> {% trans "Date" %} </th>
+            <th> {% trans "Type" %} </th>
+            <th> {% trans "File name" %} </th>
+            <th> {% trans "Note" %} </th>
+            <th colspan="2"> <a href="{% url 'doc_add' %}"> {% button 'add' %} </a> </th>
+            <th> {% submit 'edit*' 'doc_update_multi' %} </th>
+            <th> {% submit 'del*' 'doc_delete_multi' %} </th>
+            <th> <input type="checkbox"> </th>
+        </tr>
+        <tr>    <!-- filter -->
+            <th> {% submit 'filt' 'doc_list_filter' %} </th>
+            <th> {{ form.shipper }} </th>
+            <th> {{ form.org }} </th>
+            <th> {{ form.date }} </th>
+            <th> {{ form.doctype }} </th>
+            <th colspan="7"> </th>
+        </tr>
     </thead>
-<tbody>
-{% for object in object_list %}
-    <tr>
-        <td align="right"> {{ object.pk }} </td>
-        <td> {{ object.shipper.name }} </td>
-        <td> {{ object.org.name }} </td>
-        <td> {{ object.date|date:"d.m.y" }} </td>
-        <td> {{ object.doctype.name }} </td>
-        <td> <a href="{% url 'doc_view' object.pk %}"> {{ object.file.name }} </a> </td>
-        <td> {{ object.comments|default_if_none:"-" }} </td>
-        <td> <a href="{% url 'file_show' object.pk %}"> {% button 'show' %} </a> </td>
-        <td> <a href="{% url 'file_get' object.pk %}"> {% button 'dl' %} </a> </td>
-        <td> <a href="{% url 'doc_update' object.pk %}"> {% button 'edit' %} </a> </td>
-        <td> <a href="{% url 'doc_delete' object.pk %}"> {% button 'del' %} </a> </td>
-        <td> <input name="checked" value="{{ object.pk }}" type="checkbox"> </td>
-    </tr>
-{% endfor %}
-</tbody>
+    <tbody>
+    {% for object in object_list %}
+        <tr>
+            <td align="right"> {{ object.pk }} </td>
+            <td> {{ object.shipper.name }} </td>
+            <td> {{ object.org.name }} </td>
+            <td> {{ object.date|date:"d.m.y" }} </td>
+            <td> {{ object.doctype.name }} </td>
+            <td> <a href="{% url 'doc_view' object.pk %}"> {{ object.file.name }} </a> </td>
+            <td> {{ object.comments|default_if_none:"-" }} </td>
+            <td> <a href="{% url 'file_show' object.pk %}"> {% button 'show' %} </a> </td>
+            <td> <a href="{% url 'file_get' object.pk %}"> {% button 'dl' %} </a> </td>
+            <td> <a href="{% url 'doc_update' object.pk %}"> {% button 'edit' %} </a> </td>
+            <td> <a href="{% url 'doc_delete' object.pk %}"> {% button 'del' %} </a> </td>
+            <td> <input name="checked" value="{{ object.pk }}" type="checkbox"> </td>
+        </tr>
+    {% endfor %}
+    </tbody>
 </table>
 </form>
 {% endblock %}
