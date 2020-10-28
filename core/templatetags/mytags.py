@@ -13,7 +13,7 @@ buttons_items = {  # key: (char, img, tip)
     'no': ('&olarr;', 'ban', _('Cancel')),
     'add': ('&plus;', 'plus', _('New')),  # &plus
     'del': ('&cross;', 'trash-o', _('Delete')),  # &#9249;
-    'del*': ('&cross;', 'plus', _('Delete selected')),  # &#9249;
+    'del*': ('&cross;', 'trash', _('Delete selected')),  # &#9249;
     'edit': ('&#9998;', 'pencil', _('Edit')),
     'edit*': ('&#9998;', 'pencil', _('Edit selected')),
     'beg': ('&larrb;', 'fast-backward', _('Start')),  # &#9194;

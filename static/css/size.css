@@ -16,3 +16,15 @@ nav > h1 {
 
 footer {
 }
+
+button {
+    border-width: 1px;
+    font-size: 14pt;
+    min-width: 32px;
+    height: 24px;
+	border-radius: 5px;
+}
+
+img.svg {
+	width: 16px;
+}

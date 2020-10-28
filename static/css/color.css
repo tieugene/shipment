@@ -3,19 +3,24 @@ body {
 
 nav {
     background-color: #EBEFF9;
-    border-color: red;
+    //border-color: red;
 }
 
 nav > h1 {
-    border-color: black;
+    //border-color: black;
 }
 
 main {
-    background-color: silver;
-    border-color: orange;
+    //background-color: silver;
+    //border-color: orange;
 }
 
 footer {
     background-color: #F8F8F8;
     // border-color: green;
+}
+
+button {
+    border-color: silver;
+    background-color: #F0F0F0;
 }

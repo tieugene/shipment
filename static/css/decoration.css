@@ -2,21 +2,26 @@ body {
 }
 
 nav {
-    border-style: dotted;
-    border-width: 1px;
+    //border-style: dotted;
+    //border-width: 1px;
 }
 
 nav > h1 {
-    border-style: dashed;
-    border-width: 1px;
+    //border-style: dashed;
+    //border-width: 1px;
 }
 
 main {
-    border-style: dotted;
-    border-width: 1px;
+    //border-style: dotted;
+    //border-width: 1px;
 }
 
 footer {
-    border-style: dotted;
-    border-width: 1px;
+    //border-style: dotted;
+    //border-width: 1px;
+}
+
+button {
+	border-style: solid;
+	cursor: pointer;
 }

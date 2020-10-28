@@ -24,3 +24,13 @@ footer {
     flex-shrink: 0;
     text-align: center;
 }
+
+button {
+    text-align: center;
+    vertical-align: middle;
+}
+
+button > img {
+    margin-left: auto;
+    margin-right: auto;
+}
