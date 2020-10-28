@@ -1,5 +1,22 @@
 # Notes
 
+## CSS
+- type
+- .class
+- #id
+- [attr-value]
+- a,b: a | b
+- a b: b in a
+- a>b: b right in a
+- a~b: - b after a in same parent in same level
+- a+b: - 
+
+CSS online editor:
+- https://cssdeck.com/labs
+- http://www.cssdesk.com
+- https://www.w3schools.com/tryit/
+- https://codepen.io/
+
 ## Views:
 - View () - just get(), post()
 - FormView (generic.edit) - form

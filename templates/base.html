@@ -9,9 +9,12 @@
 	<title> {% trans "Shipments:" %} {% block title %} ... {% endblock %} </title>
 	<!-- 1. me -->
     <link rel="shortcut icon" href="{% static 'img/TI_64.png' %}" type="image/png"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/colors.css' %}"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/svgbutton.css' %}" />
+	<!--link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/position.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/size.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/decoration.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/color.css' %}"/>
+	<!--link rel="stylesheet" type="text/css" href="{% static 'css/svgbutton.css' %}" /-->
 	<!-- 2. admin (symlink) -->
 	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}" />
 	<!--link rel="stylesheet" type="text/css" href="{# static 'admin/css/widgets.css' #} /-->
@@ -24,22 +27,20 @@
 </head>
 <body>
 	<!-- header> <h1> Das ist Shipments </h1> </header-->
-	<nav id="topmenu">
+	<nav>
 		<a href="{% url 'index' %}"> {% button 'home' %} </a>
  		<a href="{% url 'file_list' %}"> {% button "file" %} </a>
  		<a href="{% url 'org_list' %}"> {% button "org" %} </a>
  		<a href="{% url 'doc_list' %}"> {% button "doc" %} </a>
-		<span style="width: 100%">
-			<b> {% trans "Shipments" %}:{% block menu_title %} ... {% endblock %} </b>
-		</span>
+		<h1> {% trans "Shipments" %}:{% block menu_title %} ... {% endblock %} </h1>
 		<a href="{% url 'about' %}"> {% button 'info' %} </a>
 		<a href="{% url 'admin:index' %}"> {% button 'tool' %} </a>
 	</nav>
-	<div>
+	<main>
 	{% block body_main %}
 		<p> {% trans 'Dummy' %} </p>
 	{% endblock %}
-	</div>
+	</main>
 <footer> &copy; /me </footer>	
 </body>
 </html>

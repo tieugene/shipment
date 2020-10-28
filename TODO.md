@@ -1,7 +1,7 @@
 # ToDo
 
 ## ToDo:
-- CSS (styles (positions+sizes+look)/colors)
+- CSS (position, size, decoration, color; button style by name="" attr; even/odd tr)
 - doc_bulk: verbose x 2 (prepare, upload)
 
 ## FixMe:

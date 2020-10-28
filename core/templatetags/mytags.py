@@ -21,6 +21,7 @@ buttons_items = {  # key: (char, img, tip)
     'next': ('&rarr;', 'step-forward', _('Next')),  # &#9197;
     'end': ('&rarrb;', 'fast-forward', _('End')),  # &#9193;
     'dl': ('&DownArrowBar;', 'download', _('Download')),
+    'ul': ('&UpArrowBar;', 'upload', _('Upload')),
     'show': ('&gtdot;', '0014-image', _('View')),  # &#128065; (eye)
     'home': ('&#8962;', 'home', _('Home')),
     'tool': ('&#9881;', 'cog', _('Admin')),

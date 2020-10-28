@@ -8,7 +8,6 @@ td {
         padding: 2pt;
 }
 #topmenu {
-        background-color: #EBEFF9;
         display: table;
         width: 100%;
         text-align: center;
@@ -41,7 +40,8 @@ td {
         color: blue;
 }
 #topmenu a:visited {
-        color: blue;
+	color: blue;
+}
 
 p {
 	margin: 0;
@@ -168,40 +168,10 @@ table.itemlist tbody tr a, table.catlist tbody tr a {
 	text-decoration: none;
 }
 
-.pulldown {
-	padding: 0.5em;
-	margin: -2px;
-	background: #F0F0F0;
-	border: 1px solid #D0D0D0;
-	box-shadow: 5px 5px 5px #C0C0C0;
-	-webkit-box-shadow: 5px 5px 5px #C0C0C0;
-	-moz-box-shadow: 5px 5px 5px #C0C0C0;
-}
-
-.pulldown a {
-	text-decoration: none;
-}
-.addressbar td {
-    padding: 2px 6px;
-}
-
 .bordered {
 	border: 2px solid;
 	padding: 0;
 	margin: 0
-}
-
-span.abc {
-	border: 1px solid #D0D0D0;
-}
-
-span.abc a {
-	text-decoration: none;
-}
-
-span.abc a.active {
-	font-weight: bold;
-	text-decoration: underline;
 }
 
 .pagination a {
