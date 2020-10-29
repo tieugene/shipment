@@ -5,10 +5,11 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.base import View
 from django.views.generic.edit import DeleteView, UpdateView, FormView
+from django.views.generic.detail import SingleObjectMixin
 
 from . import models, forms
 
-PAGE_SIZE = 25
+PAGE_SIZE = 24
 
 
 class FileList(ListView):
@@ -49,9 +50,32 @@ class FileDelete(DeleteView):
     success_url = reverse_lazy('file_list')
 
 
+class __FileDownload(SingleObjectMixin, View):
+    model = models.File
+    as_attach = None
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return FileResponse(
+            open(self.object.get_path(), "rb"),
+            as_attachment=self.as_attach,
+            content_type=self.object.mime,
+            filename=self.object.name)
+
+
+class FileGet(__FileDownload):
+    as_attach = True
+
+
+class FileShow(__FileDownload):
+    as_attach = False
+
+
 def delete_multi(request, m, fw: str):
     """
-    Delete checked items from listview
+    Delete checked items from listview.
+    @param m: model
+    @param fw: url redirect to
     """
     if request.method == 'POST':
         checks = request.POST.getlist('checked')
@@ -62,26 +86,3 @@ def delete_multi(request, m, fw: str):
 
 def file_delete_multi(request):
     return delete_multi(request, models.File, reverse('file_list'))
-
-
-def __file_download(pk, as_attach):
-    file = models.File.objects.get(pk=int(pk))
-    return FileResponse(
-        open(file.get_path(), "rb"),
-        as_attachment=as_attach,
-        content_type=file.mime,
-        filename=file.name)
-
-
-def file_get(request, pk):
-    """
-    Download file
-    """
-    return __file_download(pk, True)
-
-
-def file_show(request, pk):
-    """
-    Download file
-    """
-    return __file_download(pk, False)

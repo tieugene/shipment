@@ -1,5 +1,8 @@
 # Notes
 
+## Bulk errors:
+- 
+
 ## CSS
 - type
 - .class
