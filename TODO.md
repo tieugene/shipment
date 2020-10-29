@@ -1,9 +1,7 @@
 # ToDo
 
-## ToDo:
-- buttons: kwargs
-- date filter: yy/mm/dd
 - doc_bulk: verbose x 2 (prepare, upload)
+- date filter: yy/mm/dd
 
 ## FixMe:
 - Doc.create: blank comments
@@ -73,3 +71,4 @@
 - submit button tag
 - buttons: button_svg+submit_svg templates
 - CSS (position, size, decoration, color; even/odd tr)
+- buttons: kwargs (e.g. disabled)

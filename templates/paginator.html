@@ -2,20 +2,20 @@
 {% if is_paginated %}
 <span class="pagination" align="right">
 	{% if page_obj.has_previous %}
-		<a href="?page=1" class="nou"> {% button 'beg' %} </a>
-		<a href="?page={{ page_obj.previous_page_number }}" class="nou"> {% button 'prev' %} </a>
+		<a href="?page=1"> {% button 'beg' %} </a>
+		<a href="?page={{ page_obj.previous_page_number }}"> {% button 'prev' %} </a>
 	{% else %}
-		<button type="button" class="plain_mid" disabled="disabled"> &larrb; </button>
-		<button type="button" class="plain_mid" disabled="disabled"> &larr; </button>
+		{% button 'beg' disabled=True %}
+		{% button 'prev' disabled=True %}
 	{% endif %}
 	{{ page_obj.start_index }}..{{ page_obj.end_index }}/{{ paginator.count }}
 	({{ page_obj.number }}/{{ paginator.num_pages }})
 	{% if page_obj.has_next %}
-		<a href="?page={{ page_obj.next_page_number }}" class="nou"> {% button 'next' %} </a>
-		<a href="?page={{ paginator.num_pages }}" class="nou"> {% button 'end' %} </a>
+		<a href="?page={{ page_obj.next_page_number }}"> {% button 'next' %} </a>
+		<a href="?page={{ paginator.num_pages }}"> {% button 'end' %} </a>
 	{% else %}
-		<button type="button" class="plain_mid" disabled="disabled"> &rarr; </button>
-		<button type="button" class="plain_mid" disabled="disabled"> &rarrb; </button>
+		{% button 'next' disabled=True %}
+		{% button 'end' disabled=True %}
 	{% endif %}
 </span>
 {% endif %}

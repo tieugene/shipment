@@ -39,39 +39,43 @@ register = template.Library()
 
 # HTML entity powered
 @register.inclusion_tag('tags/button.html')
-def button(key):
+def button(key, **kwargs):
     char, img, title = buttons_items.get(key, ('?', None, ''))
     return {
         'char': mark_safe(char),
         'title': title,
+        **kwargs,
     }
 
 
 @register.inclusion_tag('tags/submit.html')
-def submit(key, action=''):
+def submit(key, action='', **kwargs):
     char, img, title = buttons_items.get(key, ('?', None, '---'))
     return {
         'char': mark_safe(char),
         'title': title,
-        'action': action
+        'action': action,
+        **kwargs,
     }
 
 
 # SVG powered
 @register.inclusion_tag('tags/button_svg.html')
-def button_(key):
+def button_(key, **kwargs):
     char, img, title = buttons_items.get(key, ('?', 'usd', '---'))
     return {
         'path': "img/svg/{}.svg".format(img),
         'title': title,
+        **kwargs,
     }
 
 
 @register.inclusion_tag('tags/submit_svg.html')
-def submit_(key, action=''):
+def submit_(key, action='', **kwargs):
     char, img, title = buttons_items.get(key, ('?', 'usd', '---'))
     return {
         'path': "img/svg/{}.svg".format(img),
         'title': title,
-        'action': action
+        'action': action,
+        ** kwargs,
     }

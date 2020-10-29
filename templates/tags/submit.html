@@ -1,1 +1,1 @@
-<button type="submit" title="{{ title }}" {% if action %} formaction="{% url action %}" {% endif %} style="font-size: 14pt"> {{ char }} </button>
+<button type="submit" title="{{ title }}" {% if action %} formaction="{% url action %}" {% endif %} {%  if disabled %} disabled="disabled" {% endif %}> {{ char }} </button>
