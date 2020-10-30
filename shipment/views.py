@@ -1,21 +1,24 @@
 import datetime
+import json
+from http import HTTPStatus
 
 # from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseNotAllowed
+from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseServerError, HttpResponseBadRequest
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
 # from django.views.generic.base import View, TemplateView, RedirectView  # !
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView, FormMixin
-from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import redirect, get_object_or_404
 
-from . import models, forms
 from core.models import File, get_file_mime, get_file_crc
 from core.views import delete_multi
+from . import models, forms
 
 # consts
 PAGE_SIZE = 25
 MIME_PDF = 'application/pdf'
+BIG_FILE = 0xFFFFFF     # 16MB
 
 
 class OrgList(ListView):
@@ -175,7 +178,6 @@ class DocUpdateMulti(FormView):
     def post(self, request, *args, **kwargs):
         """
         Bulk changing docs attributes.
-        Powered by [Internets](https://stackoverflow.com/questions/18051407/update-queryset-in-django-in-following-situation/18052834)
         """
         form_class = self.get_form_class()
         form = self.get_form(form_class)
@@ -225,8 +227,7 @@ def doc_bulk(request):
     - file[s] already exist[s]
     """
     if request.method != 'POST':
-        return HttpResponseNotAllowed(('POST',))
-    # print("On POST:")
+        return HttpResponseNotAllowed(('POST',))                    # 405
     # 1. get values
     shipper_name = request.POST.get('shipper', None)  # str
     org_name = request.POST.get('org', None)
@@ -234,43 +235,57 @@ def doc_bulk(request):
     files = request.FILES.getlist('file')
     # 2. check input
     if shipper_name is None or org_name is None or date_s is None or not files:
-        return HttpResponse(status=406)
-    shipper = get_object_or_404(models.Shipper, name=shipper_name)
-    org_name = org_name.strip()[:32].strip()  # cut of extra chars
+        # FIXME: replace with 'not (...&...)
+        return HttpResponse(status=HTTPStatus.NOT_ACCEPTABLE)       # 406
+    # FIXME: add note for 404
+    shipper = get_object_or_404(models.Shipper, name=shipper_name)  # 404
+    org_name = org_name.strip()[:32].strip()  # cut off extra chars
     try:
         date = datetime.datetime.strptime(date_s, "%d.%m.%y")
     except ValueError:
         date = None
     if not date:
-        return HttpResponse(status=412)
-    org = doc = None
+        return HttpResponseBadRequest("Bad date '{}'".format(date_s))  # 400
+    org = None    # org - lazy search/creation
+    response_list = list()
     # 3. add items
-    # print("We have a job.")
     for f in files:  # add file=>doc if file is pdf and not exists; add org if required.
-        # 3.1. chk file (pdf, not exists)
+        # 3.1. chk file (size, pdf, not exists)
+        if f.size > BIG_FILE:                                       # 413
+            response_list.append(dict(status=HTTPStatus.REQUEST_ENTITY_TOO_LARGE, note=f.name))
+            continue
         mime = get_file_mime(f)
-        if mime != MIME_PDF:
-            # print("Invalid mime: ".format(mime))
+        if mime != MIME_PDF:                                        # 415
+            response_list.append(dict(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE, note=f.name))
             continue
         md5 = get_file_crc(f)
-        if File.objects.filter(crc=md5).exists():
-            # print("File exists: {} (crc {})".format(f.name, md5))
+        if File.objects.filter(crc=md5).exists():                   # 409
+            # TODO: check doc (!file) exists and its attrs
+            response_list.append(dict(
+                status=HTTPStatus.CONFLICT,
+                note="File '{}' already exists.".format(f.name)))
             continue
         # 3.2. chk/create org
         if not org:
             org, created = models.Org.objects.get_or_create(name=org_name)
-            if not (org or created):
-                # print("Org oops.")
-                return HttpResponse(status=400)  # not found nor created
-        file = File.objects.create(file=f)
-        # if file:
-        #    print("File created.")
+            if not (org or created):                                # 500 and get out
+                return HttpResponseServerError("Org '{}' not found nor created".format(org_name))
         # 3.3. create file
-        doc = models.Document.objects.create(file=file, shipper=shipper, org=org, date=date)
-        # if doc:
-        #    print("Doc created.")
+        file = File.objects.create(file=f)
+        if not file:                                                # 500
+            response_list.append(dict(
+                status=HTTPStatus.INTERNAL_SERVER_ERROR,
+                note="File '{}' not be created.".format(f.name)))
         # 3.4. create doc
+        doc = models.Document.objects.create(file=file, shipper=shipper, org=org, date=date)
+        if not doc:                                                 # 500
+            response_list.append(dict(
+                status=HTTPStatus.INTERNAL_SERVER_ERROR,
+                note="Doc '{}' not be created.".format(f.name)))
     # x. the end
-    # print("Shipper: {}, Org: {}, Date: {}".format(shipper, org_name, date_s))
-    status = 204 if doc is None else 201
-    return HttpResponse(status=status)  # FIXME: 'created' (200 URL/201) or 'nothing changed (204)'
+    if response_list:   # 207 errors occur
+        # TODO: try JsonResponse()
+        response = HttpResponse(json.dumps(response_list), content_type="text/json", status=HTTPStatus.CREATED)
+    else:               # 201
+        response = HttpResponse(status=HTTPStatus.CREATED)
+    return response

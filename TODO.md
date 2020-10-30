@@ -20,6 +20,11 @@
 
 ## Features:
 - auth
+- File trashcan
+- journal (crudl, rrd?)
+- File.ctime: use source (=> teach attachment attrs_
+- [multi]edit: replace POST with PUT(==UPDATE)|PATCH
+- [multi]del: replace with DELETE
 - icons: fileS, orgS, docS, delS, editS
 - Preview pane
 - Sort
