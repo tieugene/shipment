@@ -1,9 +1,10 @@
 # ToDo
 
-- doc_bulk: verbose x 2 (prepare, upload)
+- apache ready
 - date filter: yy/mm/dd
 
 ## FixMe:
+- Org.add(): fullname required
 - Doc.create: blank comments
 - *.Edit: return ~~detail~~ back
 - Doc.edit: doctype required=True
@@ -20,6 +21,7 @@
 
 ## Features:
 - auth
+- tests
 - File trashcan
 - journal (crudl, rrd?)
 - File.ctime: use source (=> teach attachment attrs_
@@ -42,7 +44,6 @@
 - preview: img cache (grey)
 - icons: awesome font?
 - idea: email docs
-- tests
 - Merge Orgs (option; can multiedit)
 - [WebDAV](https://github.com/MnogoByte/djangodav)
 - pylint with [pylint-django](https://github.com/PyCQA/pylint-django)
@@ -77,3 +78,4 @@
 - buttons: button_svg+submit_svg templates
 - CSS (position, size, decoration, color; even/odd tr)
 - buttons: kwargs (e.g. disabled)
+- doc_bulk: self upload + verbose x 2 (prepare, upload)

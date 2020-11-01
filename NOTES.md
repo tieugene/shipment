@@ -1,6 +1,15 @@
 # Notes
 
-## Doc_Bulk responses:
+
+## Doc_Bulk
+
+### 2 check:
+- not dir in year/mon/date/org level
+- bad <date> folder name
+- not file in last level
+- not pdf
+
+### Responses:
 
 | Uw | Cod | Desc | Used |
 |----| --- | ---- | ---- |
@@ -82,6 +91,7 @@ Results (4xx/5xx):
 - Товарная накладная
 - Товарно-транспортная накладная
 - Качественное удостоверение
+- Сертификат качества
 - Декларация соответствия
 - &hellip;
 

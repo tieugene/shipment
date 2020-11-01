@@ -202,6 +202,7 @@ class DocUpdateMulti(FormView):
 @csrf_exempt
 def doc_bulk(request):
     """
+    FIXME: chk crc not works; response == 201 (but add nothing)
     FIXME: View class
     Bulk uploading documents.
     RTFM: https://pythoncircle.com/post/713/sending-post-request-with-different-body-formats-in-django/
@@ -245,7 +246,7 @@ def doc_bulk(request):
     except ValueError:
         date = None
     if not date:
-        return HttpResponseBadRequest("Bad date '{}'".format(date_s))  # 400
+        return HttpResponseBadRequest("Bad date: '{}'".format(date_s))  # 400
     org = None    # org - lazy search/creation
     response_list = list()
     # 3. add items
@@ -263,29 +264,29 @@ def doc_bulk(request):
             # TODO: check doc (!file) exists and its attrs
             response_list.append(dict(
                 status=HTTPStatus.CONFLICT,
-                note="File '{}' already exists.".format(f.name)))
+                note="File exists: '{}'.".format(f.name)))
             continue
         # 3.2. chk/create org
         if not org:
             org, created = models.Org.objects.get_or_create(name=org_name)
             if not (org or created):                                # 500 and get out
-                return HttpResponseServerError("Org '{}' not found nor created".format(org_name))
+                return HttpResponseServerError("Org not created: '{}'".format(org_name))
         # 3.3. create file
         file = File.objects.create(file=f)
         if not file:                                                # 500
             response_list.append(dict(
                 status=HTTPStatus.INTERNAL_SERVER_ERROR,
-                note="File '{}' not be created.".format(f.name)))
+                note="File not created: '{}'.".format(f.name)))
         # 3.4. create doc
         doc = models.Document.objects.create(file=file, shipper=shipper, org=org, date=date)
         if not doc:                                                 # 500
             response_list.append(dict(
                 status=HTTPStatus.INTERNAL_SERVER_ERROR,
-                note="Doc '{}' not be created.".format(f.name)))
+                note="Doc not created: '{}'.".format(f.name)))
     # x. the end
     if response_list:   # 207 errors occur
         # TODO: try JsonResponse()
-        response = HttpResponse(json.dumps(response_list), content_type="text/json", status=HTTPStatus.CREATED)
+        response = HttpResponse(json.dumps(response_list), content_type="text/json", status=HTTPStatus.MULTI_STATUS)
     else:               # 201
         response = HttpResponse(status=HTTPStatus.CREATED)
     return response
