@@ -79,3 +79,4 @@
 - CSS (position, size, decoration, color; even/odd tr)
 - buttons: kwargs (e.g. disabled)
 - doc_bulk: self upload + verbose x 2 (prepare, upload)
+- doc_bulk: python/curl client works ok
