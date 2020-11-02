@@ -4,10 +4,7 @@
 - date filter: yy/mm/dd
 
 ## FixMe:
-- Org.add(): fullname required
-- Doc.create: blank comments
 - *.Edit: return ~~detail~~ back
-- Doc.edit: doctype required=True
 - DocList.filter: date year is in future only; must be from db
 - view.*_* => forms.View (file_get, file_show, org_delete_multi, doc_delete_multi, doc_bulk)
 - Org: full name -> Notes
@@ -80,3 +77,6 @@
 - buttons: kwargs (e.g. disabled)
 - doc_bulk: self upload + verbose x 2 (prepare, upload)
 - doc_bulk: python/curl client works ok
+- Fixed: Org.add(): fullname required
+- Fixed: Doc.create: blank comments
+- Fixed: Doc.edit: doctype required=True (blank=True)

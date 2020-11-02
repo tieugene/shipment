@@ -27,7 +27,7 @@ class Org(models.Model):
     Partner
     """
     name = models.CharField(unique=True, max_length=32, verbose_name=_('Short name'))
-    fullname = models.CharField(null=True, blank=False, db_index=True, max_length=64, verbose_name=_('Full name'))
+    fullname = models.CharField(null=True, blank=True, db_index=True, max_length=64, verbose_name=_('Full name'))
 
     def __str__(self):
         return self.name
@@ -46,7 +46,7 @@ class DocType(models.Model):
     Shipment document type
     """
     name = models.CharField(unique=True, max_length=16, db_index=True, verbose_name=_('Name'))
-    fullname = models.CharField(null=True, db_index=True, max_length=64, verbose_name=_('Full name'))
+    fullname = models.CharField(null=True, blank=True, db_index=True, max_length=64, verbose_name=_('Full name'))
 
     def __str__(self):
         return self.name
@@ -64,7 +64,7 @@ class Document(models.Model):
     org = models.ForeignKey(Org, on_delete=models.CASCADE, related_name='org_document', db_index=True,
                             verbose_name=_('Customer'))
     date = models.DateField(db_index=True, verbose_name=_('Date'))
-    doctype = models.ForeignKey(DocType, on_delete=models.CASCADE, null=True, related_name='doctype_document',
+    doctype = models.ForeignKey(DocType, on_delete=models.CASCADE, null=True, blank=True, related_name='doctype_document',
                                 db_index=True, verbose_name=_('Type'))
     comments = models.CharField(null=True, blank=True, db_index=True, max_length=255, verbose_name=_('Note'))
 
