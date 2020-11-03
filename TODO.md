@@ -17,8 +17,8 @@
 - Doc.admin: no add, edit w/o file (!editable=False)
 
 ## Features:
-- auth
 - tests
+- auth
 - File trashcan
 - journal (crudl, rrd?)
 - File.ctime: use source (=> teach attachment attrs_
