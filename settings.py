@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
     'shipment.apps.ShipmentConfig',
-    #'shipment'
 ]
 
 MIDDLEWARE = [

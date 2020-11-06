@@ -75,9 +75,9 @@ def get_file_crc(file, block_size=1024 * 14):
     return h.hexdigest()
 
 
-def get_file_mime(file):
+def get_file_mime(fobj):
     """
-    @param file:
+    @param fobj:InMemoryUploadedFile
     - new/replace - django.core.files.uploadedfile.InMemoryUploadedFile (for newly created)
     - edit (w/o changing file itself) - django.core.files.base.File
     From https://stackoverflow.com/questions/4853581/django-get-uploaded-file-type-mimetype
@@ -87,10 +87,13 @@ def get_file_mime(file):
     file.seek(initial_pos)
     return mime_type
     """
-    pos = file.tell()
-    file.seek(0)
-    mime = magic.from_buffer(file.read(), mime=True)
-    file.seek(pos)
+    pos = fobj.tell()
+    fobj.seek(0)
+    # depricated (python3-magic)
+    # mime = magic.from_buffer(fobj.read(), mime=True)
+    # new (python3-file-magic)
+    mime = magic.detect_from_content(fobj.read(1024)).mime_type
+    fobj.seek(pos)
     return mime
 
 

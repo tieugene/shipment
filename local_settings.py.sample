@@ -1,0 +1,18 @@
+SECRET_KEY = '<mysecretkey>'
+DEBUG = False
+STATIC_URL = '/static_shipment/'
+MEDIA_ROOT = '/mnt/shares/media/shipment/'
+# ADMIN_MEDIA_PREFIX = '/static_shipment/admin/'
+# LOGIN_URL = '/shipment/accounts/login/'
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.sqlite3',
+		'NAME': '/mnt/shares/db/sqlite/shipment/db.sqlite3'
+	}
+}
+CACHES = {
+	'default': {
+		'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+		'LOCATION': 'unix:/tmp/memcached.sock',
+	}
+}
