@@ -1,6 +1,5 @@
 # ToDo
 
-- apache ready
 - date filter: yy/mm/dd
 
 ## FixMe:
@@ -11,7 +10,6 @@
 - Doc: Comments -> Notes
 - File: create() with crc(md5) and/or mime
 - File: chk crc on creation
-- mime on 1st block (1KB?) or chunk
 - Doc.add: validate all of files (form_valid())
 - File.admin: disable edit on add
 - Doc.admin: no add, edit w/o file (!editable=False)
@@ -21,7 +19,7 @@
 - auth
 - File trashcan
 - journal (crudl, rrd?)
-- File.ctime: use source (=> teach attachment attrs_
+- File.ctime: use source (=> teach attachment attrs)
 - [multi]edit: replace POST with PUT(==UPDATE)|PATCH
 - [multi]del: replace with DELETE
 - icons: fileS, orgS, docS, delS, editS
@@ -80,3 +78,5 @@
 - Fixed: Org.add(): fullname required
 - Fixed: Doc.create: blank comments
 - Fixed: Doc.edit: doctype required=True (blank=True)
+- apache ready
+- mime on 1st block (1KB)
