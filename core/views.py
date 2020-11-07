@@ -12,10 +12,44 @@ from . import models, forms
 PAGE_SIZE = 24
 
 
+def delete_multi(request, m, fw: str):
+    """
+    Delete checked items from listview.
+    @param request: subj
+    @param m: model
+    @param fw: url redirect to
+    TODO: rework to class FileDeleteMulti(View)
+    """
+    if request.method == 'POST':
+        checks = request.POST.getlist('checked')
+        if checks:
+            m.objects.filter(pk__in=set(checks)).delete()
+    return redirect(fw)
+
+
 class FileList(ListView):
     model = models.File
-    # template_name = 'core/file_list.html'
     paginate_by = PAGE_SIZE
+
+    def get_queryset(self):
+        s = self.request.session.get('file_sort', models.DEFAULT_SORT_FILE)
+        return self.model.objects.order_by(s)
+
+
+class FileListSort(View):
+
+    def get(self, request, fld, *args, **kwargs):
+        s = self.request.session.get('file_sort', models.DEFAULT_SORT_FILE)
+        stored_desc = (s[0] == '-')
+        stored_fld = s[1:] if stored_desc else s
+        if fld == stored_fld and not stored_desc:
+            fld = '-'+fld
+        request.session['file_sort'] = fld
+        return redirect('file_list')
+
+
+def file_delete_multi(request):
+    return delete_multi(request, models.File, reverse('file_list'))
 
 
 class FileAdd(FormView):
@@ -69,20 +103,3 @@ class FileGet(__FileDownload):
 
 class FileShow(__FileDownload):
     as_attach = False
-
-
-def delete_multi(request, m, fw: str):
-    """
-    Delete checked items from listview.
-    @param m: model
-    @param fw: url redirect to
-    """
-    if request.method == 'POST':
-        checks = request.POST.getlist('checked')
-        if checks:
-            m.objects.filter(pk__in=set(checks)).delete()
-    return redirect(fw)
-
-
-def file_delete_multi(request):
-    return delete_multi(request, models.File, reverse('file_list'))

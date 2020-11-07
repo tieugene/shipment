@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 from django.utils.translation import gettext as _
 
+DEFAULT_SORT_FILE = '-pk'
 
 def my_upload_to(instance, filename):
     """
@@ -45,7 +46,7 @@ class File(models.Model):
         return os.path.join(settings.MEDIA_ROOT, self.get_filename())
 
     class Meta:
-        ordering = ('-pk',)
+        ordering = (DEFAULT_SORT_FILE,)
         verbose_name = _('File')
         verbose_name_plural = _('Files')
 

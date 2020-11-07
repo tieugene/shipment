@@ -7,11 +7,11 @@
 <table class="list">
     <thead>
         <tr>
-            <th> &numero; </th>
-            <th> {% trans "Name" %} </th>
-            <th> MIME </th>
-            <th> {% trans "Created" %} </th>
-            <th> {% trans "Size" %} </th>
+            <th> <a href="{% url 'file_list_sort' 'pk' %}"> &numero; </a> </th>
+            <th> <a href="{% url 'file_list_sort' 'name' %}"> {% trans "Name" %} </a> </th>
+            <th> <a href="{% url 'file_list_sort' 'mime' %}"> MIME </a> </th>
+            <th> <a href="{% url 'file_list_sort' 'ctime' %}"> {% trans "Created" %} </a> </th>
+            <th> <a href="{% url 'file_list_sort' 'size' %}"> {% trans "Size" %} </a> </th>
             <th> {% trans "Doc" %} </th>
             <th colspan="3"> <a href="{% url 'file_add' %}"> {% button 'add' %} </a>  </th>
             <th> {% submit 'del*' %} </th>

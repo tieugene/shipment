@@ -50,17 +50,17 @@ class DocEditMultiForm(forms.Form):
     checked = forms.ModelMultipleChoiceField(models.Document.objects.all(), widget=forms.MultipleHiddenInput)
 
     def clean(self):
-        cleaned_data = super().clean()
+        cleaned_data = super()
         shipper_chg = cleaned_data.get('shipper_chg')
-        org_chg = cleaned_data.get('org_chg')
-        date_chg = cleaned_data.get('date_chg')
-        doctype_chg = cleaned_data.get('doctype_chg')
+        org_chg = get('org_chg')
+        date_chg = get('date_chg')
+        doctype_chg = get('doctype_chg')
         if shipper_chg or org_chg or date_chg or doctype_chg:
-            if shipper_chg and not cleaned_data.get('shipper'):
+            if shipper_chg and not get('shipper'):
                 self.add_error('shipper', _("Select one"))
-            if org_chg and not cleaned_data.get('org'):
+            if org_chg and not get('org'):
                 self.add_error('org', _("Select one"))
-            if date_chg and not cleaned_data.get('date'):
+            if date_chg and not get('date'):
                 self.add_error('date', _("Set right date"))
             # doctype can be cleared
         else:

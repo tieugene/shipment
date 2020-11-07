@@ -66,9 +66,9 @@ class DocList(FormMixin, ListView):
     success_url = reverse_lazy('doc_list')
     paginate_by = PAGE_SIZE
 
-    def get_queryset(self):
+    def get_queryset(self):     # 1.
         q = models.Document.objects.all()
-        f = self.request.session.get('doc_list')
+        f = self.request.session
         if f:
             # FIXME: rework to field__pk=...
             # val:int
@@ -98,7 +98,7 @@ class DocList(FormMixin, ListView):
             #    q = q.filter(date=datetime.datetime.strptime(val, "%y%m%d"))
         return q
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs):   # 2.
         context = super().get_context_data(**kwargs)
         f = self.request.session.get('doc_list')
         if f:

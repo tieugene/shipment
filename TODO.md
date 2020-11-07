@@ -1,5 +1,8 @@
 # ToDo
 
+- Sorting (File/Doc x asc/desc
+  session keys: <model>_sort='[-]field'
+
 ## FixMe:
 - *.Edit: return ~~detail~~ back
 - DocList.filter: y/m/d from db
@@ -11,12 +14,13 @@
 - Doc.add: validate all of files (form_valid())
 - File.admin: disable edit on add
 - Doc.admin: no add, edit w/o file (!editable=False)
+- File upload: preserve ctime ('Last-Modified', 'creation-date')
 
 ## Features:
 - tests
 - auth
 - File trashcan
-- journal (crudl, rrd?)
+- journal (CRUDL, RRD?)
 - File.ctime: use source (=> teach attachment attrs)
 - [multi]edit: replace POST with PUT(==UPDATE)|PATCH
 - [multi]del: replace with DELETE
