@@ -1,13 +1,11 @@
 # ToDo
 
-- date filter: yy/mm/dd
-
 ## FixMe:
 - *.Edit: return ~~detail~~ back
-- DocList.filter: date year is in future only; must be from db
+- DocList.filter: y/m/d from db
 - view.*_* => forms.View (file_get, file_show, org_delete_multi, doc_delete_multi, doc_bulk)
-- Org: full name -> Notes
-- Doc: Comments -> Notes
+- Org: full name -> Note
+- Doc: Comments -> Note
 - File: create() with crc(md5) and/or mime
 - File: chk crc on creation
 - Doc.add: validate all of files (form_valid())
@@ -80,3 +78,5 @@
 - Fixed: Doc.edit: doctype required=True (blank=True)
 - apache ready
 - mime on 1st block (1KB)
+- date filter: separate yy/mm/dd
+- DocMultiEdit: future years only fixed

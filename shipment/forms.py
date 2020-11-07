@@ -8,6 +8,18 @@ from . import models
 from core.models import get_file_mime
 
 
+def years():
+    return [(0, '--')] + list(((i, "%02d" % i) for i in range(14, 21)))
+
+
+def months():
+    return [(0, '--')] + list(((i, "%02d" % i) for i in range(1, 13)))
+
+
+def days():
+    return [(0, '--')] + list(((i, "%02d" % i) for i in range(1, 32)))
+
+
 class DocAddForm(forms.Form):
     # date: widget=forms.SelectDateWidget,
     file = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}), label=_('File'))
@@ -29,7 +41,7 @@ class DocEditMultiForm(forms.Form):
     # date: widget=forms.SelectDateWidget,
     shipper = forms.ModelChoiceField(queryset=models.Shipper.objects.all(), required=False, label=_("Shipper"))
     org = forms.ModelChoiceField(queryset=models.Org.objects.all(), required=False, label=_("Customer"))
-    date = forms.DateField(required=False, label=_("Date"))
+    date = forms.DateField(widget=forms.SelectDateWidget(years=range(2014, datetime.date.today().year+1)), required=False, label=_("Date"))
     doctype = forms.ModelChoiceField(queryset=models.DocType.objects.all(), required=False, label=_("Type"))
     shipper_chg = forms.BooleanField(required=False, label=_("Change shipper"), help_text="Use it!")
     org_chg = forms.BooleanField(required=False, label=_("Change partner"))
@@ -58,14 +70,17 @@ class DocEditMultiForm(forms.Form):
 class DocFilterForm(forms.Form):
     shipper = forms.ModelChoiceField(queryset=models.Shipper.objects.all(), required=False, label=_("Shipper"))
     org = forms.ModelChoiceField(queryset=models.Org.objects.all(), required=False, label=_("Customer"))
-    date = forms.DateField(widget=forms.SelectDateWidget, required=False, label=_("Date"))
+    year = forms.ChoiceField(choices=years(), required=False, label=_("Year"))
+    month = forms.ChoiceField(choices=months(), required=False, label=_("Month"))
+    day = forms.ChoiceField(choices=days(), required=False, label=_("Day"))
+    # date = forms.DateField(widget=forms.SelectDateWidget, required=False, label=_("Date"))
     doctype = forms.ModelChoiceField(queryset=models.DocType.objects.all(), required=False, label=_("Type"))
 
     def __init__(self, *args, init_data=None, **kwargs):
         super().__init__(*args, **kwargs)
         if init_data:
-            for i in ('shipper', 'org', 'doctype'):
+            for i in ('shipper', 'org', 'doctype', 'year', 'month', 'day'):
                 if i in init_data:
                     self.fields[i].initial = int(init_data[i])
-                if 'date' in init_data:
-                    self.fields['date'].initial = datetime.datetime.strptime(init_data['date'], "%y%m%d")
+                # if 'date' in init_data:
+                #    self.fields['date'].initial = datetime.datetime.strptime(init_data['date'], "%y%m%d")

@@ -1,4 +1,5 @@
 import datetime
+import calendar
 import json
 from http import HTTPStatus
 
@@ -70,6 +71,7 @@ class DocList(FormMixin, ListView):
         f = self.request.session.get('doc_list')
         if f:
             # FIXME: rework to field__pk=...
+            # val:int
             val = f.get('shipper')
             if val:
                 q = q.filter(shipper=models.Shipper.objects.get(pk=int(val)))
@@ -79,9 +81,21 @@ class DocList(FormMixin, ListView):
             val = f.get('doctype')
             if val:
                 q = q.filter(doctype=models.DocType.objects.get(pk=int(val)))
-            val = f.get('date')
-            if val:
-                q = q.filter(date=datetime.datetime.strptime(val, "%y%m%d"))
+            year = f.get('year')
+            if year:
+                year += 2000
+                month = f.get('month')
+                if month:
+                    day = f.get('day')
+                    if day:
+                        q = q.filter(date=datetime.date(year, month, day))
+                    else:
+                        q = q.filter(date__year=year, date__month=month)
+                else:
+                    q = q.filter(date__year=year)
+            # val = f.get('date')
+            # if val:
+            #    q = q.filter(date=datetime.datetime.strptime(val, "%y%m%d"))
         return q
 
     def get_context_data(self, **kwargs):
@@ -144,6 +158,7 @@ class DocListFilter(FormView):
         form = self.get_form(form_class)
         if form.is_valid():
             doc_list_filter = dict()
+            # val:str
             val = form.cleaned_data.get('shipper')
             if val:
                 doc_list_filter['shipper'] = val.pk
@@ -153,9 +168,15 @@ class DocListFilter(FormView):
             val = form.cleaned_data.get('doctype')
             if val:
                 doc_list_filter['doctype'] = val.pk
-            val = form.cleaned_data.get('date')
-            if val:
-                doc_list_filter['date'] = val.strftime("%y%m%d")
+            year = int(form.cleaned_data.get('year'))
+            doc_list_filter['year'] = year
+            month = int(form.cleaned_data.get('month'))
+            doc_list_filter['month'] = month if year else 0
+            day = int(form.cleaned_data.get('day'))
+            doc_list_filter['day'] = day if (year and month and day and (day <= calendar.monthrange(2000+year, month)[-1])) else 0
+            # val = form.cleaned_data.get('date')
+            # if val:
+            #    doc_list_filter['date'] = val.strftime("%y%m%d")
             if doc_list_filter:
                 request.session['doc_list'] = doc_list_filter
             else:
