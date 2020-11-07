@@ -11,6 +11,7 @@ urlpatterns = [
     path('o/<int:pk>/d/',	views.OrgDelete.as_view(), name='org_delete'),
     path('o/d/',            views.org_delete_multi, name='org_delete_multi'),
     path('d/',				views.DocList.as_view(), name='doc_list'),
+    path('d/s/<str:fld>/',  views.DocListSort.as_view(), name='doc_list_sort'),
     path('d/a/',			views.DocAdd.as_view(), name='doc_add'),
     path('d/<int:pk>/r/',	views.DocDetail.as_view(), name='doc_view'),
     path('d/<int:pk>/u/',	views.DocUpdate.as_view(), name='doc_update'),

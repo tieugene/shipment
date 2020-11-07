@@ -1,7 +1,5 @@
 # ToDo
 
-- Sorting (File/Doc x asc/desc). Session keys: <model>_sort='[-]field'
-
 ## FixMe:
 - *.Edit: return ~~detail~~ back
 - DocList.filter: y/m/d from db
@@ -83,3 +81,4 @@
 - mime on 1st block (1KB)
 - date filter: separate yy/mm/dd
 - DocMultiEdit: future years only fixed
+- Sorting (File/Doc x asc/desc). Session keys: <model>_sort='[-]field'

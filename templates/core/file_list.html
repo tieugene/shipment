@@ -2,7 +2,9 @@
 {% load i18n %}
 {% load mytags %}
 {% block css %}
-    #header_{{ sorted.h }} a::before { content: {% if sorted.d %} "\2191" {% else %} "\2193" {% endif %}; }
+    #header_{{ sorted.h }} a::before {
+        content: {% if sorted.d %} "\2191" {% else %} "\2193" {% endif %};
+    }
 {% endblock %}
 {% block body_main %}
 {% include "paginator.html" %}

@@ -6,6 +6,11 @@ from django.utils.translation import gettext as _
 
 from core.models import File
 
+DEFAULT_SORT_SHIPPER = 'name'
+DEFAULT_SORT_ORG = 'name'
+DEFAULT_SORT_DOCTYPE = 'name'
+DEFAULT_SORT_DOC = '-pk'
+
 
 class Shipper(models.Model):
     """
@@ -17,7 +22,7 @@ class Shipper(models.Model):
         return self.name
 
     class Meta:
-        ordering = ('name',)
+        ordering = (DEFAULT_SORT_SHIPPER,)
         verbose_name = _('Shipper')
         verbose_name_plural = _('Shippers')
 
@@ -36,7 +41,7 @@ class Org(models.Model):
         return reverse('org_view', kwargs={'pk': self.pk})
 
     class Meta:
-        ordering = ('name',)
+        ordering = (DEFAULT_SORT_ORG,)
         verbose_name = _('Customer')
         verbose_name_plural = _('Customers')
 
@@ -52,7 +57,7 @@ class DocType(models.Model):
         return self.name
 
     class Meta:
-        ordering = ('name',)
+        ordering = (DEFAULT_SORT_DOCTYPE,)
         verbose_name = _('Document type')
         verbose_name_plural = _('Document types')
 
@@ -64,8 +69,8 @@ class Document(models.Model):
     org = models.ForeignKey(Org, on_delete=models.CASCADE, related_name='org_document', db_index=True,
                             verbose_name=_('Customer'))
     date = models.DateField(db_index=True, verbose_name=_('Date'))
-    doctype = models.ForeignKey(DocType, on_delete=models.CASCADE, null=True, blank=True, related_name='doctype_document',
-                                db_index=True, verbose_name=_('Type'))
+    doctype = models.ForeignKey(DocType, on_delete=models.CASCADE, null=True, blank=True,
+                                related_name='doctype_document', db_index=True, verbose_name=_('Type'))
     comments = models.CharField(null=True, blank=True, db_index=True, max_length=255, verbose_name=_('Note'))
 
     def __str__(self):
@@ -76,7 +81,7 @@ class Document(models.Model):
 
     class Meta:
         # was '-date', 'shipper', 'org'
-        ordering = ('-pk',)
+        ordering = (DEFAULT_SORT_DOC,)
         verbose_name = _('Document')
         verbose_name_plural = _('Documents')
 

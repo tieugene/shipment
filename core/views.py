@@ -32,14 +32,13 @@ class FileList(ListView):
     paginate_by = PAGE_SIZE
 
     def get_queryset(self):                 # 1.
-        s = self.request.session.get('file_sort', models.DEFAULT_SORT_FILE)
-        return self.model.objects.order_by(s)
+        return self.model.objects.order_by(self.request.session.get('file_sort', models.DEFAULT_SORT_FILE))
 
     def get_context_data(self, **kwargs):   # 2.
-        context = super().get_context_data(**kwargs)
         s = self.request.session.get('file_sort', models.DEFAULT_SORT_FILE)
         stored_desc = (s[0] == '-')
         stored_fld = s[1:] if stored_desc else s
+        context = super().get_context_data(**kwargs)
         context['sorted'] = {'h': stored_fld, 'd': not stored_desc}
         return context
 

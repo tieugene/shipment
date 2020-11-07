@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseServer
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
-# from django.views.generic.base import View, TemplateView, RedirectView  # !
+from django.views.generic.base import View  # , TemplateView, RedirectView  # !
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView, FormMixin
 
@@ -67,7 +67,7 @@ class DocList(FormMixin, ListView):
     paginate_by = PAGE_SIZE
 
     def get_queryset(self):     # 1.
-        q = models.Document.objects.all()
+        q = self.model.objects.all()
         f = self.request.session
         if f:
             # FIXME: rework to field__pk=...
@@ -96,14 +96,34 @@ class DocList(FormMixin, ListView):
             # val = f.get('date')
             # if val:
             #    q = q.filter(date=datetime.datetime.strptime(val, "%y%m%d"))
+            # sorting
+            q = q.order_by(self.request.session.get('doc_sort', models.DEFAULT_SORT_DOC))
         return q
 
     def get_context_data(self, **kwargs):   # 2.
         context = super().get_context_data(**kwargs)
+        # 1. filter
         f = self.request.session.get('doc_list')
         if f:
             context['form'] = self.get_form_class()(init_data=f)
+        # 2. sort
+        s = self.request.session.get('doc_sort', models.DEFAULT_SORT_DOC)
+        stored_desc = (s[0] == '-')
+        stored_fld = s[1:] if stored_desc else s
+        context['sorted'] = {'h': stored_fld, 'd': not stored_desc}
         return context
+
+
+class DocListSort(View):
+
+    def get(self, request, fld, *args, **kwargs):
+        s = self.request.session.get('doc_sort', models.DEFAULT_SORT_DOC)
+        stored_desc = (s[0] == '-')
+        stored_fld = s[1:] if stored_desc else s
+        if fld == stored_fld and not stored_desc:
+            fld = '-'+fld
+        request.session['doc_sort'] = fld
+        return redirect('doc_list')
 
 
 class DocAdd(FormView):

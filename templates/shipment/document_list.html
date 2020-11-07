@@ -10,6 +10,9 @@
   padding-bottom: 0;
   white-space: nowrap;
  }
+    #header_{{ sorted.h }} a::before {
+        content: {% if sorted.d %} "\2191" {% else %} "\2193" {% endif %};
+    }
 {% endblock %}
 {% block body_main %}
 {% include "paginator.html" %}
@@ -18,11 +21,11 @@
 <table class="list">
     <thead>
         <tr>    <!-- col titles -->
-            <th> &numero; </th>
-            <th> {% trans "Shipper" %} </th>
-            <th> {% trans "Customer" %} </th>
-            <th> {% trans "Date" %} </th>
-            <th> {% trans "Type" %} </th>
+            <th id="header_pk"> <a href="{% url 'doc_list_sort' 'pk' %}"> &numero; </a> </th>
+            <th id="header_shipper"> <a href="{% url 'doc_list_sort' 'shipper' %}">  {% trans "Shipper" %} </a> </th>
+            <th id="header_org"> <a href="{% url 'doc_list_sort' 'org' %}"> {% trans "Customer" %} </a> </th>
+            <th id="header_date"> <a href="{% url 'doc_list_sort' 'date' %}"> {% trans "Date" %} </a> </th>
+            <th id="header_doctype"> <a href="{% url 'doc_list_sort' 'doctype' %}"> {% trans "Type" %} </a> </th>
             <th> {% trans "File name" %} </th>
             <th> {% trans "Note" %} </th>
             <th colspan="2"> <a href="{% url 'doc_add' %}"> {% button 'add' %} </a> </th>
