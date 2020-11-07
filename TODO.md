@@ -1,7 +1,6 @@
 # ToDo
 
-- Sorting (File/Doc x asc/desc
-  session keys: <model>_sort='[-]field'
+- Sorting (File/Doc x asc/desc). Session keys: <model>_sort='[-]field'
 
 ## FixMe:
 - *.Edit: return ~~detail~~ back
