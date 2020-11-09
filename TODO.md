@@ -1,5 +1,9 @@
 # ToDo
 
+## 201109:
+- filter on Org - not works
+- multiedit - err
+
 ## FixMe:
 - *.Edit: return ~~detail~~ back
 - DocList.filter: y/m/d from db

@@ -68,7 +68,7 @@ class DocList(FormMixin, ListView):
 
     def get_queryset(self):     # 1.
         q = self.model.objects.all()
-        f = self.request.session
+        f = self.request.session.get('doc_list')
         if f:
             # FIXME: rework to field__pk=...
             # val:int
@@ -77,10 +77,12 @@ class DocList(FormMixin, ListView):
                 q = q.filter(shipper=models.Shipper.objects.get(pk=int(val)))
             val = f.get('org')
             if val:
+                print("Filter by org")
                 q = q.filter(org=models.Org.objects.get(pk=int(val)))
             val = f.get('doctype')
             if val:
                 q = q.filter(doctype=models.DocType.objects.get(pk=int(val)))
+            print("Filter complete")
             year = f.get('year')
             if year:
                 year += 2000

@@ -17,6 +17,9 @@ General purpose file storage with addition functionality for shipping documents 
 - Python-file-magic (python3-file-magic)
 - Django-compatible RDB backend (~~SQLite,~~ MariaDB, PostgreSQL etc)
 - python3-mod_wsgi (for wsgi)
+- memcached (option)
+- python3-mysql
+- mariadb-server
 
 ## Installation
 
@@ -55,13 +58,13 @@ cp $APPDIR/local_setting.py.sample $APPDIR/local_settings.py
 ### 4. Prepare db etc:
 
 ```
+# mk i18n
+./manage.py compilemessages
 # create db
 ./manage.py migrate
 # create admin
 ./manage.py createsuperuser --username root --email root@example.com --noinput
 # echo "password" | ./manage.py changepassword root
-# mk i18n
-./manage.py compilemessages
 # add admin static (static/README)
 # ln -s ...
 # load initial data (option):
@@ -73,6 +76,17 @@ cp $APPDIR/local_setting.py.sample $APPDIR/local_settings.py
 ```
 sudo ln -s $APPDIR/shipment.conf /etc/httpd/conf.d/shipment.conf
 ```
+
+### 7. memcached
+/etc/sysconfig/memcached:
+
+``
+PORT="0"
+USER="apache"
+MAXCONN="1024"
+CACHESIZE="64"
+OPTIONS="-s /tmp/memcached.sock -a 0600"
+``
 
 ### X. Let's go:
 
