@@ -3,6 +3,7 @@
 ## 201109:
 - filter on Org - not works
 - multiedit - err
+- highlight line on hover
 
 ## FixMe:
 - *.Edit: return ~~detail~~ back

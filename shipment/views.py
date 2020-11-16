@@ -1,3 +1,7 @@
+"""
+shipment.shipment
+TODO: org.merge
+"""
 import datetime
 import calendar
 import json
@@ -74,14 +78,20 @@ class DocList(FormMixin, ListView):
             # val:int
             val = f.get('shipper')
             if val:
-                q = q.filter(shipper=models.Shipper.objects.get(pk=int(val)))
+                objs = models.Shipper.objects.filter(pk=int(val))
+                if objs.count():
+                    q = q.filter(shipper=objs.get())
             val = f.get('org')
             if val:
-                print("Filter by org")
-                q = q.filter(org=models.Org.objects.get(pk=int(val)))
+                # print("Filter by org")
+                objs = models.Org.objects.filter(pk=int(val))
+                if objs.count():
+                    q = q.filter(org=objs.get())
             val = f.get('doctype')
             if val:
-                q = q.filter(doctype=models.DocType.objects.get(pk=int(val)))
+                objs = models.DocType.objects.filter(pk=int(val))
+                if objs.count():
+                    q = q.filter(doctype=objs.get())
             print("Filter complete")
             year = f.get('year')
             if year:
