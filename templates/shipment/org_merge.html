@@ -1,0 +1,16 @@
+{% extends "shipment/org_base.html" %}
+{% load i18n %}
+{% load mytags %}
+{% block js %}
+{{ form.media }}
+{% endblock %}
+{% block body_main %}
+   <form action="." method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        {% submit 'ok' %}
+        <a href="{% url 'org_list' %}"> {% button 'no' %} </a>
+   </form>
+{% endblock %}

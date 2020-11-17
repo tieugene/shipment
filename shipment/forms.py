@@ -8,6 +8,21 @@ from . import models
 from core.models import get_file_mime
 
 
+class OrgMergeForm(forms.Form):
+    org = forms.ModelChoiceField(queryset=models.Org.objects.none(), label=_("Target"))
+    checked = forms.ModelMultipleChoiceField(queryset=models.Org.objects.none(),
+                                             widget=forms.CheckboxSelectMultiple(), label=_("Selected"))
+
+    def __init__(self, *args, **kwargs):
+        """
+        :MultiValueDict
+        """
+        super().__init__(*args, **kwargs)
+        chk_list = kwargs['data'].getlist('checked')
+        self.fields['org'].queryset = models.Org.objects.exclude(pk__in=chk_list)
+        self.fields['checked'].queryset = models.Org.objects.filter(pk__in=chk_list)
+        self.fields['checked'].initial = chk_list
+
 def years():
     return [(0, '--')] + list(((i, "%02d" % i) for i in range(14, 21)))
 
@@ -41,7 +56,8 @@ class DocEditMultiForm(forms.Form):
     # date: widget=forms.SelectDateWidget,
     shipper = forms.ModelChoiceField(queryset=models.Shipper.objects.all(), required=False, label=_("Shipper"))
     org = forms.ModelChoiceField(queryset=models.Org.objects.all(), required=False, label=_("Customer"))
-    date = forms.DateField(widget=forms.SelectDateWidget(years=range(2014, datetime.date.today().year+1)), required=False, label=_("Date"))
+    date = forms.DateField(widget=forms.SelectDateWidget(years=range(2014, datetime.date.today().year+1)),
+                           required=False, label=_("Date"))
     doctype = forms.ModelChoiceField(queryset=models.DocType.objects.all(), required=False, label=_("Type"))
     shipper_chg = forms.BooleanField(required=False, label=_("Change shipper"), help_text="Use it!")
     org_chg = forms.BooleanField(required=False, label=_("Change partner"))

@@ -22,6 +22,6 @@ table.list > tbody > tr:nth-child(even) {
     background-color: #F2F2F2;
 }
 
-table.list > tbody > tr > td:hover {
+table.list > tbody > tr:hover {
     background-color: yellow;
 }

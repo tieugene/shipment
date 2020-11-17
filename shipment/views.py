@@ -55,6 +55,38 @@ class OrgDelete(DeleteView):
     # template_name = 'shipment/org_confirm_delete.html'
 
 
+class OrgMerge(FormView):
+    """
+    Merge orgs selected in OrgList into one another.
+    TODO: mk required queries for form.init:
+    - org: excluding selected
+    - checked: selected only
+    """
+    form_class = forms.OrgMergeForm
+    template_name = 'shipment/org_merge.html'
+    success_url = reverse_lazy('org_list')
+
+    '''
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        # init form
+        form = self.get_form(form_class)
+        if form.is_valid():
+            pass
+        else:
+            return self.form_invalid(form)
+    '''
+    def form_valid(self, form):
+        """
+        form.cleaned_data['org']:Org item
+        ['checked']:QuerySet(Org)
+        """
+        src = form.cleaned_data['checked']
+        models.Document.objects.filter(org__in=src).update(org=form.cleaned_data['org'])
+        src.delete()
+        return super().form_valid(form)
+
+
 def org_delete_multi(request):
     return delete_multi(request, models.Org, reverse('org_list'))
 
@@ -92,7 +124,7 @@ class DocList(FormMixin, ListView):
                 objs = models.DocType.objects.filter(pk=int(val))
                 if objs.count():
                     q = q.filter(doctype=objs.get())
-            print("Filter complete")
+            # print("Filter complete")
             year = f.get('year')
             if year:
                 year += 2000

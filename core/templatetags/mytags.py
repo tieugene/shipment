@@ -32,6 +32,7 @@ buttons_items = {  # key: (char, img, tip)
     'file': ('&#128206;', 'file-o', _('File')),  # &#10064; (cubes)
     'doc': ('&#128214;', 'book', _('Document')),  # &# 128203 (clip), 9993; (envelop), 9997; (hand)
     'org': ('&#127970;', 'industry', _('Organisation')),
+    'join': ('&xcup;', 'repeat', _('Merge')),
 }
 
 register = template.Library()
