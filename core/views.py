@@ -1,4 +1,7 @@
-from django.contrib.auth.decorators import login_required
+"""
+core.views
+"""
+# from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, FileResponse, HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy

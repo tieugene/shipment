@@ -1,3 +1,6 @@
+"""
+core.models
+"""
 import hashlib
 import os
 import magic

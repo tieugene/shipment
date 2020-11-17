@@ -1,6 +1,5 @@
 """
-shipment.shipment
-TODO: org.merge
+shipment.views
 """
 import datetime
 import calendar
@@ -57,8 +56,7 @@ class OrgDelete(DeleteView):
 
 class OrgMerge(FormView):
     """
-    Merge orgs selected in OrgList into one another.
-    TODO: mk required queries for form.init:
+    Merge org9ns selected in OrgList into one another.
     - org: excluding selected
     - checked: selected only
     """
@@ -66,16 +64,6 @@ class OrgMerge(FormView):
     template_name = 'shipment/org_merge.html'
     success_url = reverse_lazy('org_list')
 
-    '''
-    def post(self, request, *args, **kwargs):
-        form_class = self.get_form_class()
-        # init form
-        form = self.get_form(form_class)
-        if form.is_valid():
-            pass
-        else:
-            return self.form_invalid(form)
-    '''
     def form_valid(self, form):
         """
         form.cleaned_data['org']:Org item

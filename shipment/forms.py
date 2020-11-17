@@ -1,3 +1,6 @@
+"""
+shipment.forms
+"""
 import datetime
 
 from django import forms
@@ -22,6 +25,7 @@ class OrgMergeForm(forms.Form):
         self.fields['org'].queryset = models.Org.objects.exclude(pk__in=chk_list)
         self.fields['checked'].queryset = models.Org.objects.filter(pk__in=chk_list)
         self.fields['checked'].initial = chk_list
+
 
 def years():
     return [(0, '--')] + list(((i, "%02d" % i) for i in range(14, 21)))

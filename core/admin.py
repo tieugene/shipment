@@ -1,4 +1,5 @@
 """
+core.admin
 https://docs.djangoproject.com/en/3.0/ref/contrib/admin/#django.contrib.admin.ModelAdmin
 """
 from django.contrib import admin

@@ -1,11 +1,11 @@
 # ToDo
 
 ## FixMe:
-- highlight whole tr:hover
-- multi_del: confirm delete form
-- *.Edit: return ~~detail~~ back
-- DocList.filter: y/m/d from db
 - view.*_* => forms.View (file_get, file_show, org_delete_multi, doc_delete_multi, doc_bulk)
+- multi_del: confirm delete form (ListView+)
+- *.Edit: return ~~detail~~ back
+- highlight whole tr:hover
+- DocList.filter: y/m/d from db
 - Org: full name -> Note
 - Doc: Comments -> Note
 - File: create() with crc(md5) and/or mime
@@ -85,4 +85,4 @@
 - date filter: separate yy/mm/dd
 - DocMultiEdit: future years only fixed
 - Sorting (File/Doc x asc/desc). Session keys: <model>_sort='[-]field'
-- merge orgs
+- merge organisations

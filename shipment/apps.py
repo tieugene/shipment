@@ -1,3 +1,6 @@
+"""
+shipment.apps
+"""
 from django.apps import AppConfig
 
 
