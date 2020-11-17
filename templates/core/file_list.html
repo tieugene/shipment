@@ -8,7 +8,7 @@
 {% endblock %}
 {% block body_main %}
 {% include "paginator.html" %}
-<form action="{% url 'file_delete_multi' %}" method="POST"> {% csrf_token %}
+<form action="{% url 'file_delete_multi' %}"> {% csrf_token %}
 <table class="list">
     <thead>
         <tr>

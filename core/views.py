@@ -34,10 +34,10 @@ class FileList(ListView):
     model = models.File
     paginate_by = PAGE_SIZE
 
-    def get_queryset(self):                 # 1.
+    def get_queryset(self):  # 1.
         return self.model.objects.order_by(self.request.session.get('file_sort', models.DEFAULT_SORT_FILE))
 
-    def get_context_data(self, **kwargs):   # 2.
+    def get_context_data(self, **kwargs):  # 2.
         s = self.request.session.get('file_sort', models.DEFAULT_SORT_FILE)
         stored_desc = (s[0] == '-')
         stored_fld = s[1:] if stored_desc else s
@@ -53,13 +53,24 @@ class FileListSort(View):
         stored_desc = (s[0] == '-')
         stored_fld = s[1:] if stored_desc else s
         if fld == stored_fld and not stored_desc:
-            fld = '-'+fld
+            fld = '-' + fld
         request.session['file_sort'] = fld
         return redirect('file_list')
 
 
-def file_delete_multi(request):
-    return delete_multi(request, models.File, reverse('file_list'))
+class FileDeleteMulti(FormView):
+    form_class = forms.FileDeleteMultiForm
+    template_name = 'core/file_confirm_delete_multi.html'
+    success_url = reverse_lazy('file_list')
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {'form': self.form_class(initial={'checked': request.GET.getlist('checked')})})
+
+    def form_valid(self, form):
+        form.cleaned_data['checked'].delete()
+        return super().form_valid(form)
+# def file_delete_multi(request):
+#    return delete_multi(request, models.File, reverse('file_list'))
 
 
 class FileAdd(FormView):

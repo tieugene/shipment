@@ -1,11 +1,17 @@
 # ToDo
 
+## 201117:
+ConfirmDeleteMulti.
+
+Variants:
+- view.get(): replace FormView.get(), template: form method=get
+- forward: POST=>FormView.is_valid()=>redirect ConfirFormView.get()
+
 ## FixMe:
-- view.*_* => forms.View (file_get, file_show, org_delete_multi, doc_delete_multi, doc_bulk)
-- multi_del: confirm delete form (ListView+)
-- *.Edit: return ~~detail~~ back
+- view.*_* => forms.View (*_delete_multi, doc_bulk)
+- multi_del: confirm delete form (File, Org, Doc)
+- *.Edit: return to ~~detail~~ referrer
 - highlight whole tr:hover
-- DocList.filter: y/m/d from db
 - Org: full name -> Note
 - Doc: Comments -> Note
 - File: create() with crc(md5) and/or mime
@@ -16,6 +22,7 @@
 - File upload: preserve ctime ('Last-Modified', 'creation-date')
 
 ## Features:
+- DocList.filter: y/m/d from db
 - model.field, readonly
 - tests
 - auth

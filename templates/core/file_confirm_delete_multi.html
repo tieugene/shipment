@@ -1,0 +1,14 @@
+{% extends "core/file_base.html" %}
+{% load i18n %}
+{% load mytags %}
+{% block body_main %}
+<form action="." method="post">
+    {% csrf_token %}
+    <p> {% trans 'Delete' %} {% trans 'Files' %}?</p>
+    <table>
+    {{ form.as_table }}
+    </table>
+    {% submit 'ok' %}
+    <a href="{{ request.META.HTTP_REFERER }}"> {% button 'no' %} </a>
+</form>
+{% endblock %}
