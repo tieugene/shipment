@@ -8,6 +8,6 @@
         (Docs: {{ object.org_document.count }})
     </p>
     {% submit 'ok' %}
-    <a href="{% url 'org_view' object.pk %}"> {% button 'no' %} </a>
+    <a href="{{ request.META.HTTP_REFERER }}"> {% button 'no' %} </a>
 </form>
 {% endblock %}
