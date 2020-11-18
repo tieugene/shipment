@@ -28,6 +28,17 @@ def delete_multi(request, m, fw: str):
         if checks:
             m.objects.filter(pk__in=set(checks)).delete()
     return redirect(fw)
+# def file_delete_multi(request):
+#    return delete_multi(request, models.File, reverse('file_list'))
+
+
+class DeleteMulti(FormView):
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {'form': self.form_class(initial={'checked': request.GET.getlist('checked')})})
+
+    def form_valid(self, form):
+        form.cleaned_data['checked'].delete()
+        return super().form_valid(form)
 
 
 class FileList(ListView):
@@ -58,19 +69,10 @@ class FileListSort(View):
         return redirect('file_list')
 
 
-class FileDeleteMulti(FormView):
+class FileDeleteMulti(DeleteMulti):
     form_class = forms.FileDeleteMultiForm
     template_name = 'core/file_confirm_delete_multi.html'
     success_url = reverse_lazy('file_list')
-
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, {'form': self.form_class(initial={'checked': request.GET.getlist('checked')})})
-
-    def form_valid(self, form):
-        form.cleaned_data['checked'].delete()
-        return super().form_valid(form)
-# def file_delete_multi(request):
-#    return delete_multi(request, models.File, reverse('file_list'))
 
 
 class FileAdd(FormView):

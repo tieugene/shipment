@@ -9,6 +9,6 @@
     {{ form.as_table }}
     </table>
     {% submit 'ok' %}
-    <a href="{{ request.META.HTTP_REFERER }}"> {% button 'no' %} </a>
+    <a href="{% url 'file_list' %}"> {% button 'no' %} </a>
 </form>
 {% endblock %}

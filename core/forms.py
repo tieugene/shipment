@@ -12,7 +12,7 @@ class MultiFileAddForm(forms.Form):
 
 
 class FileDeleteMultiForm(forms.Form):
-    checked = forms.ModelMultipleChoiceField(queryset=models.File.objects.none(),
+    checked = forms.ModelMultipleChoiceField(queryset=models.File.objects.all(),
                                              widget=forms.CheckboxSelectMultiple(), label=_("Selected"))
 
     def __init__(self, *args, **kwargs):
