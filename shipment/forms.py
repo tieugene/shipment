@@ -9,6 +9,7 @@ from django.utils.translation import gettext as _
 
 from . import models
 from core.models import get_file_mime
+from core.forms import DeleteMultiForm
 
 
 class OrgMergeForm(forms.Form):
@@ -25,6 +26,10 @@ class OrgMergeForm(forms.Form):
         self.fields['org'].queryset = models.Org.objects.exclude(pk__in=chk_list)
         self.fields['checked'].queryset = models.Org.objects.filter(pk__in=chk_list)
         self.fields['checked'].initial = chk_list
+
+
+class OrgDeleteMultiForm(DeleteMultiForm):
+    model = models.Org
 
 
 def years():
@@ -104,3 +109,7 @@ class DocFilterForm(forms.Form):
                     self.fields[i].initial = int(init_data[i])
                 # if 'date' in init_data:
                 #    self.fields['date'].initial = datetime.datetime.strptime(init_data['date'], "%y%m%d")
+
+
+class DocDeleteMultiForm(DeleteMultiForm):
+    model = models.Document

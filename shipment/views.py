@@ -16,7 +16,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView, FormMixin
 
 from core.models import File, get_file_mime, get_file_crc
-from core.views import delete_multi
+from core.views import DeleteMulti
 from . import models, forms
 
 # consts
@@ -75,8 +75,10 @@ class OrgMerge(FormView):
         return super().form_valid(form)
 
 
-def org_delete_multi(request):
-    return delete_multi(request, models.Org, reverse('org_list'))
+class OrgDeleteMulti(DeleteMulti):
+    form_class = forms.OrgDeleteMultiForm
+    template_name = 'shipment/org_confirm_delete_multi.html'
+    success_url = reverse_lazy('org_list')
 
 
 class DocList(FormMixin, ListView):
@@ -239,8 +241,10 @@ class DocListFilter(FormView):
             return self.form_invalid(form)
 
 
-def doc_delete_multi(request):
-    return delete_multi(request, models.Document, reverse('doc_list'))
+class DocDeleteMulti(DeleteMulti):
+    form_class = forms.DocDeleteMultiForm
+    template_name = 'shipment/document_confirm_delete_multi.html'
+    success_url = reverse_lazy('doc_list')
 
 
 class DocUpdateMulti(FormView):

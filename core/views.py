@@ -15,23 +15,6 @@ from . import models, forms
 PAGE_SIZE = 24
 
 
-def delete_multi(request, m, fw: str):
-    """
-    Delete checked items from listview.
-    @param request: subj
-    @param m: model
-    @param fw: url redirect to
-    TODO: rework to class FileDeleteMulti(View)
-    """
-    if request.method == 'POST':
-        checks = request.POST.getlist('checked')
-        if checks:
-            m.objects.filter(pk__in=set(checks)).delete()
-    return redirect(fw)
-# def file_delete_multi(request):
-#    return delete_multi(request, models.File, reverse('file_list'))
-
-
 class DeleteMulti(FormView):
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, {'form': self.form_class(initial={'checked': request.GET.getlist('checked')})})
@@ -126,3 +109,23 @@ class FileGet(__FileDownload):
 
 class FileShow(__FileDownload):
     as_attach = False
+
+
+'''
+def delete_multi(request, m, fw: str):
+    """
+    Delete checked items from listview.
+    @param request: subj
+    @param m: model
+    @param fw: url redirect to
+    TODO: rework to class FileDeleteMulti(View)
+    """
+    if request.method == 'POST':
+        checks = request.POST.getlist('checked')
+        if checks:
+            m.objects.filter(pk__in=set(checks)).delete()
+    return redirect(fw)
+
+def file_delete_multi(request):
+    return delete_multi(request, models.File, reverse('file_list'))
+'''

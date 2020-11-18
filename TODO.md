@@ -1,17 +1,9 @@
 # ToDo
 
-## 201117:
-ConfirmDeleteMulti.
-
-Variants:
-- view.get(): replace FormView.get(), template: form method=get
-- forward: POST=>FormView.is_valid()=>redirect ConfirFormView.get()
-
 ## FixMe:
-- view.*_* => forms.View (*_delete_multi, doc_bulk)
-- multi_del: confirm delete form (File, Org, Doc)
+- doc_bulk: class View
+- multi_del: checked items widget
 - *.Edit: return to ~~detail~~ referrer
-- highlight whole tr:hover
 - Org: full name -> Note
 - Doc: Comments -> Note
 - File: create() with crc(md5) and/or mime
@@ -93,3 +85,5 @@ Variants:
 - DocMultiEdit: future years only fixed
 - Sorting (File/Doc x asc/desc). Session keys: <model>_sort='[-]field'
 - merge organisations
+- highlight whole tr:hover
+- multi_del: confirm delete form (File, Org, Doc)

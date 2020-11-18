@@ -1,0 +1,14 @@
+{% extends "shipment/document_base.html" %}
+{% load i18n %}
+{% load mytags %}
+{% block body_main %}
+<form action="." method="post">
+    {% csrf_token %}
+    <p> {% trans 'Delete' %} {% trans 'Documents' %}?</p>
+    <table>
+    {{ form.as_table }}
+    </table>
+    {% submit 'ok' %}
+    <a href="{% url 'doc_list' %}"> {% button 'no' %} </a>
+</form>
+{% endblock %}

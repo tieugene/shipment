@@ -8,7 +8,7 @@
 {% endblock %}
 {% block body_main %}
 {% include "paginator.html" %}
-<form action="{% url 'file_delete_multi' %}"> {% csrf_token %}
+<form action=""> {% csrf_token %}
 <table class="list">
     <thead>
         <tr>
@@ -19,7 +19,7 @@
             <th id="header_size"> <a href="{% url 'file_list_sort' 'size' %}"> {% trans "Size" %} </a> </th>
             <th> {% trans "Doc" %} </th>
             <th colspan="3"> <a href="{% url 'file_add' %}"> {% button 'add' %} </a>  </th>
-            <th> {% submit 'del*' %} </th>
+            <th> {% submit 'del*' 'file_delete_multi' %} </th>
             <th> <input type="checkbox"> </th>
         </tr>
     </thead>

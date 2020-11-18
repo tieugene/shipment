@@ -12,7 +12,7 @@ urlpatterns = [
     path('o/<int:pk>/r/',	views.OrgDetail.as_view(), name='org_view'),
     path('o/<int:pk>/u/',	views.OrgUpdate.as_view(), name='org_update'),
     path('o/<int:pk>/d/',	views.OrgDelete.as_view(), name='org_delete'),
-    path('o/d/',            views.org_delete_multi, name='org_delete_multi'),
+    path('o/d/',            views.OrgDeleteMulti.as_view(), name='org_delete_multi'),
     path('o/m/',            views.OrgMerge.as_view(), name='org_merge'),
     path('d/',				views.DocList.as_view(), name='doc_list'),
     path('d/s/<str:fld>/',  views.DocListSort.as_view(), name='doc_list_sort'),
@@ -22,6 +22,6 @@ urlpatterns = [
     path('d/<int:pk>/d/',	views.DocDelete.as_view(), name='doc_delete'),
     path('d/f/',	        views.DocListFilter.as_view(), name='doc_list_filter'),
     path('d/u/',            views.DocUpdateMulti.as_view(), name='doc_update_multi'),
-    path('d/d/',            views.doc_delete_multi, name='doc_delete_multi'),
+    path('d/d/',            views.DocDeleteMulti.as_view(), name='doc_delete_multi'),
     path('d/bulk/',         views.doc_bulk, name='doc_bulk'),   # name is option
 ]
