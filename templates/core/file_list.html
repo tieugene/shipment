@@ -20,7 +20,7 @@
             <th> {% trans "Doc" %} </th>
             <th colspan="3"> <a href="{% url 'file_add' %}"> {% button 'add' %} </a>  </th>
             <th> {% submit 'del*' 'file_delete_multi' %} </th>
-            <th> <input type="checkbox"> </th>
+            <th> <input type="checkbox" id="switch_checked"> </th>
         </tr>
     </thead>
     <tbody>
@@ -42,4 +42,10 @@
     </tbody>
 </table>
 </form>
+{% endblock %}
+{% block post_js %}
+    <script>
+        document.getElementById('switch_checked').addEventListener('change', switch_chk);
+        document.getElementsByName('checked').forEach(item => item.addEventListener('change', chk_switched));
+    </script>
 {% endblock %}

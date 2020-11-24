@@ -87,3 +87,4 @@
 - merge organisations
 - highlight whole tr:hover
 - multi_del: confirm delete form (File, Org, Doc)
+- [de]select all

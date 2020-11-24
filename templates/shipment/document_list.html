@@ -31,7 +31,7 @@
             <th colspan="2"> <a href="{% url 'doc_add' %}"> {% button 'add' %} </a> </th>
             <th> {% submit 'edit*' 'doc_update_multi' %} </th>
             <th> {% submit 'del*' 'doc_delete_multi' %} </th>
-            <th> <input type="checkbox"> </th>
+            <th> <input type="checkbox" id="switch_checked"> </th>
         </tr>
         <tr>    <!-- filter -->
             <th> {% submit 'filt' 'doc_list_filter' %} </th>
@@ -62,4 +62,10 @@
     </tbody>
 </table>
 </form>
+{% endblock %}
+{% block post_js %}
+    <script>
+        document.getElementById('switch_checked').addEventListener('change', switch_chk);
+        document.getElementsByName('checked').forEach(item => item.addEventListener('change', chk_switched));
+    </script>
 {% endblock %}

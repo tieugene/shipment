@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/color.css' %}"/>
 	<!-- 2. admin (symlink) -->
 	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}" />
+    <script src="{% static 'js/util.js' %}"></script>
 	<!--link rel="stylesheet" type="text/css" href="{# static 'admin/css/widgets.css' #} /-->
 	{% block js %} {% endblock %}
 	<style> {% block css %} {% endblock %} </style>
@@ -35,4 +36,5 @@
 	</main>
     <footer> &copy; <a href="mailto:ti.eugene@gmail.com"> ti.eugene </a> </footer>
 </body>
+{% block post_js %} {% endblock %}
 </html>
