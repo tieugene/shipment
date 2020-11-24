@@ -1,6 +1,7 @@
 # ToDo
 
 ## FixMe:
+- multi_del_confirm: handle POST
 - doc_bulk: class View
 - multi_del: checked items widget
 - *.Edit: return to ~~detail~~ referrer

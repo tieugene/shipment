@@ -24,4 +24,5 @@ urlpatterns = [
     path('d/u/',            views.DocUpdateMulti.as_view(), name='doc_update_multi'),
     path('d/d/',            views.DocDeleteMulti.as_view(), name='doc_delete_multi'),
     path('d/bulk/',         views.doc_bulk, name='doc_bulk'),   # name is option
+    # path('d/bulk/', views.DocBulk.as_view(), name='doc_bulk'),  # name is option
 ]

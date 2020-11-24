@@ -5,10 +5,10 @@
 <form action="." method="post">
     {% csrf_token %}
     <p> {% trans 'Delete' %} {% trans 'Organisations' %}?</p>
+   {% submit 'ok' %}
+    <a href="{% url 'org_list' %}"> {% button 'no' %} </a>
     <table>
     {{ form.as_table }}
     </table>
-   {% submit 'ok' %}
-    <a href="{% url 'org_list' %}"> {% button 'no' %} </a>
 </form>
 {% endblock %}

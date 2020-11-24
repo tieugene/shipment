@@ -16,7 +16,7 @@
 {% endblock %}
 {% block body_main %}
 {% include "paginator.html" %}
-<form action="">
+<form action="" method="POST">
     {% csrf_token %}
 <table class="list">
     <thead>
